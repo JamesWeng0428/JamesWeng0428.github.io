@@ -46,24 +46,29 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 				object-fit: cover;
 				flex-shrink: 0;
 			}
-			.links {
-				display: flex;
-				gap: 1rem;
-				flex-wrap: wrap;
-				margin-top: 1.5rem;
+			.currently {
+				margin-top: 2.5rem;
 			}
-			.links a {
-				padding: 0.5rem 1rem;
-				border: 1px solid rgb(var(--accent));
-				border-radius: 6px;
+			.currently h2 {
+				font-size: 1.2rem;
+				margin: 0 0 0.75rem;
+				color: rgb(var(--gray-dark));
+				padding-bottom: 0.75rem;
+				border-bottom: 1px solid rgb(var(--gray-light));
+			}
+			.currently ul {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
+			.currently ul li {
+				font-size: 1rem;
+				color: rgb(var(--gray-dark));
+				line-height: 1.7;
+			}
+			.currently ul li::before {
+				content: "→ ";
 				color: rgb(var(--accent));
-				text-decoration: none;
-				font-size: 0.9rem;
-				transition: background 0.2s, color 0.2s;
-			}
-			.links a:hover {
-				background: rgb(var(--accent));
-				color: white;
 			}
 			@media (max-width: 560px) {
 				.hero-body {
@@ -81,7 +86,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		<main>
 			<div class="hero">
 				<h1>James Weng</h1>
-				<p class="subtitle">CS + Education @ UIUC &nbsp;·&nbsp; Builder &nbsp;·&nbsp; Problem Solver</p>
+				<p class="subtitle">CS + Education @ UIUC &nbsp;·&nbsp; ENTJ &nbsp;·&nbsp; Leadership</p>
 				<div class="hero-body">
 					<div>
 						<p>
@@ -90,15 +95,15 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 							China, and spent 18 years in this fast-growing city. Right now, college life provides me a
 							chance to experience more.
 						</p>
-						<div class="links">
-							<a href="/portfolio">Projects</a>
-							<a href="/blog">Blog</a>
-							<a href="https://github.com/JamesWeng0428" target="_blank" rel="noopener">GitHub</a>
-							<a href="https://www.linkedin.com/in/JamesWeng0428" target="_blank" rel="noopener">LinkedIn</a>
 						</div>
-					</div>
 					<img src="/favicon.png" alt="James Weng" class="avatar" />
 				</div>
+			</div>
+			<div class="currently">
+				<h2>Currently</h2>
+				<ul>
+					<li>Mentee for Vishesh Prasad in URSA, completing Mathematical Derivation Graphs Dataset</li>
+				</ul>
 			</div>
 		</main>
 		<Footer />
