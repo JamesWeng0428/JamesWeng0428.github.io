@@ -70,6 +70,70 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 				content: "→ ";
 				color: rgb(var(--accent));
 			}
+			.bouldering {
+				margin-top: 2.5rem;
+			}
+			.bouldering h2 {
+				font-size: 1.2rem;
+				margin: 0 0 0.75rem;
+				color: rgb(var(--gray-dark));
+				padding-bottom: 0.75rem;
+				border-bottom: 1px solid rgb(var(--gray-light));
+			}
+			.bouldering p {
+				font-size: 1rem;
+				color: rgb(var(--gray-dark));
+				line-height: 1.7;
+				margin: 0 0 1rem;
+			}
+			.video-grid {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 1rem;
+				margin-top: 1rem;
+			}
+			.video-grid video {
+				width: 100%;
+				border-radius: 8px;
+			}
+			.cycling {
+				margin-top: 2.5rem;
+			}
+			.cycling h2 {
+				font-size: 1.2rem;
+				margin: 0 0 0.75rem;
+				color: rgb(var(--gray-dark));
+				padding-bottom: 0.75rem;
+				border-bottom: 1px solid rgb(var(--gray-light));
+			}
+			.cycling p {
+				font-size: 1rem;
+				color: rgb(var(--gray-dark));
+				line-height: 1.7;
+				margin: 0 0 1rem;
+			}
+			.photo-gallery {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 0.75rem;
+				margin-top: 1rem;
+			}
+			.photo-gallery img {
+				width: 100%;
+				aspect-ratio: 1;
+				object-fit: cover;
+				border-radius: 8px;
+			}
+			@media (max-width: 560px) {
+				.photo-gallery {
+					grid-template-columns: 1fr;
+				}
+			}
+			@media (max-width: 560px) {
+				.video-grid {
+					grid-template-columns: 1fr;
+				}
+			}
 			@media (max-width: 560px) {
 				.hero-body {
 					flex-direction: column-reverse;
@@ -111,6 +175,27 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 					<li>Mentee for Vishesh Prasad in URSA, completing Mathematical Derivation Graphs Dataset</li>
 					<li>Working with Professor Chris Napolitano with SEB skills</li>
 				</ul>
+			</div>
+			<div class="bouldering">
+				<h2>Bouldering</h2>
+				<p>I am not a NERD. I do sport outside from my computer. Bouldering is one of them. I am an active climber at <a href="https://www.urbanaboulders.com/" target="_blank" rel="noopener">Urbana Boulder&Boneyard Boulders</a>. Here are some videos. If you are interested in climbing, you can follow my instagram account: <a href="https://www.instagram.com/jamesweng0428/" target="_blank" rel="noopener">JamesWeng0428</a></p>
+				<div class="video-grid">
+					<video controls playsinline>
+						<source src="/帅飞了.MP4" type="video/mp4" />
+					</video>
+					<video controls playsinline>
+						<source src="/这才叫动态.MP4" type="video/mp4" />
+					</video>
+				</div>
+			</div>
+			<div class="cycling">
+				<h2>Cycling</h2>
+				<p>I also enjoy cycling. I have GIANT Propel ADV SL.</p>
+				<div class="photo-gallery">
+					<img src="/cycling-1.JPG" alt="Cycling photo 1" />
+					<img src="/cycling-2.JPG" alt="Cycling photo 2" />
+					<img src="/cycling-3.JPG" alt="Cycling photo 3" />
+				</div>
 			</div>
 		</main>
 		<Footer />
