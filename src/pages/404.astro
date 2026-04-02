@@ -1,0 +1,41 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`404 | ${SITE_TITLE}`} description="Page not found." />
+		<style>
+			main {
+				max-width: 720px;
+				margin: 0 auto;
+				padding: 4rem 1rem;
+				text-align: center;
+			}
+			h1 {
+				font-size: 4rem;
+				margin: 0 0 0.5rem;
+			}
+			p {
+				color: rgb(var(--gray));
+				margin-bottom: 2rem;
+			}
+			a {
+				color: var(--accent);
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>404</h1>
+			<p>This page doesn't exist.</p>
+			<a href="/">Back to home</a>
+		</main>
+		<Footer />
+	</body>
+</html>

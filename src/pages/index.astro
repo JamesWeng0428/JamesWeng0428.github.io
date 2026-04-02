@@ -46,45 +46,35 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 				object-fit: cover;
 				flex-shrink: 0;
 			}
-			.currently {
+			.section {
 				margin-top: 2.5rem;
 			}
-			.currently h2 {
+			.section h2 {
 				font-size: 1.2rem;
 				margin: 0 0 0.75rem;
 				color: rgb(var(--gray-dark));
 				padding-bottom: 0.75rem;
 				border-bottom: 1px solid rgb(var(--gray-light));
 			}
-			.currently ul {
-				list-style: none;
-				padding: 0;
-				margin: 0;
-			}
-			.currently ul li {
-				font-size: 1rem;
-				color: rgb(var(--gray-dark));
-				line-height: 1.7;
-			}
-			.currently ul li::before {
-				content: "→ ";
-				color: rgb(var(--accent));
-			}
-			.bouldering {
-				margin-top: 2.5rem;
-			}
-			.bouldering h2 {
-				font-size: 1.2rem;
-				margin: 0 0 0.75rem;
-				color: rgb(var(--gray-dark));
-				padding-bottom: 0.75rem;
-				border-bottom: 1px solid rgb(var(--gray-light));
-			}
-			.bouldering p {
+			.section p {
 				font-size: 1rem;
 				color: rgb(var(--gray-dark));
 				line-height: 1.7;
 				margin: 0 0 1rem;
+			}
+			.section ul {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
+			.section ul li {
+				font-size: 1rem;
+				color: rgb(var(--gray-dark));
+				line-height: 1.7;
+			}
+			.section ul li::before {
+				content: "\2192 ";
+				color: rgb(var(--accent));
 			}
 			.video-grid {
 				display: grid;
@@ -95,27 +85,6 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 			.video-grid video {
 				width: 100%;
 				border-radius: 8px;
-			}
-			@media (max-width: 560px) {
-				.video-grid {
-					grid-template-columns: 1fr;
-				}
-			}
-			.cycling {
-				margin-top: 2.5rem;
-			}
-			.cycling h2 {
-				font-size: 1.2rem;
-				margin: 0 0 0.75rem;
-				color: rgb(var(--gray-dark));
-				padding-bottom: 0.75rem;
-				border-bottom: 1px solid rgb(var(--gray-light));
-			}
-			.cycling p {
-				font-size: 1rem;
-				color: rgb(var(--gray-dark));
-				line-height: 1.7;
-				margin: 0 0 1rem;
 			}
 			.photo-gallery {
 				display: grid;
@@ -130,17 +99,18 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 				border-radius: 8px;
 			}
 			@media (max-width: 560px) {
-				.photo-gallery {
-					grid-template-columns: 1fr;
-				}
-			}
-			@media (max-width: 560px) {
 				.hero-body {
 					flex-direction: column-reverse;
 				}
 				.avatar {
 					width: 120px;
 					height: 120px;
+				}
+				.video-grid {
+					grid-template-columns: 1fr;
+				}
+				.photo-gallery {
+					grid-template-columns: 1fr;
 				}
 			}
 		</style>
@@ -155,10 +125,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 					<div>
 						<p>
 							I am currently a sophomore majoring CS+EDU (Learning Science) at the University of Illinois
-							at Urbana-Champaign, graduating in December 2026/May 2027. 
-						</p>
-						<p>
-							
+							at Urbana-Champaign, graduating in December 2026/May 2027.
 						</p>
 						<p>
 							I was originally from Shenzhen,
@@ -166,29 +133,29 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 							chance to experience more.
 						</p>
 						</div>
-					<img src="/favicon.png" alt="James Weng" class="avatar" />
+					<img src="/avatar.png" alt="James Weng" class="avatar" />
 				</div>
 			</div>
-			<div class="currently">
+			<div class="section">
 				<h2>Currently</h2>
 				<ul>
 					<li>Mentee for Vishesh Prasad in URSA, completing Mathematical Derivation Graphs Dataset</li>
 					<li>Working with Professor Chris Napolitano with SEB skills</li>
 				</ul>
 			</div>
-			<div class="bouldering">
+			<div class="section">
 				<h2>Bouldering</h2>
 				<p>I am not a NERD. I do sport outside from my computer. Bouldering is one of them. I am an active climber at <a href="https://www.urbanaboulders.com/" target="_blank" rel="noopener">Urbana Boulders &amp; Boneyard Boulders</a>. Here are some videos. If you are interested in climbing, you can follow my instagram account: <a href="https://www.instagram.com/jamesweng0428/" target="_blank" rel="noopener">JamesWeng0428</a></p>
 				<div class="video-grid">
-					<video controls playsinline>
-						<source src="/帅飞了.MP4" type="video/mp4" />
+					<video controls playsinline preload="none">
+						<source src="/bouldering-1.mp4" type="video/mp4" />
 					</video>
-					<video controls playsinline>
-						<source src="/这才叫动态.MP4" type="video/mp4" />
+					<video controls playsinline preload="none">
+						<source src="/bouldering-2.mp4" type="video/mp4" />
 					</video>
 				</div>
 			</div>
-			<div class="cycling">
+			<div class="section">
 				<h2>Cycling</h2>
 				<p>I also enjoy cycling. I have a GIANT Propel ADV SL. If you love cycling too, you can follow me on <a href="https://www.strava.com/athletes/124960807" target="_blank" rel="noopener">Strava</a></p>
 				<div class="photo-gallery">
