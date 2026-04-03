@@ -68,12 +68,12 @@ import { fade } from 'astro:transitions';
 		margin: 0 auto;
 	}
 	nav a {
-		padding: 0.9em 0.75em;
+		padding: 1.05em 1.1em;
 		color: rgb(var(--gray));
 		border-bottom: 2px solid transparent;
 		text-decoration: none;
-		font-size: 0.9rem;
-		font-weight: 500;
+		font-size: 1.05rem;
+		font-weight: 600;
 		letter-spacing: 0.01em;
 		transition: color 0.2s, border-color 0.2s;
 	}
@@ -132,6 +132,24 @@ import { fade } from 'astro:transitions';
 </style>
 <script>
 	document.addEventListener('astro:page-load', () => {
+		const normalizePath = (path: string) => {
+			const normalized = path.replace(/\/+$/, '');
+			return normalized === '' ? '/' : normalized;
+		};
+
+		const pathname = normalizePath(window.location.pathname);
+		const navLinks = document.querySelectorAll('.internal-links a');
+		navLinks.forEach((link) => {
+			const href = (link.getAttribute('href') || '').trim();
+			const isActive = href && normalizePath(href) === pathname;
+			link.classList.toggle('active', isActive);
+			if (isActive) {
+				link.setAttribute('aria-current', 'page');
+			} else {
+				link.removeAttribute('aria-current');
+			}
+		});
+
 		const toggle = document.querySelector('.menu-toggle');
 		const links = document.querySelector('.internal-links');
 		if (toggle && links && toggle instanceof HTMLButtonElement && links instanceof HTMLElement) {
