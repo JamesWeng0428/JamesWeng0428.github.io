@@ -162,6 +162,14 @@ const { title, description, pubDate, updatedDate, heroImage, prevPost, nextPost 
 </html>
 <script>
 	document.addEventListener('astro:page-load', () => {
+		const scopedWindow = window as Window & {
+			__blogPostController?: AbortController;
+		};
+		scopedWindow.__blogPostController?.abort();
+		const controller = new AbortController();
+		const { signal } = controller;
+		scopedWindow.__blogPostController = controller;
+
 		const bar = document.getElementById('reading-progress');
 		if (!bar) return;
 		const update = () => {
@@ -170,7 +178,7 @@ const { title, description, pubDate, updatedDate, heroImage, prevPost, nextPost 
 			const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
 			bar.style.width = `${Math.min(progress, 100)}%`;
 		};
-		window.addEventListener('scroll', update, { passive: true });
+		window.addEventListener('scroll', update, { passive: true, signal });
 		update();
 	});
 </script>

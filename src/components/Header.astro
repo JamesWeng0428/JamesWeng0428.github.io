@@ -134,19 +134,23 @@ import { fade } from 'astro:transitions';
 	document.addEventListener('astro:page-load', () => {
 		const toggle = document.querySelector('.menu-toggle');
 		const links = document.querySelector('.internal-links');
-		if (toggle && links) {
-			toggle.addEventListener('click', () => {
-				const isOpen = links.classList.toggle('open');
-				toggle.setAttribute('aria-expanded', String(isOpen));
-			});
+		if (toggle && links && toggle instanceof HTMLButtonElement && links instanceof HTMLElement) {
+			if (toggle.dataset.bound !== 'true') {
+				toggle.dataset.bound = 'true';
+				toggle.addEventListener('click', () => {
+					const isOpen = links.classList.toggle('open');
+					toggle.setAttribute('aria-expanded', String(isOpen));
+				});
+			}
 		}
 
 		// Scroll-aware header show/hide
 		const header = document.querySelector('header');
-		if (!header) return;
+		if (!header || !(header instanceof HTMLElement)) return;
+		if (header.dataset.scrollBound === 'true') return;
+		header.dataset.scrollBound = 'true';
 		let lastScrollY = window.scrollY;
 		const threshold = 60; // px before hiding kicks in
-
 		window.addEventListener('scroll', () => {
 			const currentScrollY = window.scrollY;
 			if (currentScrollY > threshold && currentScrollY > lastScrollY) {

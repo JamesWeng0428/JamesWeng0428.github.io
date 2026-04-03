@@ -315,6 +315,14 @@ const latestPost = posts[0];
 </html>
 <script>
 	document.addEventListener('astro:page-load', () => {
+		const scopedWindow = window as Window & {
+			__indexPageController?: AbortController;
+		};
+		scopedWindow.__indexPageController?.abort();
+		const controller = new AbortController();
+		const { signal } = controller;
+		scopedWindow.__indexPageController = controller;
+
 		// Scroll-reveal
 		const reveals = document.querySelectorAll('.reveal');
 		if (reveals.length) {
@@ -327,6 +335,7 @@ const latestPost = posts[0];
 				});
 			}, { threshold: 0.1 });
 			reveals.forEach((el) => observer.observe(el));
+			signal.addEventListener('abort', () => observer.disconnect(), { once: true });
 		}
 
 		// Lightbox
@@ -341,13 +350,13 @@ const latestPost = posts[0];
 					lightboxImg.alt = (target as HTMLImageElement).alt;
 					lightbox.classList.add('active');
 				}
-			});
+			}, { signal });
 			lightbox.addEventListener('click', () => {
 				lightbox.classList.remove('active');
-			});
+			}, { signal });
 			document.addEventListener('keydown', (e) => {
 				if (e.key === 'Escape') lightbox.classList.remove('active');
-			});
+			}, { signal });
 		}
 	});
 </script>
