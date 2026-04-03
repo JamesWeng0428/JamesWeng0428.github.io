@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import OGImage from '../../assets/blog-placeholder-about.jpg';
 import BaseHead from '../../components/BaseHead.astro';
@@ -55,10 +54,6 @@ const posts = (await getCollection('blog')).sort(
 				background: var(--surface-raised);
 				box-shadow: var(--shadow-sm);
 			}
-			ul li img {
-				margin-bottom: 0.75rem;
-				border-radius: var(--radius-md);
-			}
 			.title {
 				margin: 0;
 				color: rgb(var(--black));
@@ -99,15 +94,12 @@ const posts = (await getCollection('blog')).sort(
 			<section>
 				<ul>
 					{
-						posts.map((post) => (
-							<li>
-								<a href={`/blog/${post.id}/`}>
-									{post.data.heroImage && (
-										<Image width={720} height={360} src={post.data.heroImage} alt="" />
-									)}
-									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
+							posts.map((post) => (
+								<li>
+									<a href={`/blog/${post.id}/`}>
+										<h4 class="title">{post.data.title}</h4>
+										<p class="date">
+											<FormattedDate date={post.data.pubDate} />
 									</p>
 									<p class="excerpt">{post.data.description}</p>
 								</a>
