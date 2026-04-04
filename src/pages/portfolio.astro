@@ -23,7 +23,8 @@ const projects = [
 	{
 		title: 'OhMyTSS',
 		description:
-			'iOS app built in Swift that integrates HealthKit to transform wearable workout data into readiness and training-load insights, using an on-device, privacy-first architecture. I built this because I wanted athletes to get useful training feedback without giving away their private health data.',
+			'iOS app built in Swift that integrates HealthKit to transform wearable workout data into readiness and training-load insights, using an on-device, privacy-first architecture.',
+		why: 'I wanted athletes to get useful training feedback without giving away their private health data.',
 		url: 'https://github.com/GodisinHisHeaven/ohMyTss/tree/main',
 		tags: ['Swift', 'iOS', 'HealthKit'],
 		period: 'Nov 2025 – Present',
@@ -31,7 +32,8 @@ const projects = [
 	{
 		title: 'Meeting Minion',
 		description:
-			'End-to-end AI web app for automated meeting transcription and summarization. Led a cross-functional team; integrated WhisperX, Ollama LLM, Streamlit UI, and SQLite. 64+ pytest tests at 100% pass rate. I built this because teams waste too much momentum when great conversations disappear right after the meeting ends.',
+			'End-to-end AI web app for automated meeting transcription and summarization. Led a cross-functional team; integrated WhisperX, Ollama LLM, Streamlit UI, and SQLite. 64+ pytest tests at 100% pass rate.',
+		why: 'Teams waste too much momentum when great conversations disappear right after the meeting ends.',
 		url: 'https://github.com/CS222-UIUC/Meeting-Minion',
 		tags: ['Python', 'WhisperX', 'LLM', 'Streamlit'],
 		period: 'Aug 2025 – Jan 2026',
@@ -39,7 +41,8 @@ const projects = [
 	{
 		title: 'Seizure Prediction Bracelet',
 		description:
-			'Wearable seizure-prediction device built for my brother, combining advanced sensors and machine learning to analyze real-time biometric data and deliver timely alerts. I built this because I wanted my family to feel less helpless and give my brother earlier warnings in daily life.',
+			'Wearable seizure-prediction device built for my brother, combining advanced sensors and machine learning to analyze real-time biometric data and deliver timely alerts.',
+		why: 'I wanted my family to feel less helpless and give my brother earlier warnings in daily life.',
 		url: 'https://github.com/JamesWeng0428',
 		tags: ['C++', 'Machine Learning', 'Embedded Systems'],
 		period: '2022 – 2024',
@@ -124,6 +127,12 @@ const projects = [
 				margin: 0 0 1rem;
 				flex: 1;
 			}
+			.card-why {
+				font-style: italic;
+				color: rgb(var(--gray));
+				font-size: 0.85rem !important;
+				flex: 0 !important;
+			}
 			.tags {
 				display: flex;
 				flex-wrap: wrap;
@@ -155,6 +164,7 @@ const projects = [
 								<span class="period">{project.period}</span>
 							</div>
 							<p>{project.description}</p>
+							{project.why && <p class="card-why">{project.why}</p>}
 							<div class="tags">
 								{project.tags.map((tag) => {
 									const color = tagColors[tag] || '#4f5bd5';
