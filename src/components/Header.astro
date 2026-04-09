@@ -1,6 +1,7 @@
 ---
 import { SITE_TITLE } from '../consts';
 import HeaderLink from './HeaderLink.astro';
+import ThemeToggle from './ThemeToggle.astro';
 import { fade } from 'astro:transitions';
 ---
 
@@ -8,10 +9,18 @@ import { fade } from 'astro:transitions';
 <header transition:persist>
 	<nav>
 		<button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
-			<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-				<line x1="3" y1="6" x2="21" y2="6" />
-				<line x1="3" y1="12" x2="21" y2="12" />
-				<line x1="3" y1="18" x2="21" y2="18" />
+			<svg
+				width="24"
+				height="24"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2"
+				stroke-linecap="round"
+			>
+				<line x1="3" y1="6" x2="21" y2="6"></line>
+				<line x1="3" y1="12" x2="21" y2="12"></line>
+				<line x1="3" y1="18" x2="21" y2="18"></line>
 			</svg>
 		</button>
 		<div class="internal-links">
@@ -19,6 +28,9 @@ import { fade } from 'astro:transitions';
 			<HeaderLink href="/portfolio">Projects</HeaderLink>
 			<HeaderLink href="/blog">Journals</HeaderLink>
 			<HeaderLink href="/resume">Resume</HeaderLink>
+		</div>
+		<div class="header-actions">
+			<ThemeToggle />
 		</div>
 	</nav>
 </header>
@@ -49,16 +61,22 @@ import { fade } from 'astro:transitions';
 		-webkit-backdrop-filter: blur(12px);
 		background: rgba(255, 255, 255, 0.85);
 		border-bottom: 1px solid rgb(var(--gray-light));
-		transition: transform 0.3s ease, box-shadow 0.3s ease;
+		transition:
+			transform 0.3s ease,
+			box-shadow 0.3s ease;
 	}
 	header.header-hidden {
 		transform: translateY(-100%);
 	}
 	@media (prefers-color-scheme: dark) {
-		header {
+		:root:not([data-theme='light']) header {
 			background: rgba(22, 22, 42, 0.85);
 			border-bottom-color: rgba(var(--gray-light), 0.3);
 		}
+	}
+	[data-theme='dark'] header {
+		background: rgba(22, 22, 42, 0.85);
+		border-bottom-color: rgba(var(--gray-light), 0.3);
 	}
 	nav {
 		display: flex;
@@ -72,6 +90,11 @@ import { fade } from 'astro:transitions';
 		align-items: stretch;
 		gap: 0.1rem;
 	}
+	.header-actions {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
 	nav a {
 		display: inline-flex;
 		align-items: center;
@@ -83,7 +106,9 @@ import { fade } from 'astro:transitions';
 		font-weight: 600;
 		line-height: 1.2;
 		letter-spacing: 0.01em;
-		transition: color 0.2s, border-color 0.2s;
+		transition:
+			color 0.2s,
+			border-color 0.2s;
 	}
 	nav a:hover {
 		color: rgb(var(--black));
@@ -121,9 +146,12 @@ import { fade } from 'astro:transitions';
 			z-index: 100;
 		}
 		@media (prefers-color-scheme: dark) {
-			.internal-links {
+			:root:not([data-theme='light']) .internal-links {
 				background: rgba(22, 22, 42, 0.95);
 			}
+		}
+		[data-theme='dark'] .internal-links {
+			background: rgba(22, 22, 42, 0.95);
 		}
 		.internal-links.open {
 			display: flex;
@@ -177,14 +205,18 @@ import { fade } from 'astro:transitions';
 		header.dataset.scrollBound = 'true';
 		let lastScrollY = window.scrollY;
 		const threshold = 60; // px before hiding kicks in
-		window.addEventListener('scroll', () => {
-			const currentScrollY = window.scrollY;
-			if (currentScrollY > threshold && currentScrollY > lastScrollY) {
-				header.classList.add('header-hidden');
-			} else {
-				header.classList.remove('header-hidden');
-			}
-			lastScrollY = currentScrollY;
-		}, { passive: true });
+		window.addEventListener(
+			'scroll',
+			() => {
+				const currentScrollY = window.scrollY;
+				if (currentScrollY > threshold && currentScrollY > lastScrollY) {
+					header.classList.add('header-hidden');
+				} else {
+					header.classList.remove('header-hidden');
+				}
+				lastScrollY = currentScrollY;
+			},
+			{ passive: true },
+		);
 	});
 </script>

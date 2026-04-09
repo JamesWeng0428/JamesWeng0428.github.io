@@ -21,6 +21,30 @@ const { title, description, image = FallbackImage } = Astro.props;
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<!-- Theme initialization (prevent flash) -->
+<script is:inline>
+	(function () {
+		function applyTheme() {
+			const stored = localStorage.getItem('jamesweng-theme');
+			const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+			// Use stored theme if available, otherwise use system preference
+			if (stored === 'light') {
+				document.documentElement.setAttribute('data-theme', 'light');
+			} else if (stored === 'dark') {
+				document.documentElement.setAttribute('data-theme', 'dark');
+			} else if (prefersDark) {
+				document.documentElement.setAttribute('data-theme', 'dark');
+			} else {
+				document.documentElement.setAttribute('data-theme', 'light');
+			}
+		}
+		// Apply immediately
+		applyTheme();
+		// Re-apply after view transitions
+		document.addEventListener('astro:page-load', applyTheme);
+	})();
+</script>
 <link rel="icon" type="image/png" href="/favicon.png" />
 <link rel="icon" href="/favicon.ico" />
 <link rel="sitemap" href="/sitemap-index.xml" />

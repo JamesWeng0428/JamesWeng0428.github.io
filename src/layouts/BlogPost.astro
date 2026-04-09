@@ -7,7 +7,9 @@ import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 
-interface Props extends CollectionEntry<'blog'>['data'] {
+type BlogData = CollectionEntry<'blog'>['data'];
+
+interface Props extends BlogData {
 	prevPost?: { id: string; title: string } | null;
 	nextPost?: { id: string; title: string } | null;
 }
@@ -138,22 +140,28 @@ const { title, description, pubDate, updatedDate, heroImage, prevPost, nextPost 
 						<hr />
 					</div>
 					<slot />
-					{(prevPost || nextPost) && (
-						<nav class="post-nav">
-							{prevPost ? (
-								<a href={`/blog/${prevPost.id}/`}>
-									<span class="post-nav-label">Previous</span>
-									<span class="post-nav-title">{prevPost.title}</span>
-								</a>
-							) : <div />}
-							{nextPost ? (
-								<a href={`/blog/${nextPost.id}/`} class="next">
-									<span class="post-nav-label">Next</span>
-									<span class="post-nav-title">{nextPost.title}</span>
-								</a>
-							) : <div />}
-						</nav>
-					)}
+					{
+						(prevPost || nextPost) && (
+							<nav class="post-nav">
+								{prevPost ? (
+									<a href={`/blog/${prevPost.id}/`}>
+										<span class="post-nav-label">Previous</span>
+										<span class="post-nav-title">{prevPost.title}</span>
+									</a>
+								) : (
+									<div />
+								)}
+								{nextPost ? (
+									<a href={`/blog/${nextPost.id}/`} class="next">
+										<span class="post-nav-label">Next</span>
+										<span class="post-nav-title">{nextPost.title}</span>
+									</a>
+								) : (
+									<div />
+								)}
+							</nav>
+						)
+					}
 				</div>
 			</article>
 		</main>

@@ -37,9 +37,9 @@
 	--space-2xl: 6rem;
 }
 
-/* --- Dark Mode --- */
+/* --- Dark Mode (system preference) --- */
 @media (prefers-color-scheme: dark) {
-	:root {
+	:root:not([data-theme='light']) {
 		--accent: #8b95f7;
 		--accent-dark: #a8b0fa;
 		--accent-light: #6b75d4;
@@ -54,29 +54,49 @@
 		--shadow-md: 0 4px 12px rgba(0, 0, 0, 0.25), 0 2px 4px rgba(0, 0, 0, 0.15);
 		--shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.3), 0 4px 8px rgba(0, 0, 0, 0.2);
 	}
-	body {
+	:root:not([data-theme='light']) body {
 		background-color: var(--surface);
 	}
 }
 
+/* --- Dark Mode (manual override) --- */
+[data-theme='dark'] {
+	--accent: #8b95f7;
+	--accent-dark: #a8b0fa;
+	--accent-light: #6b75d4;
+	--black: 235, 238, 245;
+	--gray: 155, 165, 185;
+	--gray-light: 45, 50, 65;
+	--gray-dark: 215, 220, 232;
+	--gray-gradient: rgba(var(--gray-light), 50%), #12121f;
+	--surface: #16162a;
+	--surface-raised: #1e1e36;
+	--shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.15);
+	--shadow-md: 0 4px 12px rgba(0, 0, 0, 0.25), 0 2px 4px rgba(0, 0, 0, 0.15);
+	--shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.3), 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+[data-theme='dark'] body {
+	background-color: var(--surface);
+}
+
 /* --- Typography --- */
 @font-face {
-	font-family: "Atkinson";
-	src: url("/fonts/atkinson-regular.woff") format("woff");
+	font-family: 'Atkinson';
+	src: url('/fonts/atkinson-regular.woff') format('woff');
 	font-weight: 400;
 	font-style: normal;
 	font-display: swap;
 }
 @font-face {
-	font-family: "Atkinson";
-	src: url("/fonts/atkinson-bold.woff") format("woff");
+	font-family: 'Atkinson';
+	src: url('/fonts/atkinson-bold.woff') format('woff');
 	font-weight: 700;
 	font-style: normal;
 	font-display: swap;
 }
 
 body {
-	font-family: "Atkinson", sans-serif;
+	font-family: 'Atkinson', sans-serif;
 	margin: 0;
 	padding: 0;
 	text-align: left;
@@ -97,7 +117,12 @@ main {
 }
 
 /* Tighter modular scale (~1.2 ratio) */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
 	margin: 0 0 0.5rem 0;
 	color: rgb(var(--black));
 	line-height: 1.25;
@@ -124,7 +149,8 @@ h5 {
 	font-size: 1em;
 	font-weight: 700;
 }
-strong, b {
+strong,
+b {
 	font-weight: 700;
 }
 
@@ -133,7 +159,9 @@ a {
 	color: var(--accent);
 	text-decoration-thickness: 1px;
 	text-underline-offset: 3px;
-	transition: color 0.2s, text-decoration-color 0.2s;
+	transition:
+		color 0.2s,
+		text-decoration-color 0.2s;
 }
 a:hover {
 	color: var(--accent-dark);
@@ -204,9 +232,12 @@ hr {
 	color: inherit;
 }
 @media (prefers-color-scheme: dark) {
-	::selection {
+	:root:not([data-theme='light']) ::selection {
 		background: rgba(139, 149, 247, 0.25);
 	}
+}
+[data-theme='dark'] ::selection {
+	background: rgba(139, 149, 247, 0.25);
 }
 
 /* --- Focus Styles --- */
@@ -220,7 +251,9 @@ hr {
 .reveal {
 	opacity: 0;
 	transform: translateY(20px);
-	transition: opacity 0.6s ease, transform 0.6s ease;
+	transition:
+		opacity 0.6s ease,
+		transform 0.6s ease;
 }
 .reveal.visible {
 	opacity: 1;

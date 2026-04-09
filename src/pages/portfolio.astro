@@ -7,13 +7,13 @@ import { fade } from 'astro:transitions';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
 const tagColors: Record<string, string> = {
-	'Swift': '#f05138',
-	'iOS': '#147efb',
-	'HealthKit': '#34c759',
-	'Python': '#3776ab',
-	'WhisperX': '#8b5cf6',
-	'LLM': '#ec4899',
-	'Streamlit': '#ff4b4b',
+	Swift: '#f05138',
+	iOS: '#147efb',
+	HealthKit: '#34c759',
+	Python: '#3776ab',
+	WhisperX: '#8b5cf6',
+	LLM: '#ec4899',
+	Streamlit: '#ff4b4b',
 	'C++': '#00599c',
 	'Machine Learning': '#f59e0b',
 	'Embedded Systems': '#10b981',
@@ -53,7 +53,11 @@ const projects = [
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={`Projects | ${SITE_TITLE}`} description="A selection of software projects I've built — iOS apps, AI tools, and embedded systems." image={OGImage} />
+		<BaseHead
+			title={`Projects | ${SITE_TITLE}`}
+			description="A selection of software projects I've built — iOS apps, AI tools, and embedded systems."
+			image={OGImage}
+		/>
 		<style>
 			main {
 				max-width: 960px;
@@ -82,7 +86,9 @@ const projects = [
 				border-radius: var(--radius-md);
 				padding: var(--space-md);
 				background: var(--surface);
-				transition: box-shadow 0.25s, transform 0.25s;
+				transition:
+					box-shadow 0.25s,
+					transform 0.25s;
 				display: flex;
 				flex-direction: column;
 				opacity: 0;
@@ -91,7 +97,11 @@ const projects = [
 			.card.visible {
 				opacity: 1;
 				transform: translateY(0);
-				transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.25s, transform 0.25s;
+				transition:
+					opacity 0.5s ease,
+					transform 0.5s ease,
+					box-shadow 0.25s,
+					transform 0.25s;
 			}
 			.card.visible:hover {
 				box-shadow: var(--shadow-lg);
@@ -158,7 +168,13 @@ const projects = [
 				{
 					projects.map((project) => (
 						<div class="card">
-							<a href={project.url} target="_blank" rel="noopener noreferrer" class="card-link" aria-label={project.title} />
+							<a
+								href={project.url}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="card-link"
+								aria-label={project.title}
+							/>
 							<div class="card-header">
 								<h2>{project.title}</h2>
 								<span class="period">{project.period}</span>
@@ -169,7 +185,9 @@ const projects = [
 								{project.tags.map((tag) => {
 									const color = tagColors[tag] || '#4f5bd5';
 									return (
-										<span class="tag" style={`background: ${color}15; color: ${color};`}>{tag}</span>
+										<span class="tag" style={`background: ${color}15; color: ${color};`}>
+											{tag}
+										</span>
 									);
 								})}
 							</div>
@@ -184,16 +202,19 @@ const projects = [
 <script>
 	document.addEventListener('astro:page-load', () => {
 		const cards = document.querySelectorAll('.card');
-		const observer = new IntersectionObserver((entries) => {
-			entries.forEach((entry) => {
-				if (entry.isIntersecting) {
-					const el = entry.target as HTMLElement;
-					const index = Array.from(cards).indexOf(el);
-					setTimeout(() => el.classList.add('visible'), index * 120);
-					observer.unobserve(el);
-				}
-			});
-		}, { threshold: 0.1 });
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						const el = entry.target as HTMLElement;
+						const index = Array.from(cards).indexOf(el);
+						setTimeout(() => el.classList.add('visible'), index * 120);
+						observer.unobserve(el);
+					}
+				});
+			},
+			{ threshold: 0.1 },
+		);
 		cards.forEach((card) => observer.observe(card));
 	});
 </script>

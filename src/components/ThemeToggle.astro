@@ -1,0 +1,172 @@
+---
+// Theme toggle button with sun/moon icons
+---
+
+<button class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+	<span class="icon-sun">
+		<svg
+			width="20"
+			height="20"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="2"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+		>
+			<circle cx="12" cy="12" r="5"></circle>
+			<line x1="12" y1="1" x2="12" y2="3"></line>
+			<line x1="12" y1="21" x2="12" y2="23"></line>
+			<line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+			<line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+			<line x1="1" y1="12" x2="3" y2="12"></line>
+			<line x1="21" y1="12" x2="23" y2="12"></line>
+			<line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+			<line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+		</svg>
+	</span>
+	<span class="icon-moon">
+		<svg
+			width="20"
+			height="20"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="2"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+		>
+			<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+		</svg>
+	</span>
+</button>
+
+<style>
+	.theme-toggle {
+		background: rgba(var(--gray-light), 0.3);
+		border: 1px solid rgb(var(--gray-light));
+		cursor: pointer;
+		padding: 0.5em;
+		color: rgb(var(--gray-dark));
+		border-radius: var(--radius-sm);
+		transition:
+			color 0.2s,
+			background-color 0.2s,
+			border-color 0.2s;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.theme-toggle:hover {
+		color: rgb(var(--black));
+		background-color: rgba(var(--gray-light), 0.6);
+		border-color: rgb(var(--gray));
+	}
+	.theme-toggle:focus-visible {
+		outline: 2px solid var(--accent);
+		outline-offset: 2px;
+	}
+
+	/* Dark mode styles for the button itself */
+	@media (prefers-color-scheme: dark) {
+		:root:not([data-theme='light']) .theme-toggle {
+			background: rgba(var(--gray-light), 0.15);
+			border-color: rgba(var(--gray-light), 0.3);
+			color: rgb(var(--gray));
+		}
+		:root:not([data-theme='light']) .theme-toggle:hover {
+			background: rgba(var(--gray-light), 0.25);
+			border-color: rgba(var(--gray-light), 0.5);
+			color: rgb(var(--gray-dark));
+		}
+	}
+	[data-theme='dark'] .theme-toggle {
+		background: rgba(var(--gray-light), 0.15);
+		border-color: rgba(var(--gray-light), 0.3);
+		color: rgb(var(--gray));
+	}
+	[data-theme='dark'] .theme-toggle:hover {
+		background: rgba(var(--gray-light), 0.25);
+		border-color: rgba(var(--gray-light), 0.5);
+		color: rgb(var(--gray-dark));
+	}
+	.icon-sun,
+	.icon-moon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	/* Default (before script runs): assume light mode, show moon icon */
+	.icon-sun {
+		display: none;
+	}
+	.icon-moon {
+		display: flex;
+	}
+
+	/* Light mode: show moon icon (click to switch to dark) */
+	:root[data-theme='light'] .icon-sun {
+		display: none;
+	}
+	:root[data-theme='light'] .icon-moon {
+		display: flex;
+	}
+
+	/* Dark mode: show sun icon (click to switch to light) */
+	:root[data-theme='dark'] .icon-sun {
+		display: flex;
+	}
+	:root[data-theme='dark'] .icon-moon {
+		display: none;
+	}
+</style>
+
+<script>
+	(function () {
+		const STORAGE_KEY = 'jamesweng-theme';
+
+		function getStoredTheme() {
+			if (typeof localStorage === 'undefined') return null;
+			const stored = localStorage.getItem(STORAGE_KEY);
+			if (stored === 'light' || stored === 'dark') return stored;
+			return null;
+		}
+
+		function getSystemTheme() {
+			return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+		}
+
+		function getEffectiveTheme() {
+			const stored = getStoredTheme();
+			return stored || getSystemTheme();
+		}
+
+		function setTheme(theme) {
+			const root = document.documentElement;
+			root.setAttribute('data-theme', theme);
+			localStorage.setItem(STORAGE_KEY, theme);
+		}
+
+		function toggleTheme() {
+			const current = getEffectiveTheme();
+			const next = current === 'dark' ? 'light' : 'dark';
+			setTheme(next);
+		}
+
+		// Bind click handlers to toggle buttons
+		function bindToggles() {
+			document.querySelectorAll('.theme-toggle').forEach((btn) => {
+				if (btn.dataset.bound === 'true') return;
+				btn.dataset.bound = 'true';
+				btn.addEventListener('click', toggleTheme);
+			});
+		}
+
+		// Bind on initial load
+		bindToggles();
+
+		// Re-bind after Astro page transitions
+		document.addEventListener('astro:page-load', bindToggles);
+	})();
+</script>

@@ -18,24 +18,27 @@ const latestPost = posts[0];
 <html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} image={AvatarImage} />
-		<script type="application/ld+json" set:html={JSON.stringify({
-			"@context": "https://schema.org",
-			"@type": "Person",
-			"name": "James Weng",
-			"url": "https://JamesWeng0428.github.io",
-			"sameAs": [
-				"https://github.com/JamesWeng0428",
-				"https://www.linkedin.com/in/JamesWeng0428",
-				"https://www.instagram.com/jamesweng0428/",
-				"https://www.strava.com/athletes/124960807"
-			],
-			"jobTitle": "Student",
-			"affiliation": {
-				"@type": "CollegeOrUniversity",
-				"name": "University of Illinois at Urbana-Champaign"
-			},
-			"knowsAbout": ["Computer Science", "Learning Science", "iOS Development", "Machine Learning"]
-		})} />
+		<script
+			type="application/ld+json"
+			set:html={JSON.stringify({
+				'@context': 'https://schema.org',
+				'@type': 'Person',
+				name: 'James Weng',
+				url: 'https://JamesWeng0428.github.io',
+				sameAs: [
+					'https://github.com/JamesWeng0428',
+					'https://www.linkedin.com/in/JamesWeng0428',
+					'https://www.instagram.com/jamesweng0428/',
+					'https://www.strava.com/athletes/124960807',
+				],
+				jobTitle: 'Student',
+				affiliation: {
+					'@type': 'CollegeOrUniversity',
+					name: 'University of Illinois at Urbana-Champaign',
+				},
+				knowsAbout: ['Computer Science', 'Learning Science', 'iOS Development', 'Machine Learning'],
+			})}
+		/>
 		<style>
 			main {
 				max-width: 720px;
@@ -117,7 +120,7 @@ const latestPost = posts[0];
 				position: relative;
 			}
 			.section ul li::before {
-				content: "";
+				content: '';
 				position: absolute;
 				left: 0;
 				top: 0.7em;
@@ -135,7 +138,9 @@ const latestPost = posts[0];
 				border-radius: var(--radius-md);
 				text-decoration: none;
 				background: var(--surface-raised);
-				transition: box-shadow 0.2s, transform 0.2s;
+				transition:
+					box-shadow 0.2s,
+					transform 0.2s;
 			}
 			.latest-post:hover {
 				box-shadow: var(--shadow-md);
@@ -185,7 +190,9 @@ const latestPost = posts[0];
 				object-fit: cover;
 				border-radius: var(--radius-md);
 				cursor: pointer;
-				transition: transform 0.2s, box-shadow 0.2s;
+				transition:
+					transform 0.2s,
+					box-shadow 0.2s;
 			}
 			.photo-gallery img:hover {
 				transform: scale(1.03);
@@ -251,16 +258,17 @@ const latestPost = posts[0];
 		<main id="main-content" transition:animate={fade({ duration: '0.3s' })}>
 			<div class="hero">
 				<h1>James Weng</h1>
-				<p class="subtitle">CS + Education at UIUC &nbsp;·&nbsp; software, learning & health &nbsp;·&nbsp; I build what I can't find</p>
+				<p class="subtitle">
+					CS + Education at UIUC &nbsp;·&nbsp; software, learning & health &nbsp;·&nbsp; I build
+					what I can't find
+				</p>
 				<div class="hero-body">
 					<div class="hero-text">
 						<p>
 							Most of my work lives at the intersection of software, learning, and health — I like
 							building things I couldn't find anywhere else.
 						</p>
-						<p>
-							I grew up in Shenzhen and now study CS + Education at UIUC.
-						</p>
+						<p>I grew up in Shenzhen and now study CS + Education at UIUC.</p>
 					</div>
 					<img src="/avatar.png" alt="James Weng" class="avatar" />
 				</div>
@@ -268,23 +276,37 @@ const latestPost = posts[0];
 			<div class="section reveal">
 				<h2>Currently</h2>
 				<ul>
-					<li>Mentee for Vishesh Prasad in URSA, completing Mathematical Derivation Graphs Dataset</li>
+					<li>
+						Mentee for Vishesh Prasad in URSA, completing Mathematical Derivation Graphs Dataset
+					</li>
 					<li>Working with Professor Chris Napolitano with SEB skills</li>
 				</ul>
 			</div>
-			{latestPost && (
-				<div class="section reveal">
-					<h2>Latest Journal</h2>
-					<a href={`/blog/${latestPost.id}/`} class="latest-post">
-						<p class="latest-post-title">{latestPost.data.title}</p>
-						<p class="latest-post-meta"><FormattedDate date={latestPost.data.pubDate} /></p>
-						<p class="latest-post-desc">{latestPost.data.description}</p>
-					</a>
-				</div>
-			)}
+			{
+				latestPost && (
+					<div class="section reveal">
+						<h2>Latest Journal</h2>
+						<a href={`/blog/${latestPost.id}/`} class="latest-post">
+							<p class="latest-post-title">{latestPost.data.title}</p>
+							<p class="latest-post-meta">
+								<FormattedDate date={latestPost.data.pubDate} />
+							</p>
+							<p class="latest-post-desc">{latestPost.data.description}</p>
+						</a>
+					</div>
+				)
+			}
 			<div class="section reveal">
 				<h2>Bouldering</h2>
-				<p>I am not a NERD. I do sport outside from my computer. Bouldering is one of them. I am an active climber at <a href="https://www.urbanaboulders.com/" target="_blank" rel="noopener">Urbana Boulders &amp; Boneyard Boulders</a>. Here are some videos. If you are interested in climbing, you can follow my instagram account: <a href="https://www.instagram.com/jamesweng0428/" target="_blank" rel="noopener">JamesWeng0428</a></p>
+				<p>
+					I am not a NERD. I do sport outside from my computer. Bouldering is one of them. I am an
+					active climber at <a href="https://www.urbanaboulders.com/" target="_blank" rel="noopener"
+						>Urbana Boulders &amp; Boneyard Boulders</a
+					>. Here are some videos. If you are interested in climbing, you can follow my instagram
+					account: <a href="https://www.instagram.com/jamesweng0428/" target="_blank" rel="noopener"
+						>JamesWeng0428</a
+					>
+				</p>
 				<div class="video-grid">
 					<video controls playsinline preload="none">
 						<source src="/bouldering-1.mp4" type="video/mp4" />
@@ -296,7 +318,14 @@ const latestPost = posts[0];
 			</div>
 			<div class="section reveal">
 				<h2>Cycling</h2>
-				<p>I also enjoy cycling. I have a GIANT Propel ADV SL. If you love cycling too, you can follow me on <a href="https://www.strava.com/athletes/124960807" target="_blank" rel="noopener">Strava</a></p>
+				<p>
+					I also enjoy cycling. I have a GIANT Propel ADV SL. If you love cycling too, you can
+					follow me on <a
+						href="https://www.strava.com/athletes/124960807"
+						target="_blank"
+						rel="noopener">Strava</a
+					>
+				</p>
 				<div class="photo-gallery" id="photo-gallery">
 					<img src="/cycling-1.JPG" alt="Cycling photo 1" />
 					<img src="/cycling-2.JPG" alt="Cycling photo 2" />
@@ -324,14 +353,17 @@ const latestPost = posts[0];
 		// Scroll-reveal
 		const reveals = document.querySelectorAll('.reveal');
 		if (reveals.length) {
-			const observer = new IntersectionObserver((entries) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-						entry.target.classList.add('visible');
-						observer.unobserve(entry.target);
-					}
-				});
-			}, { threshold: 0.1 });
+			const observer = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((entry) => {
+						if (entry.isIntersecting) {
+							entry.target.classList.add('visible');
+							observer.unobserve(entry.target);
+						}
+					});
+				},
+				{ threshold: 0.1 },
+			);
 			reveals.forEach((el) => observer.observe(el));
 			signal.addEventListener('abort', () => observer.disconnect(), { once: true });
 		}
@@ -341,20 +373,32 @@ const latestPost = posts[0];
 		const lightbox = document.getElementById('lightbox');
 		const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
 		if (gallery && lightbox && lightboxImg) {
-			gallery.addEventListener('click', (e) => {
-				const target = e.target as HTMLElement;
-				if (target.tagName === 'IMG') {
-					lightboxImg.src = (target as HTMLImageElement).src;
-					lightboxImg.alt = (target as HTMLImageElement).alt;
-					lightbox.classList.add('active');
-				}
-			}, { signal });
-			lightbox.addEventListener('click', () => {
-				lightbox.classList.remove('active');
-			}, { signal });
-			document.addEventListener('keydown', (e) => {
-				if (e.key === 'Escape') lightbox.classList.remove('active');
-			}, { signal });
+			gallery.addEventListener(
+				'click',
+				(e) => {
+					const target = e.target as HTMLElement;
+					if (target.tagName === 'IMG') {
+						lightboxImg.src = (target as HTMLImageElement).src;
+						lightboxImg.alt = (target as HTMLImageElement).alt;
+						lightbox.classList.add('active');
+					}
+				},
+				{ signal },
+			);
+			lightbox.addEventListener(
+				'click',
+				() => {
+					lightbox.classList.remove('active');
+				},
+				{ signal },
+			);
+			document.addEventListener(
+				'keydown',
+				(e) => {
+					if (e.key === 'Escape') lightbox.classList.remove('active');
+				},
+				{ signal },
+			);
 		}
 	});
 </script>

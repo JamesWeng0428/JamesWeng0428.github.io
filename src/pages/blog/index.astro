@@ -16,7 +16,11 @@ const posts = (await getCollection('blog')).sort(
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={`Journals | ${SITE_TITLE}`} description="Personal journals and reflections by James Weng." image={OGImage} />
+		<BaseHead
+			title={`Journals | ${SITE_TITLE}`}
+			description="Personal journals and reflections by James Weng."
+			image={OGImage}
+		/>
 		<style>
 			main {
 				width: 960px;
@@ -48,7 +52,9 @@ const posts = (await getCollection('blog')).sort(
 				padding: var(--space-sm);
 				border-radius: var(--radius-md);
 				text-decoration: none;
-				transition: background 0.2s, box-shadow 0.2s;
+				transition:
+					background 0.2s,
+					box-shadow 0.2s;
 			}
 			ul li a:hover {
 				background: var(--surface-raised);
@@ -94,12 +100,12 @@ const posts = (await getCollection('blog')).sort(
 			<section>
 				<ul>
 					{
-							posts.map((post) => (
-								<li>
-									<a href={`/blog/${post.id}/`}>
-										<h4 class="title">{post.data.title}</h4>
-										<p class="date">
-											<FormattedDate date={post.data.pubDate} />
+						posts.map((post) => (
+							<li>
+								<a href={`/blog/${post.id}/`}>
+									<h4 class="title">{post.data.title}</h4>
+									<p class="date">
+										<FormattedDate date={post.data.pubDate} />
 									</p>
 									<p class="excerpt">{post.data.description}</p>
 								</a>

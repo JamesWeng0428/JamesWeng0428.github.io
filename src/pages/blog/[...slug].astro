@@ -11,7 +11,8 @@ export async function getStaticPaths() {
 		props: {
 			post,
 			prevPost: i > 0 ? { id: posts[i - 1].id, title: posts[i - 1].data.title } : null,
-			nextPost: i < posts.length - 1 ? { id: posts[i + 1].id, title: posts[i + 1].data.title } : null,
+			nextPost:
+				i < posts.length - 1 ? { id: posts[i + 1].id, title: posts[i + 1].data.title } : null,
 		},
 	}));
 }
