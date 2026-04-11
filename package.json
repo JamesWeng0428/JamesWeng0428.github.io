@@ -10,6 +10,7 @@
 		"build": "astro build",
 		"preview": "astro preview",
 		"astro": "astro",
+		"security:check": "node scripts/security-check.js",
 		"lint": "eslint . --ext .js,.ts,.astro",
 		"lint:fix": "eslint . --ext .js,.ts,.astro --fix",
 		"format": "prettier --write .",
