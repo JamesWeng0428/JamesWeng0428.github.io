@@ -76,9 +76,9 @@ function checkCSP(html, filePath) {
 		warning(`CSP missing directives: ${missing.join(', ')}`);
 	}
 
-	// Check for frame-src none (clickjacking protection)
-	if (!cspContent.includes("frame-src 'none'")) {
-		warning(`CSP should include frame-src 'none' for clickjacking protection`);
+	// Check frame-src - 'none' is ideal, 'self' is acceptable for same-origin iframes (e.g., PDF viewer)
+	if (!cspContent.includes("frame-src 'none'") && !cspContent.includes("frame-src 'self'")) {
+		warning(`CSP should include frame-src 'none' or 'self' for clickjacking protection`);
 	}
 
 	success(`CSP configured with ${cspContent.split(';').length} directives`);
