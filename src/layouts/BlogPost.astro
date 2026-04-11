@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import { fade } from 'astro:transitions';
 import BaseHead from '../components/BaseHead.astro';
@@ -14,7 +13,7 @@ interface Props extends BlogData {
 	nextPost?: { id: string; title: string } | null;
 }
 
-const { title, description, pubDate, updatedDate, heroImage, prevPost, nextPost } = Astro.props;
+const { title, description, pubDate, updatedDate, prevPost, nextPost } = Astro.props;
 ---
 
 <html lang="en">
@@ -35,15 +34,6 @@ const { title, description, pubDate, updatedDate, heroImage, prevPost, nextPost 
 				width: calc(100% - 2em);
 				max-width: 100%;
 				margin: 0;
-			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: var(--radius-md);
-				box-shadow: var(--shadow-md);
 			}
 			.prose {
 				width: 720px;
@@ -121,9 +111,6 @@ const { title, description, pubDate, updatedDate, heroImage, prevPost, nextPost 
 		<Header />
 		<main id="main-content" transition:animate={fade({ duration: '0.3s' })}>
 			<article>
-				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
-				</div>
 				<div class="prose">
 					<div class="title">
 						<div class="date">

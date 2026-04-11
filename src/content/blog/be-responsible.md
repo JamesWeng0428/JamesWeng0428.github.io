@@ -2,7 +2,6 @@
 title: 'Be Responsible'
 description: "Being irresponsible is easy, but it hurts people's feelings."
 pubDate: 'Mar 27 2026'
-heroImage: '../../assets/blog-placeholder-2.jpg'
 ---
 
 My brother always found me an irresponsible person, from elementary school even till now. I generally did not feel that way, because I was a responsible person in cases that interested me. I did know people forget things, and I did know to double check.

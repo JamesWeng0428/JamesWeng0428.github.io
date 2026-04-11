@@ -2,7 +2,6 @@
 title: 'About READY'
 description: 'You will never feel like you are ready, but you can always START to ready.'
 pubDate: 'Mar 11 2026'
-heroImage: '../../assets/blog-placeholder-3.jpg'
 ---
 
 When I was in high school, I always struggled for exams, because I found I don't have enough time to prepare. I did not feel like I am ready.

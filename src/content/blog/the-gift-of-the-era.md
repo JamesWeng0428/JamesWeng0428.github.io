@@ -2,7 +2,6 @@
 title: 'The Gift of the Era'
 description: 'Two families, one era, and the difference between consuming opportunity and letting it cultivate you.'
 pubDate: 'Jan 14 2024'
-heroImage: '../../assets/blog-placeholder-1.jpg'
 ---
 
 I wrote this essay after a long conversation with my brother. We had been talking about our parents' generation, about the strange luck of being born at the hinge of history, and about why some families rise while others drift. I kept thinking about two stories I had heard years ago—one about a windfall that became a trap, and another about a hardship that became a doorway. I sat down that evening and tried to make sense of them. This is what came out.
