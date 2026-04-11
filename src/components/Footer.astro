@@ -79,10 +79,10 @@ const today = new Date();
 <style>
 	.back-to-top {
 		position: fixed;
-		bottom: 2rem;
-		right: 2rem;
-		width: 42px;
-		height: 42px;
+		bottom: 1rem;
+		right: 1rem;
+		width: 44px;
+		height: 44px;
 		border-radius: var(--radius-full);
 		border: 1px solid rgb(var(--gray-light));
 		background: var(--surface);
@@ -168,6 +168,11 @@ const today = new Date();
 		transition:
 			color 0.2s,
 			transform 0.2s;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 44px;
+		height: 44px;
 	}
 	.social-links a:hover {
 		color: var(--accent);
@@ -190,6 +195,10 @@ const today = new Date();
 		}
 		.social-links {
 			justify-content: center;
+		}
+		.back-to-top {
+			bottom: 0.75rem;
+			right: 0.75rem;
 		}
 	}
 </style>

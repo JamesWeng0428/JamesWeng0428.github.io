@@ -103,6 +103,19 @@ const { title, description, pubDate, updatedDate, prevPost, nextPost } = Astro.p
 				text-align: right;
 				margin-left: auto;
 			}
+			@media (max-width: 560px) {
+				.post-nav {
+					flex-direction: column;
+					gap: 0.75rem;
+				}
+				.post-nav a {
+					max-width: 100%;
+				}
+				.post-nav .next {
+					text-align: left;
+					margin-left: 0;
+				}
+			}
 		</style>
 	</head>
 

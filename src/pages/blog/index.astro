@@ -23,7 +23,9 @@ const posts = (await getCollection('blog')).sort(
 		/>
 		<style>
 			main {
-				width: 960px;
+				max-width: 960px;
+				margin: 0 auto;
+				padding: var(--space-xl) var(--space-sm);
 			}
 			.page-header {
 				margin-bottom: var(--space-lg);

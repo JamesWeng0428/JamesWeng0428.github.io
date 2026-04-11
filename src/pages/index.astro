@@ -214,18 +214,30 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 			}
 			.lightbox-close {
 				position: absolute;
-				top: 1rem;
-				right: 1.5rem;
-				background: none;
+				top: 0.5rem;
+				right: 0.5rem;
+				background: rgba(0, 0, 0, 0.35);
 				border: none;
+				border-radius: var(--radius-sm);
 				color: white;
-				font-size: 2rem;
+				font-size: 1.75rem;
 				cursor: pointer;
 				line-height: 1;
+				min-width: 44px;
+				min-height: 44px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
 			}
 
 			/* --- Responsive --- */
 			@media (max-width: 560px) {
+				main {
+					padding: var(--space-lg) var(--space-sm);
+				}
+				.section {
+					margin-top: var(--space-lg);
+				}
 				.hero h1 {
 					font-size: 2rem;
 				}

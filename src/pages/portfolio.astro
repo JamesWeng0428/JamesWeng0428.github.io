@@ -77,7 +77,7 @@ const projects = [
 			}
 			.projects {
 				display: grid;
-				grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+				grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
 				gap: var(--space-md);
 			}
 			.card {
@@ -117,6 +117,8 @@ const projects = [
 				justify-content: space-between;
 				align-items: flex-start;
 				margin-bottom: 0.5rem;
+				flex-wrap: wrap;
+				gap: 0.25rem;
 			}
 			.card h2 {
 				margin: 0;
