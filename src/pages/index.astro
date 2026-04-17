@@ -36,7 +36,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 			main {
 				max-width: 720px;
 				margin: 0 auto;
-				padding: var(--space-xl) var(--space-sm);
+				padding: var(--space-2xl) var(--space-md);
 			}
 			/* --- Hero --- */
 			.hero {
@@ -45,9 +45,10 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 				border-bottom: 1px solid rgb(var(--gray-light));
 			}
 			.hero h1 {
-				font-size: 2.8rem;
-				margin: 0 0 0.2rem;
+				font-size: clamp(2.8rem, 8vw, 4rem);
+				margin: 0 0 0.3rem;
 				letter-spacing: -0.03em;
+				line-height: 1;
 			}
 			.hero .subtitle {
 				font-size: 1rem;
@@ -63,7 +64,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 				flex: 1;
 			}
 			.hero-body p {
-				font-size: 1rem;
+				font-size: 1.05rem;
 				line-height: 1.75;
 				color: rgb(var(--gray-dark));
 				margin: 0 0 0.75rem;
@@ -77,6 +78,10 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 				box-shadow: var(--shadow-lg);
 				border: 3px solid var(--surface);
 				outline: 1px solid rgb(var(--gray-light));
+				transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+			.avatar:hover {
+				transform: scale(1.03);
 			}
 
 			/* --- Sections --- */
@@ -123,40 +128,6 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 				background: var(--accent);
 			}
 
-			/* --- Latest Post Card --- */
-			.latest-post {
-				display: block;
-				padding: var(--space-md);
-				border: 1px solid rgb(var(--gray-light));
-				border-radius: var(--radius-md);
-				text-decoration: none;
-				background: var(--surface-raised);
-				transition:
-					box-shadow 0.2s,
-					transform 0.2s;
-			}
-			.latest-post:hover {
-				box-shadow: var(--shadow-md);
-				transform: translateY(-2px);
-			}
-			.latest-post-title {
-				font-size: 1rem;
-				font-weight: 700;
-				color: rgb(var(--black));
-				margin: 0 0 0.25rem;
-			}
-			.latest-post-meta {
-				font-size: 0.85rem;
-				color: rgb(var(--gray));
-				margin: 0 0 0.5rem;
-			}
-			.latest-post-desc {
-				font-size: 0.9rem;
-				color: rgb(var(--gray-dark));
-				margin: 0;
-				line-height: 1.5;
-			}
-
 			/* --- Video Grid --- */
 			.video-grid {
 				display: grid;
@@ -184,11 +155,11 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 				border-radius: var(--radius-md);
 				cursor: pointer;
 				transition:
-					transform 0.2s,
-					box-shadow 0.2s;
+					transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+					box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 			}
 			.photo-gallery img:hover {
-				transform: scale(1.03);
+				transform: scale(1.04);
 				box-shadow: var(--shadow-md);
 			}
 
@@ -233,13 +204,13 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 			/* --- Responsive --- */
 			@media (max-width: 560px) {
 				main {
-					padding: var(--space-lg) var(--space-sm);
+					padding: var(--space-xl) var(--space-sm);
 				}
 				.section {
 					margin-top: var(--space-lg);
 				}
 				.hero h1 {
-					font-size: 2rem;
+					font-size: 2.2rem;
 				}
 				.hero-body {
 					flex-direction: column-reverse;
@@ -261,7 +232,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 	<body>
 		<Header />
 		<main id="main-content" transition:animate={fade({ duration: '0.3s' })}>
-			<div class="hero">
+			<div class="hero reveal-stagger">
 				<h1>James Weng</h1>
 				<p class="subtitle">
 					CS + Education at UIUC &nbsp;·&nbsp; software, learning & health &nbsp;·&nbsp; I build
@@ -345,7 +316,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		const { signal } = controller;
 		scopedWindow.__indexPageController = controller;
 
-		// Scroll-reveal
+		// Scroll-reveal (single elements)
 		const reveals = document.querySelectorAll('.reveal');
 		if (reveals.length) {
 			const observer = new IntersectionObserver(
@@ -357,10 +328,28 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 						}
 					});
 				},
-				{ threshold: 0.1 },
+				{ threshold: 0.1, rootMargin: '0px 0px -50px 0px' },
 			);
 			reveals.forEach((el) => observer.observe(el));
 			signal.addEventListener('abort', () => observer.disconnect(), { once: true });
+		}
+
+		// Scroll-reveal (stagger containers)
+		const staggerContainers = document.querySelectorAll('.reveal-stagger');
+		if (staggerContainers.length) {
+			const staggerObserver = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((entry) => {
+						if (entry.isIntersecting) {
+							entry.target.classList.add('visible');
+							staggerObserver.unobserve(entry.target);
+						}
+					});
+				},
+				{ threshold: 0.1 },
+			);
+			staggerContainers.forEach((el) => staggerObserver.observe(el));
+			signal.addEventListener('abort', () => staggerObserver.disconnect(), { once: true });
 		}
 
 		// Lightbox

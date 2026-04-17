@@ -62,98 +62,103 @@ const projects = [
 			main {
 				max-width: 960px;
 				margin: 0 auto;
-				padding: var(--space-xl) var(--space-sm);
+				padding: var(--space-2xl) var(--space-md);
 			}
 			.page-header {
-				margin-bottom: var(--space-xl);
+				margin-bottom: var(--space-2xl);
 			}
 			.page-header h1 {
-				margin-bottom: 0.25rem;
+				font-size: clamp(2.5rem, 8vw, 4.5rem);
+				letter-spacing: -0.03em;
+				line-height: 1;
+				margin-bottom: 0.5rem;
 			}
 			.subtitle {
 				color: rgb(var(--gray));
 				margin: 0;
-				font-size: 1rem;
+				font-size: 1.15rem;
+				max-width: 480px;
 			}
 			.projects {
 				display: grid;
-				grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-				gap: var(--space-md);
+				grid-template-columns: 1fr;
+				gap: var(--space-xl);
 			}
 			.card {
 				position: relative;
-				border: 1px solid rgb(var(--gray-light));
-				border-radius: var(--radius-md);
-				padding: var(--space-md);
-				background: var(--surface);
+				border-radius: var(--radius-lg);
+				padding: var(--space-xl);
+				background: var(--surface-raised);
 				transition:
-					box-shadow 0.25s,
-					transform 0.25s;
+					box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+					transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 				display: flex;
 				flex-direction: column;
 				opacity: 0;
-				transform: translateY(20px);
+				transform: translateY(40px) scale(0.98);
 			}
 			.card.visible {
 				opacity: 1;
-				transform: translateY(0);
+				transform: translateY(0) scale(1);
 				transition:
-					opacity 0.5s ease,
-					transform 0.5s ease,
-					box-shadow 0.25s,
-					transform 0.25s;
+					opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+					transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+					box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 			}
 			.card.visible:hover {
 				box-shadow: var(--shadow-lg);
-				transform: translateY(-4px);
+				transform: translateY(-6px);
 			}
 			.card-link {
 				position: absolute;
 				inset: 0;
 				z-index: 1;
+				border-radius: var(--radius-lg);
 			}
 			.card-header {
 				display: flex;
 				justify-content: space-between;
-				align-items: flex-start;
-				margin-bottom: 0.5rem;
+				align-items: baseline;
+				margin-bottom: 0.75rem;
 				flex-wrap: wrap;
-				gap: 0.25rem;
+				gap: 0.5rem;
 			}
 			.card h2 {
 				margin: 0;
-				font-size: 1.15rem;
+				font-size: 1.6rem;
 				color: rgb(var(--black));
+				letter-spacing: -0.01em;
 			}
 			.period {
-				font-size: 0.75rem;
+				font-size: 0.85rem;
 				color: rgb(var(--gray));
 				white-space: nowrap;
-				margin-left: 0.75rem;
-				margin-top: 0.15rem;
+				font-weight: 500;
 			}
 			.card p {
 				color: rgb(var(--gray-dark));
-				font-size: 0.92rem;
-				line-height: 1.6;
-				margin: 0 0 1rem;
-				flex: 1;
+				font-size: 1.05rem;
+				line-height: 1.7;
+				margin: 0 0 1.25rem;
 			}
 			.card-why {
 				font-style: italic;
 				color: rgb(var(--gray));
-				font-size: 0.85rem !important;
-				flex: 0 !important;
+				font-size: 1rem !important;
+				margin: 0 0 1.5rem !important;
+				padding-left: 1rem;
+				border-left: 3px solid var(--accent);
 			}
 			.tags {
 				display: flex;
 				flex-wrap: wrap;
-				gap: 0.4rem;
+				gap: 0.5rem;
+				margin-top: auto;
 			}
 			.tag {
-				font-size: 0.72rem;
+				font-size: 0.75rem;
 				font-weight: 600;
-				padding: 0.2rem 0.65rem;
+				padding: 0.3rem 0.8rem;
 				border-radius: var(--radius-full);
 				letter-spacing: 0.01em;
 			}
@@ -162,7 +167,7 @@ const projects = [
 	<body>
 		<Header />
 		<main id="main-content" transition:animate={fade({ duration: '0.3s' })}>
-			<div class="page-header">
+			<div class="page-header reveal">
 				<h1>Projects</h1>
 				<p class="subtitle">Things I built to solve problems I actually care about.</p>
 			</div>
@@ -215,7 +220,7 @@ const projects = [
 					}
 				});
 			},
-			{ threshold: 0.1 },
+			{ threshold: 0.1, rootMargin: '0px 0px -50px 0px' },
 		);
 		cards.forEach((card) => observer.observe(card));
 	});
