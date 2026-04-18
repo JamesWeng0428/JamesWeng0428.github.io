@@ -30,6 +30,17 @@
 	--col-wide: 1080px;
 	--pad-y: 4rem;
 	--gap: 1.25rem;
+
+	/* Spacing + shadow shim for legacy subpage styles (portfolio, blog, resume, 404, BlogPost). */
+	--space-sm: 0.75rem;
+	--space-md: 1.25rem;
+	--space-lg: 2rem;
+	--space-xl: 3rem;
+	--space-2xl: 5rem;
+	--radius-full: 9999px;
+	--shadow-sm: 0 1px 2px oklch(0% 0 0 / 0.06);
+	--shadow-md: 0 4px 12px oklch(0% 0 0 / 0.08);
+	--shadow-lg: 0 12px 28px oklch(0% 0 0 / 0.1);
 }
 
 [data-palette='ink'],
@@ -646,21 +657,6 @@ h3 {
 	font-size: 0.7rem;
 	color: var(--ink-mute);
 }
-.project-placeholder {
-	aspect-ratio: 16 / 9;
-	background:
-		repeating-linear-gradient(45deg, var(--rule-soft) 0 8px, transparent 8px 16px), var(--bg-raised);
-	border: 1px solid var(--rule);
-	border-radius: 3px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-family: var(--font-mono);
-	font-size: 0.7rem;
-	letter-spacing: 0.1em;
-	text-transform: uppercase;
-	color: var(--ink-mute);
-}
 .project-desc {
 	font-size: 0.92rem;
 	color: var(--ink-soft);
@@ -668,9 +664,16 @@ h3 {
 }
 .project-tags {
 	display: flex;
-	gap: 1rem;
+	flex-wrap: wrap;
+	gap: 0.4rem;
+	margin-top: 0.2rem;
+}
+.project-tags span {
 	font-family: var(--font-mono);
 	font-size: 0.7rem;
+	padding: 0.2rem 0.55rem;
+	border: 1px solid var(--rule);
+	border-radius: 4px;
 	color: var(--ink-mute);
 	letter-spacing: 0.06em;
 }

@@ -1,4 +1,6 @@
 ---
+import SectionHead from './SectionHead.astro';
+const year = new Date().getFullYear();
 const contacts = [
 	{ k: 'Email', v: 'Wengzhiheng1@outlook.com', href: 'mailto:Wengzhiheng1@outlook.com' },
 	{ k: 'GitHub', v: 'JamesWeng0428', href: 'https://github.com/JamesWeng0428' },
@@ -11,8 +13,8 @@ const contacts = [
 
 <section id="contact" style="border-bottom: none;">
 	<div class="wrap contact">
+		<SectionHead num="§ 06 / Contact" title="Let's" titleEm="talk." />
 		<div class="contact-inner">
-			<h2 class="contact-headline">Let's <em>talk.</em></h2>
 			<div class="contact-links">
 				{
 					contacts.map((c) => (
@@ -31,7 +33,7 @@ const contacts = [
 			</div>
 		</div>
 		<footer>
-			<span>© James Weng — 2026</span>
+			<span>© James Weng — {year}</span>
 			<span>Urbana, IL</span>
 		</footer>
 	</div>

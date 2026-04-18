@@ -40,7 +40,7 @@ const { title, description, pubDate, updatedDate, prevPost, nextPost } = Astro.p
 				max-width: calc(100% - 2em);
 				margin: auto;
 				padding: var(--space-xl) 1em;
-				color: rgb(var(--gray-dark));
+				color: var(--ink-soft);
 				font-size: 1.08rem;
 				line-height: 1.85;
 			}
@@ -58,7 +58,7 @@ const { title, description, pubDate, updatedDate, prevPost, nextPost } = Astro.p
 			}
 			.date {
 				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
+				color: var(--ink-mute);
 				font-size: 0.95rem;
 			}
 			.last-updated-on {
@@ -70,7 +70,7 @@ const { title, description, pubDate, updatedDate, prevPost, nextPost } = Astro.p
 				gap: 1rem;
 				margin-top: var(--space-xl);
 				padding-top: var(--space-lg);
-				border-top: 1px solid rgb(var(--gray-light));
+				border-top: 1px solid var(--rule);
 			}
 			.post-nav a {
 				display: flex;
@@ -79,25 +79,25 @@ const { title, description, pubDate, updatedDate, prevPost, nextPost } = Astro.p
 				text-decoration: none;
 				max-width: 45%;
 				padding: 0.75rem 1rem;
-				border-radius: var(--radius-md);
+				border-radius: 6px;
 				transition: background 0.2s;
 			}
 			.post-nav a:hover {
-				background: var(--surface-raised);
+				background: var(--bg-raised);
 			}
 			.post-nav a:hover .post-nav-title {
 				color: var(--accent);
 			}
 			.post-nav-label {
 				font-size: 0.75rem;
-				color: rgb(var(--gray));
+				color: var(--ink-mute);
 				text-transform: uppercase;
 				letter-spacing: 0.06em;
 				font-weight: 600;
 			}
 			.post-nav-title {
 				font-size: 0.95rem;
-				color: rgb(var(--black));
+				color: var(--ink);
 				font-weight: 600;
 				transition: color 0.2s;
 			}

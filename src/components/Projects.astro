@@ -8,7 +8,6 @@ const projects = [
 		url: 'https://github.com/GodisinHisHeaven/ohMyTss/tree/main',
 		desc: 'iOS app built in Swift that integrates HealthKit to transform wearable workout data into readiness and training-load insights, using an on-device, privacy-first architecture.',
 		tags: ['Swift', 'iOS', 'HealthKit'],
-		placeholder: 'iOS screenshot',
 	},
 	{
 		title: 'Meeting Minion',
@@ -16,23 +15,20 @@ const projects = [
 		url: 'https://github.com/JamesWeng0428/Meeting-Minion',
 		desc: 'End-to-end AI web app for automated meeting transcription and summarization. Led a cross-functional team; integrated WhisperX, Ollama LLM, Streamlit UI, and SQLite. 64+ pytest tests at 100% pass rate.',
 		tags: ['Python', 'WhisperX', 'LLM', 'Streamlit'],
-		placeholder: 'product demo',
 	},
 	{
 		title: 'Seizure Prediction Bracelet',
 		year: '2022 — 2024',
-		url: 'https://github.com/JamesWeng0428',
+		url: null,
 		desc: 'Wearable seizure-prediction device built for my brother, combining advanced sensors and ML to analyze real-time biometric data and deliver timely alerts.',
 		tags: ['C++', 'Machine Learning', 'Embedded Systems'],
-		placeholder: 'hardware photo',
 	},
 	{
 		title: 'Derivation Graph Builder',
 		year: '2025 — Now',
-		url: 'https://github.com/JamesWeng0428',
+		url: 'https://github.com/MLPgroup/Derivation-Tree',
 		desc: 'Heuristic pipeline for extracting math equation derivation graphs from arXiv papers. Part of the URSA Mathematical Derivation Graphs Dataset project targeting a top-tier conference.',
 		tags: ['Python', 'NLP', 'Research'],
-		placeholder: 'graph viz',
 	},
 ];
 ---
@@ -42,10 +38,9 @@ const projects = [
 		<SectionHead num="§ 04 / Projects" title="Selected" titleEm="work." />
 		<div class="projects">
 			{
-				projects.map((p) => (
-					<article class="project">
-						<a href={p.url} target="_blank" rel="noopener noreferrer" class="project-link">
-							<div class="project-placeholder">[ {p.placeholder} ]</div>
+				projects.map((p) => {
+					const inner = (
+						<>
 							<div class="project-head">
 								<h3 class="project-title">{p.title}</h3>
 								<span class="project-year">{p.year}</span>
@@ -56,9 +51,20 @@ const projects = [
 									<span>{t}</span>
 								))}
 							</div>
-						</a>
-					</article>
-				))
+						</>
+					);
+					return (
+						<article class="project">
+							{p.url ? (
+								<a href={p.url} target="_blank" rel="noopener noreferrer" class="project-link">
+									{inner}
+								</a>
+							) : (
+								inner
+							)}
+						</article>
+					);
+				})
 			}
 		</div>
 	</div>

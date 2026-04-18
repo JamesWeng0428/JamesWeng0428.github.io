@@ -43,9 +43,18 @@ const projects = [
 		description:
 			'Wearable seizure-prediction device built for my brother, combining advanced sensors and machine learning to analyze real-time biometric data and deliver timely alerts.',
 		why: 'I wanted my family to feel less helpless and give my brother earlier warnings in daily life.',
-		url: 'https://github.com/JamesWeng0428',
+		url: null,
 		tags: ['C++', 'Machine Learning', 'Embedded Systems'],
 		period: '2022 – 2024',
+	},
+	{
+		title: 'Derivation Graph Builder',
+		description:
+			'Heuristic pipeline for extracting math equation derivation graphs from arXiv papers. Part of the URSA Mathematical Derivation Graphs Dataset project targeting a top-tier conference.',
+		why: 'Teaching models to reason about how equations derive from each other — the structure that textbooks hide in plain sight.',
+		url: 'https://github.com/MLPgroup/Derivation-Tree',
+		tags: ['Python', 'NLP', 'Research'],
+		period: '2025 – Present',
 	},
 ];
 ---
@@ -74,7 +83,7 @@ const projects = [
 				margin-bottom: 0.5rem;
 			}
 			.subtitle {
-				color: rgb(var(--gray));
+				color: var(--ink-mute);
 				margin: 0;
 				font-size: 1.15rem;
 				max-width: 480px;
@@ -86,9 +95,10 @@ const projects = [
 			}
 			.card {
 				position: relative;
-				border-radius: var(--radius-lg);
+				border: 1px solid var(--rule);
+				border-radius: 8px;
 				padding: var(--space-xl);
-				background: var(--surface-raised);
+				background: var(--bg-raised);
 				transition:
 					box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
 					transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -117,7 +127,7 @@ const projects = [
 				position: absolute;
 				inset: 0;
 				z-index: 1;
-				border-radius: var(--radius-lg);
+				border-radius: 8px;
 			}
 			.card-header {
 				display: flex;
@@ -130,24 +140,24 @@ const projects = [
 			.card h2 {
 				margin: 0;
 				font-size: 1.6rem;
-				color: rgb(var(--black));
+				color: var(--ink);
 				letter-spacing: -0.01em;
 			}
 			.period {
 				font-size: 0.85rem;
-				color: rgb(var(--gray));
+				color: var(--ink-mute);
 				white-space: nowrap;
 				font-weight: 500;
 			}
 			.card p {
-				color: rgb(var(--gray-dark));
+				color: var(--ink-soft);
 				font-size: 1.05rem;
 				line-height: 1.7;
 				margin: 0 0 1.25rem;
 			}
 			.card-why {
 				font-style: italic;
-				color: rgb(var(--gray));
+				color: var(--ink-mute);
 				font-size: 1rem !important;
 				margin: 0 0 1.5rem !important;
 				padding-left: 1rem;
@@ -179,13 +189,15 @@ const projects = [
 				{
 					projects.map((project) => (
 						<div class="card">
-							<a
-								href={project.url}
-								target="_blank"
-								rel="noopener noreferrer"
-								class="card-link"
-								aria-label={project.title}
-							/>
+							{project.url && (
+								<a
+									href={project.url}
+									target="_blank"
+									rel="noopener noreferrer"
+									class="card-link"
+									aria-label={project.title}
+								/>
+							)}
 							<div class="card-header">
 								<h2>{project.title}</h2>
 								<span class="period">{project.period}</span>
