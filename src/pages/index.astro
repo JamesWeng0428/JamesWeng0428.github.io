@@ -1,38 +1,388 @@
 ---
-// src/pages/index.astro
+import AvatarImage from '../assets/blog-placeholder-1.jpg';
 import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import Hero from '../components/Hero.astro';
-import About from '../components/About.astro';
-import Hobbies from '../components/Hobbies.astro';
-import Experience from '../components/Experience.astro';
-import Projects from '../components/Projects.astro';
-import Writing from '../components/Writing.astro';
-import Contact from '../components/Contact.astro';
-import Tweaks from '../components/Tweaks.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
-import { getCollection } from 'astro:content';
-
-const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+import { fade } from 'astro:transitions';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} image={AvatarImage} />
+		<script
+			type="application/ld+json"
+			set:html={JSON.stringify({
+				'@context': 'https://schema.org',
+				'@type': 'Person',
+				name: 'James Weng',
+				url: 'https://JamesWeng0428.github.io',
+				sameAs: [
+					'https://github.com/JamesWeng0428',
+					'https://www.linkedin.com/in/JamesWeng0428',
+					'https://www.instagram.com/jamesweng0428/',
+					'https://www.strava.com/athletes/124960807',
+				],
+				jobTitle: 'Student',
+				affiliation: {
+					'@type': 'CollegeOrUniversity',
+					name: 'University of Illinois at Urbana-Champaign',
+				},
+				knowsAbout: ['Computer Science', 'Learning Science', 'iOS Development', 'Machine Learning'],
+			})}
+		/>
+		<style>
+			main {
+				max-width: 720px;
+				margin: 0 auto;
+				padding: var(--space-2xl) var(--space-md);
+			}
+			/* --- Hero --- */
+			.hero {
+				margin-bottom: var(--space-2xl);
+				padding-bottom: var(--space-xl);
+				border-bottom: 1px solid rgb(var(--gray-light));
+			}
+			.hero h1 {
+				font-size: clamp(2.8rem, 8vw, 4rem);
+				margin: 0 0 0.3rem;
+				letter-spacing: -0.03em;
+				line-height: 1;
+			}
+			.hero .subtitle {
+				font-size: 1rem;
+				color: rgb(var(--gray));
+				margin: 0 0 var(--space-lg);
+			}
+			.hero-body {
+				display: flex;
+				gap: var(--space-lg);
+				align-items: flex-start;
+			}
+			.hero-body .hero-text {
+				flex: 1;
+			}
+			.hero-body p {
+				font-size: 1.05rem;
+				line-height: 1.75;
+				color: rgb(var(--gray-dark));
+				margin: 0 0 0.75rem;
+			}
+			.avatar {
+				width: 180px;
+				height: 180px;
+				border-radius: var(--radius-lg);
+				object-fit: cover;
+				flex-shrink: 0;
+				box-shadow: var(--shadow-lg);
+				border: 3px solid var(--surface);
+				outline: 1px solid rgb(var(--gray-light));
+				transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+			.avatar:hover {
+				transform: scale(1.03);
+			}
+
+			/* --- Sections --- */
+			.section {
+				margin-top: var(--space-xl);
+			}
+			.section h2 {
+				font-size: 1.1rem;
+				margin: 0 0 var(--space-sm);
+				color: rgb(var(--gray));
+				text-transform: uppercase;
+				letter-spacing: 0.06em;
+				font-weight: 600;
+			}
+			.section p {
+				font-size: 1rem;
+				color: rgb(var(--gray-dark));
+				line-height: 1.75;
+				margin: 0 0 1rem;
+			}
+			.section ul {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+				display: flex;
+				flex-direction: column;
+				gap: 0.5rem;
+			}
+			.section ul li {
+				font-size: 1rem;
+				color: rgb(var(--gray-dark));
+				line-height: 1.7;
+				padding-left: 1.25rem;
+				position: relative;
+			}
+			.section ul li::before {
+				content: '';
+				position: absolute;
+				left: 0;
+				top: 0.7em;
+				width: 6px;
+				height: 6px;
+				border-radius: var(--radius-full);
+				background: var(--accent);
+			}
+
+			/* --- Video Grid --- */
+			.video-grid {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: var(--space-sm);
+				margin-top: var(--space-sm);
+			}
+			.video-grid video {
+				width: 100%;
+				border-radius: var(--radius-md);
+				min-height: 44px;
+			}
+
+			/* --- Photo Gallery --- */
+			.photo-gallery {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 0.75rem;
+				margin-top: var(--space-sm);
+			}
+			.photo-gallery img {
+				width: 100%;
+				aspect-ratio: 1;
+				object-fit: cover;
+				border-radius: var(--radius-md);
+				cursor: pointer;
+				transition:
+					transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+					box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+			.photo-gallery img:hover {
+				transform: scale(1.04);
+				box-shadow: var(--shadow-md);
+			}
+
+			/* --- Lightbox --- */
+			.lightbox {
+				display: none;
+				position: fixed;
+				inset: 0;
+				z-index: 300;
+				background: rgba(0, 0, 0, 0.85);
+				align-items: center;
+				justify-content: center;
+				cursor: pointer;
+			}
+			.lightbox.active {
+				display: flex;
+			}
+			.lightbox img {
+				max-width: 90vw;
+				max-height: 90vh;
+				object-fit: contain;
+				border-radius: var(--radius-sm);
+			}
+			.lightbox-close {
+				position: absolute;
+				top: 0.5rem;
+				right: 0.5rem;
+				background: rgba(0, 0, 0, 0.35);
+				border: none;
+				border-radius: var(--radius-sm);
+				color: white;
+				font-size: 1.75rem;
+				cursor: pointer;
+				line-height: 1;
+				min-width: 44px;
+				min-height: 44px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			/* --- Responsive --- */
+			@media (max-width: 560px) {
+				main {
+					padding: var(--space-xl) var(--space-sm);
+				}
+				.section {
+					margin-top: var(--space-lg);
+				}
+				.hero h1 {
+					font-size: 2.2rem;
+				}
+				.hero-body {
+					flex-direction: column-reverse;
+					gap: var(--space-md);
+				}
+				.avatar {
+					width: 120px;
+					height: 120px;
+				}
+				.video-grid {
+					grid-template-columns: 1fr;
+				}
+				.photo-gallery {
+					grid-template-columns: 1fr 1fr;
+				}
+			}
+		</style>
 	</head>
 	<body>
 		<Header />
-		<div id="top"></div>
-		<Hero />
-		<About />
-		<Hobbies />
-		<Experience />
-		<Projects />
-		<Writing posts={posts} />
-		<Contact />
-		<Tweaks />
+		<main id="main-content" transition:animate={fade({ duration: '0.3s' })}>
+			<div class="hero reveal-stagger">
+				<h1>James Weng</h1>
+				<p class="subtitle">
+					CS + Education at UIUC &nbsp;·&nbsp; software, learning & health &nbsp;·&nbsp; I build
+					what I can't find
+				</p>
+				<div class="hero-body">
+					<div class="hero-text">
+						<p>
+							Most of my work lives at the intersection of software, learning, and health — I like
+							building things I couldn't find anywhere else.
+						</p>
+						<p>I grew up in Shenzhen and now study CS + Education at UIUC.</p>
+					</div>
+					<img src="/avatar.png" alt="James Weng" class="avatar" />
+				</div>
+			</div>
+			<div class="section reveal">
+				<h2>Currently</h2>
+				<ul>
+					<li>
+						Mentee for Vishesh Prasad in URSA, completing Mathematical Derivation Graphs Dataset
+					</li>
+					<li>Working with Professor Chris Napolitano with SEB skills</li>
+				</ul>
+			</div>
+			<div class="section reveal">
+				<h2>Bouldering</h2>
+				<p>
+					I am not a NERD. I do sport outside from my computer. Bouldering is one of them. I am an
+					active climber at <a
+						href="https://www.urbanaboulders.com/"
+						target="_blank"
+						rel="noopener noreferrer">Urbana Boulders &amp; Boneyard Boulders</a
+					>. Here are some videos. If you are interested in climbing, you can follow my instagram
+					account: <a
+						href="https://www.instagram.com/jamesweng0428/"
+						target="_blank"
+						rel="noopener noreferrer">JamesWeng0428</a
+					>
+				</p>
+				<div class="video-grid">
+					<video controls playsinline preload="none" poster="/bouldering-1-poster.jpg">
+						<source src="/bouldering-1.mp4" type="video/mp4" />
+					</video>
+					<video controls playsinline preload="none" poster="/bouldering-2-poster.jpg">
+						<source src="/bouldering-2.mp4" type="video/mp4" />
+					</video>
+				</div>
+			</div>
+			<div class="section reveal">
+				<h2>Cycling</h2>
+				<p>
+					I also enjoy cycling. I have a GIANT Propel ADV SL. If you love cycling too, you can
+					follow me on <a
+						href="https://www.strava.com/athletes/124960807"
+						target="_blank"
+						rel="noopener noreferrer">Strava</a
+					>
+				</p>
+				<div class="photo-gallery" id="photo-gallery">
+					<img src="/cycling-1.JPG" alt="Cycling photo 1" />
+					<img src="/cycling-2.JPG" alt="Cycling photo 2" />
+					<img src="/cycling-3.JPG" alt="Cycling photo 3" />
+				</div>
+			</div>
+		</main>
+		<div class="lightbox" id="lightbox">
+			<button class="lightbox-close" aria-label="Close lightbox">&times;</button>
+			<img src="" alt="" id="lightbox-img" />
+		</div>
+		<Footer />
 	</body>
 </html>
+<script>
+	document.addEventListener('astro:page-load', () => {
+		const scopedWindow = window as Window & {
+			__indexPageController?: AbortController;
+		};
+		scopedWindow.__indexPageController?.abort();
+		const controller = new AbortController();
+		const { signal } = controller;
+		scopedWindow.__indexPageController = controller;
+
+		// Scroll-reveal (single elements)
+		const reveals = document.querySelectorAll('.reveal');
+		if (reveals.length) {
+			const observer = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((entry) => {
+						if (entry.isIntersecting) {
+							entry.target.classList.add('visible');
+							observer.unobserve(entry.target);
+						}
+					});
+				},
+				{ threshold: 0.1, rootMargin: '0px 0px -50px 0px' },
+			);
+			reveals.forEach((el) => observer.observe(el));
+			signal.addEventListener('abort', () => observer.disconnect(), { once: true });
+		}
+
+		// Scroll-reveal (stagger containers)
+		const staggerContainers = document.querySelectorAll('.reveal-stagger');
+		if (staggerContainers.length) {
+			const staggerObserver = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((entry) => {
+						if (entry.isIntersecting) {
+							entry.target.classList.add('visible');
+							staggerObserver.unobserve(entry.target);
+						}
+					});
+				},
+				{ threshold: 0.1 },
+			);
+			staggerContainers.forEach((el) => staggerObserver.observe(el));
+			signal.addEventListener('abort', () => staggerObserver.disconnect(), { once: true });
+		}
+
+		// Lightbox
+		const gallery = document.getElementById('photo-gallery');
+		const lightbox = document.getElementById('lightbox');
+		const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+		if (gallery && lightbox && lightboxImg) {
+			gallery.addEventListener(
+				'click',
+				(e) => {
+					const target = e.target as HTMLElement;
+					if (target.tagName === 'IMG') {
+						lightboxImg.src = (target as HTMLImageElement).src;
+						lightboxImg.alt = (target as HTMLImageElement).alt;
+						lightbox.classList.add('active');
+					}
+				},
+				{ signal },
+			);
+			lightbox.addEventListener(
+				'click',
+				() => {
+					lightbox.classList.remove('active');
+				},
+				{ signal },
+			);
+			document.addEventListener(
+				'keydown',
+				(e) => {
+					if (e.key === 'Escape') lightbox.classList.remove('active');
+				},
+				{ signal },
+			);
+		}
+	});
+</script>

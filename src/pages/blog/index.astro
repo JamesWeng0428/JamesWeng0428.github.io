@@ -1,0 +1,126 @@
+---
+import { getCollection } from 'astro:content';
+import OGImage from '../../assets/blog-placeholder-about.jpg';
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import Header from '../../components/Header.astro';
+import { fade } from 'astro:transitions';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title={`Journals | ${SITE_TITLE}`}
+			description="Personal journals and reflections by James Weng."
+			image={OGImage}
+		/>
+		<style>
+			main {
+				max-width: 960px;
+				margin: 0 auto;
+				padding: var(--space-2xl) var(--space-md);
+			}
+			.page-header {
+				margin-bottom: var(--space-2xl);
+			}
+			.page-header h1 {
+				font-size: clamp(2.5rem, 8vw, 4.5rem);
+				letter-spacing: -0.03em;
+				line-height: 1;
+				margin-bottom: 0.5rem;
+			}
+			.page-subtitle {
+				color: rgb(var(--gray));
+				margin: 0;
+				font-size: 1.15rem;
+			}
+			.post-list {
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+				display: flex;
+				flex-direction: column;
+				gap: 0;
+			}
+			.post-list li {
+				border-top: 1px solid rgb(var(--gray-light));
+			}
+			.post-list li:last-child {
+				border-bottom: 1px solid rgb(var(--gray-light));
+			}
+			.post-list li a {
+				display: block;
+				padding: var(--space-lg) 0;
+				text-decoration: none;
+				transition: padding 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+			.post-list li a:hover {
+				padding-left: 0.75rem;
+			}
+			.post-list li a:hover .title {
+				color: var(--accent);
+			}
+			.title {
+				margin: 0 0 0.35rem;
+				color: rgb(var(--black));
+				line-height: 1.25;
+				font-size: 1.35rem;
+				font-weight: 600;
+				letter-spacing: -0.01em;
+				transition: color 0.2s;
+			}
+			.meta {
+				margin: 0;
+				color: rgb(var(--gray));
+				font-size: 0.9rem;
+				font-weight: 500;
+			}
+			.excerpt {
+				margin: 0.5rem 0 0;
+				font-size: 1rem;
+				color: rgb(var(--gray-dark));
+				line-height: 1.6;
+				max-width: 620px;
+			}
+			@media (max-width: 720px) {
+				.title {
+					font-size: 1.15rem;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main id="main-content" transition:animate={fade({ duration: '0.3s' })}>
+			<div class="page-header reveal">
+				<h1>Journals</h1>
+				<p class="page-subtitle">Personal reflections and thoughts.</p>
+			</div>
+			<section>
+				<ul class="post-list reveal-stagger">
+					{
+						posts.map((post) => (
+							<li>
+								<a href={`/blog/${post.id}/`}>
+									<h4 class="title">{post.data.title}</h4>
+									<p class="meta">
+										<FormattedDate date={post.data.pubDate} />
+									</p>
+									<p class="excerpt">{post.data.description}</p>
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>

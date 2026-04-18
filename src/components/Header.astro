@@ -1,27 +1,227 @@
 ---
-// src/components/Header.astro — replaces existing Header
-const nav = [
-	{ href: '#about', label: 'About' },
-	{ href: '#hobbies', label: 'Hobbies' },
-	{ href: '#work', label: 'Work' },
-	{ href: '#projects', label: 'Projects' },
-	{ href: '#writing', label: 'Writing' },
-	{ href: '#contact', label: 'Contact' },
-];
+import { SITE_TITLE } from '../consts';
+import HeaderLink from './HeaderLink.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import { fade } from 'astro:transitions';
 ---
 
-<nav class="nav">
-	<div class="nav-inner">
-		<a href="#top" class="nav-brand">
-			<span class="dot"></span>
-			<span>James Weng</span>
-		</a>
-		<div class="nav-links">
-			{nav.map((n) => <a href={n.href}>{n.label}</a>)}
+<a href="#main-content" class="skip-link">Skip to content</a>
+<header transition:persist>
+	<nav>
+		<button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+			<svg
+				width="24"
+				height="24"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2"
+				stroke-linecap="round"
+			>
+				<line x1="3" y1="6" x2="21" y2="6"></line>
+				<line x1="3" y1="12" x2="21" y2="12"></line>
+				<line x1="3" y1="18" x2="21" y2="18"></line>
+			</svg>
+		</button>
+		<div class="internal-links">
+			<HeaderLink href="/">Home</HeaderLink>
+			<HeaderLink href="/portfolio">Projects</HeaderLink>
+			<HeaderLink href="/blog">Journals</HeaderLink>
+			<HeaderLink href="/resume">Resume</HeaderLink>
 		</div>
-		<div class="nav-status">
-			<span class="ping"></span>
-			<span>Open to roles</span>
+		<div class="header-actions">
+			<ThemeToggle />
 		</div>
-	</div>
-</nav>
+	</nav>
+</header>
+<style>
+	.skip-link {
+		position: absolute;
+		top: -100%;
+		left: 1rem;
+		padding: 0.5rem 1rem;
+		background: var(--accent);
+		color: #fff;
+		border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+		z-index: 200;
+		text-decoration: none;
+		font-size: 0.9rem;
+	}
+	.skip-link:focus {
+		top: 0;
+	}
+	header {
+		position: sticky;
+		top: 0;
+		z-index: 100;
+		margin: 0;
+		padding: 0 2em;
+		backdrop-filter: blur(16px);
+		-webkit-backdrop-filter: blur(16px);
+		background: rgba(255, 255, 255, 0.72);
+		border-bottom: 1px solid rgba(var(--gray-light), 0.6);
+		transition:
+			transform 0.3s ease,
+			box-shadow 0.3s ease;
+	}
+	header.header-hidden {
+		transform: translateY(-100%);
+	}
+	@media (prefers-color-scheme: dark) {
+		:root:not([data-theme='light']) header {
+			background: rgba(22, 22, 42, 0.72);
+			border-bottom-color: rgba(var(--gray-light), 0.2);
+		}
+	}
+	[data-theme='dark'] header {
+		background: rgba(22, 22, 42, 0.72);
+		border-bottom-color: rgba(var(--gray-light), 0.2);
+	}
+	nav {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		max-width: 1100px;
+		margin: 0 auto;
+	}
+	.internal-links {
+		display: flex;
+		align-items: stretch;
+		gap: 0.25rem;
+	}
+	.header-actions {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+	nav a {
+		display: inline-flex;
+		align-items: center;
+		padding: 0.9em 1.1em;
+		color: rgb(var(--gray));
+		border-radius: var(--radius-sm);
+		text-decoration: none;
+		font-size: 1rem;
+		font-weight: 500;
+		line-height: 1.2;
+		letter-spacing: 0.01em;
+		transition:
+			color 0.2s,
+			background 0.2s;
+	}
+	nav a:hover {
+		color: rgb(var(--black));
+		background: rgba(var(--gray-light), 0.5);
+	}
+	nav a.active {
+		color: rgb(var(--black));
+		background: rgba(var(--gray-light), 0.8);
+		font-weight: 600;
+	}
+	.menu-toggle {
+		display: none;
+		background: none;
+		border: none;
+		cursor: pointer;
+		padding: 0;
+		color: rgb(var(--gray-dark));
+	}
+	@media (max-width: 480px) {
+		header {
+			padding: 0 1em;
+		}
+		.menu-toggle {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			min-width: 44px;
+			min-height: 44px;
+		}
+		.internal-links {
+			display: none;
+			flex-direction: column;
+			width: 100%;
+			position: absolute;
+			top: 100%;
+			left: 0;
+			background: rgba(255, 255, 255, 0.95);
+			backdrop-filter: blur(12px);
+			-webkit-backdrop-filter: blur(12px);
+			box-shadow: var(--shadow-md);
+			z-index: 100;
+		}
+		@media (prefers-color-scheme: dark) {
+			:root:not([data-theme='light']) .internal-links {
+				background: rgba(22, 22, 42, 0.95);
+			}
+		}
+		[data-theme='dark'] .internal-links {
+			background: rgba(22, 22, 42, 0.95);
+		}
+		.internal-links.open {
+			display: flex;
+		}
+		.internal-links a {
+			padding: 0.75em 1.5em;
+			border-bottom: none;
+		}
+		nav {
+			position: relative;
+			flex-wrap: wrap;
+		}
+	}
+</style>
+<script>
+	document.addEventListener('astro:page-load', () => {
+		const normalizePath = (path: string) => {
+			const normalized = path.replace(/\/+$/, '');
+			return normalized === '' ? '/' : normalized;
+		};
+
+		const pathname = normalizePath(window.location.pathname);
+		const navLinks = document.querySelectorAll('.internal-links a');
+		navLinks.forEach((link) => {
+			const href = (link.getAttribute('href') || '').trim();
+			const isActive = href && normalizePath(href) === pathname;
+			link.classList.toggle('active', isActive);
+			if (isActive) {
+				link.setAttribute('aria-current', 'page');
+			} else {
+				link.removeAttribute('aria-current');
+			}
+		});
+
+		const toggle = document.querySelector('.menu-toggle');
+		const links = document.querySelector('.internal-links');
+		if (toggle && links && toggle instanceof HTMLButtonElement && links instanceof HTMLElement) {
+			if (toggle.dataset.bound !== 'true') {
+				toggle.dataset.bound = 'true';
+				toggle.addEventListener('click', () => {
+					const isOpen = links.classList.toggle('open');
+					toggle.setAttribute('aria-expanded', String(isOpen));
+				});
+			}
+		}
+
+		// Scroll-aware header show/hide
+		const header = document.querySelector('header');
+		if (!header || !(header instanceof HTMLElement)) return;
+		if (header.dataset.scrollBound === 'true') return;
+		header.dataset.scrollBound = 'true';
+		let lastScrollY = window.scrollY;
+		const threshold = 60; // px before hiding kicks in
+		window.addEventListener(
+			'scroll',
+			() => {
+				const currentScrollY = window.scrollY;
+				if (currentScrollY > threshold && currentScrollY > lastScrollY) {
+					header.classList.add('header-hidden');
+				} else {
+					header.classList.remove('header-hidden');
+				}
+				lastScrollY = currentScrollY;
+			},
+			{ passive: true },
+		);
+	});
+</script>

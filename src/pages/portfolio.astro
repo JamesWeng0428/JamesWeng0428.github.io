@@ -1,0 +1,227 @@
+---
+import OGImage from '../assets/blog-placeholder-4.jpg';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { fade } from 'astro:transitions';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+const tagColors: Record<string, string> = {
+	Swift: '#f05138',
+	iOS: '#147efb',
+	HealthKit: '#34c759',
+	Python: '#3776ab',
+	WhisperX: '#8b5cf6',
+	LLM: '#ec4899',
+	Streamlit: '#ff4b4b',
+	'C++': '#00599c',
+	'Machine Learning': '#f59e0b',
+	'Embedded Systems': '#10b981',
+};
+
+const projects = [
+	{
+		title: 'OhMyTSS',
+		description:
+			'iOS app built in Swift that integrates HealthKit to transform wearable workout data into readiness and training-load insights, using an on-device, privacy-first architecture.',
+		why: 'I wanted athletes to get useful training feedback without giving away their private health data.',
+		url: 'https://github.com/GodisinHisHeaven/ohMyTss/tree/main',
+		tags: ['Swift', 'iOS', 'HealthKit'],
+		period: 'Nov 2025 – Present',
+	},
+	{
+		title: 'Meeting Minion',
+		description:
+			'End-to-end AI web app for automated meeting transcription and summarization. Led a cross-functional team; integrated WhisperX, Ollama LLM, Streamlit UI, and SQLite. 64+ pytest tests at 100% pass rate.',
+		why: 'Teams waste too much momentum when great conversations disappear right after the meeting ends.',
+		url: 'https://github.com/JamesWeng0428/Meeting-Minion',
+		tags: ['Python', 'WhisperX', 'LLM', 'Streamlit'],
+		period: 'Aug 2025 – Jan 2026',
+	},
+	{
+		title: 'Seizure Prediction Bracelet',
+		description:
+			'Wearable seizure-prediction device built for my brother, combining advanced sensors and machine learning to analyze real-time biometric data and deliver timely alerts.',
+		why: 'I wanted my family to feel less helpless and give my brother earlier warnings in daily life.',
+		url: 'https://github.com/JamesWeng0428',
+		tags: ['C++', 'Machine Learning', 'Embedded Systems'],
+		period: '2022 – 2024',
+	},
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title={`Projects | ${SITE_TITLE}`}
+			description="A selection of software projects I've built — iOS apps, AI tools, and embedded systems."
+			image={OGImage}
+		/>
+		<style>
+			main {
+				max-width: 960px;
+				margin: 0 auto;
+				padding: var(--space-2xl) var(--space-md);
+			}
+			.page-header {
+				margin-bottom: var(--space-2xl);
+			}
+			.page-header h1 {
+				font-size: clamp(2.5rem, 8vw, 4.5rem);
+				letter-spacing: -0.03em;
+				line-height: 1;
+				margin-bottom: 0.5rem;
+			}
+			.subtitle {
+				color: rgb(var(--gray));
+				margin: 0;
+				font-size: 1.15rem;
+				max-width: 480px;
+			}
+			.projects {
+				display: grid;
+				grid-template-columns: 1fr;
+				gap: var(--space-xl);
+			}
+			.card {
+				position: relative;
+				border-radius: var(--radius-lg);
+				padding: var(--space-xl);
+				background: var(--surface-raised);
+				transition:
+					box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+					transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+				display: flex;
+				flex-direction: column;
+				opacity: 0;
+				transform: translateY(40px) scale(0.98);
+			}
+			.card.visible {
+				opacity: 1;
+				transform: translateY(0) scale(1);
+				transition:
+					opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+					transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+					box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+			.card.visible:hover {
+				box-shadow: var(--shadow-lg);
+				transform: translateY(-6px);
+			}
+			.card-link {
+				position: absolute;
+				inset: 0;
+				z-index: 1;
+				border-radius: var(--radius-lg);
+			}
+			.card-header {
+				display: flex;
+				justify-content: space-between;
+				align-items: baseline;
+				margin-bottom: 0.75rem;
+				flex-wrap: wrap;
+				gap: 0.5rem;
+			}
+			.card h2 {
+				margin: 0;
+				font-size: 1.6rem;
+				color: rgb(var(--black));
+				letter-spacing: -0.01em;
+			}
+			.period {
+				font-size: 0.85rem;
+				color: rgb(var(--gray));
+				white-space: nowrap;
+				font-weight: 500;
+			}
+			.card p {
+				color: rgb(var(--gray-dark));
+				font-size: 1.05rem;
+				line-height: 1.7;
+				margin: 0 0 1.25rem;
+			}
+			.card-why {
+				font-style: italic;
+				color: rgb(var(--gray));
+				font-size: 1rem !important;
+				margin: 0 0 1.5rem !important;
+				padding-left: 1rem;
+				border-left: 3px solid var(--accent);
+			}
+			.tags {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.5rem;
+				margin-top: auto;
+			}
+			.tag {
+				font-size: 0.75rem;
+				font-weight: 600;
+				padding: 0.3rem 0.8rem;
+				border-radius: var(--radius-full);
+				letter-spacing: 0.01em;
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main id="main-content" transition:animate={fade({ duration: '0.3s' })}>
+			<div class="page-header reveal">
+				<h1>Projects</h1>
+				<p class="subtitle">Things I built to solve problems I actually care about.</p>
+			</div>
+			<div class="projects">
+				{
+					projects.map((project) => (
+						<div class="card">
+							<a
+								href={project.url}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="card-link"
+								aria-label={project.title}
+							/>
+							<div class="card-header">
+								<h2>{project.title}</h2>
+								<span class="period">{project.period}</span>
+							</div>
+							<p>{project.description}</p>
+							{project.why && <p class="card-why">{project.why}</p>}
+							<div class="tags">
+								{project.tags.map((tag) => {
+									const color = tagColors[tag] || '#4f5bd5';
+									return (
+										<span class="tag" style={`background: ${color}15; color: ${color};`}>
+											{tag}
+										</span>
+									);
+								})}
+							</div>
+						</div>
+					))
+				}
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>
+<script>
+	document.addEventListener('astro:page-load', () => {
+		const cards = document.querySelectorAll('.card');
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						const el = entry.target as HTMLElement;
+						const index = Array.from(cards).indexOf(el);
+						setTimeout(() => el.classList.add('visible'), index * 120);
+						observer.unobserve(el);
+					}
+				});
+			},
+			{ threshold: 0.1, rootMargin: '0px 0px -50px 0px' },
+		);
+		cards.forEach((card) => observer.observe(card));
+	});
+</script>

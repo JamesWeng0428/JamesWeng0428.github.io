@@ -1,0 +1,111 @@
+---
+import OGImage from '../assets/blog-placeholder-5.jpg';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { fade } from 'astro:transitions';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title={`Resume | ${SITE_TITLE}`}
+			description="James Weng's resume — CS + Education at UIUC, software engineering and research experience."
+			image={OGImage}
+		/>
+		<style>
+			main {
+				max-width: 960px;
+				margin: 0 auto;
+				padding: var(--space-2xl) var(--space-md);
+			}
+			.page-header {
+				margin-bottom: var(--space-xl);
+			}
+			.page-header h1 {
+				font-size: clamp(2.5rem, 8vw, 4.5rem);
+				letter-spacing: -0.03em;
+				line-height: 1;
+				margin-bottom: 0.5rem;
+			}
+			.subtitle {
+				color: rgb(var(--gray));
+				margin: 0 0 var(--space-md);
+				font-size: 1.15rem;
+			}
+			.download-btn {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				padding: 0.6rem 1.5rem;
+				background: var(--accent);
+				color: #fff;
+				border-radius: var(--radius-sm);
+				text-decoration: none;
+				font-size: 0.9rem;
+				font-weight: 600;
+				transition:
+					background 0.2s,
+					transform 0.2s;
+				margin-bottom: var(--space-md);
+			}
+			.download-btn:hover {
+				background: var(--accent-dark);
+				color: #fff;
+				transform: translateY(-1px);
+			}
+			.pdf-container {
+				width: 100%;
+				border: 1px solid rgb(var(--gray-light));
+				border-radius: var(--radius-md);
+				overflow: hidden;
+				box-shadow: var(--shadow-sm);
+			}
+			.pdf-container iframe {
+				width: 100%;
+				height: 80vh;
+				display: block;
+				border: none;
+			}
+			.mobile-fallback {
+				display: none;
+				text-align: center;
+				padding: var(--space-xl) var(--space-sm);
+				color: rgb(var(--gray));
+			}
+			.mobile-fallback p {
+				margin-bottom: var(--space-md);
+				font-size: 1rem;
+			}
+			@media (max-width: 768px) {
+				.pdf-container iframe {
+					display: none;
+				}
+				.mobile-fallback {
+					display: block;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main id="main-content" transition:animate={fade({ duration: '0.3s' })}>
+			<div class="page-header">
+				<h1>Resume</h1>
+				<p class="subtitle">
+					Interested in working together? Here's a quick look at my background.
+				</p>
+			</div>
+			<a href="/resume.pdf" download class="download-btn">Download PDF</a>
+			<div class="pdf-container">
+				<iframe src="/resume.pdf" title="James Weng Resume"></iframe>
+				<div class="mobile-fallback">
+					<p>PDF preview isn't available on mobile. Tap the button above to download and view.</p>
+				</div>
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>
