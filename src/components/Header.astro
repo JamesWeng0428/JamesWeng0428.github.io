@@ -1,18 +1,19 @@
 ---
 // src/components/Header.astro — replaces existing Header
+import ThemeToggle from './ThemeToggle.astro';
 const nav = [
-	{ href: '#about', label: 'About' },
-	{ href: '#work', label: 'Work' },
-	{ href: '#projects', label: 'Projects' },
+	{ href: '/#about', label: 'About' },
+	{ href: '/#work', label: 'Work' },
+	{ href: '/#projects', label: 'Projects' },
 	{ href: '/blog', label: 'Blog' },
 	{ href: '/resume', label: 'Resume' },
-	{ href: '#contact', label: 'Contact' },
+	{ href: '/#contact', label: 'Contact' },
 ];
 ---
 
 <nav class="nav">
 	<div class="nav-inner">
-		<a href="#top" class="nav-brand">
+		<a href="/" class="nav-brand">
 			<span class="dot"></span>
 			<span>James Weng</span>
 		</a>
@@ -22,6 +23,26 @@ const nav = [
 		<div class="nav-status">
 			<span class="ping"></span>
 			<span>Open to roles</span>
+			<ThemeToggle />
 		</div>
 	</div>
 </nav>
+
+<style>
+	.nav-status :global(.theme-toggle) {
+		background: transparent;
+		border: 1px solid var(--rule);
+		color: var(--ink-mute);
+		padding: 0.35em;
+		border-radius: 4px;
+	}
+	.nav-status :global(.theme-toggle:hover) {
+		background: var(--bg-raised);
+		border-color: var(--ink-mute);
+		color: var(--ink);
+	}
+	.nav-status :global(.theme-toggle svg) {
+		width: 16px;
+		height: 16px;
+	}
+</style>

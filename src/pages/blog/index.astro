@@ -99,12 +99,12 @@ const posts = (await getCollection('blog')).sort(
 	<body>
 		<Header />
 		<main id="main-content" transition:animate={fade({ duration: '0.3s' })}>
-			<div class="page-header reveal">
+			<div class="page-header">
 				<h1>Journals</h1>
 				<p class="page-subtitle">Personal reflections and thoughts.</p>
 			</div>
 			<section>
-				<ul class="post-list reveal-stagger">
+				<ul class="post-list">
 					{
 						posts.map((post) => (
 							<li>

@@ -94,18 +94,22 @@ const projects = [
 					transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 				display: flex;
 				flex-direction: column;
-				opacity: 0;
-				transform: translateY(40px) scale(0.98);
 			}
-			.card.visible {
-				opacity: 1;
-				transform: translateY(0) scale(1);
-				transition:
-					opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-					transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-					box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+			@media (prefers-reduced-motion: no-preference) {
+				.card.js-enabled {
+					opacity: 0;
+					transform: translateY(40px) scale(0.98);
+				}
+				.card.js-enabled.visible {
+					opacity: 1;
+					transform: translateY(0) scale(1);
+					transition:
+						opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+						transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+						box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+				}
 			}
-			.card.visible:hover {
+			.card:hover {
 				box-shadow: var(--shadow-lg);
 				transform: translateY(-6px);
 			}
@@ -167,7 +171,7 @@ const projects = [
 	<body>
 		<Header />
 		<main id="main-content" transition:animate={fade({ duration: '0.3s' })}>
-			<div class="page-header reveal">
+			<div class="page-header">
 				<h1>Projects</h1>
 				<p class="subtitle">Things I built to solve problems I actually care about.</p>
 			</div>
@@ -209,6 +213,9 @@ const projects = [
 <script>
 	document.addEventListener('astro:page-load', () => {
 		const cards = document.querySelectorAll('.card');
+		const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		if (prefersReduced) return;
+		cards.forEach((card) => card.classList.add('js-enabled'));
 		const observer = new IntersectionObserver(
 			(entries) => {
 				entries.forEach((entry) => {
