@@ -1,110 +1,84 @@
 ---
 import OGImage from '../assets/blog-placeholder-5.jpg';
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import { fade } from 'astro:transitions';
 import { SITE_TITLE } from '../consts';
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead
-			title={`Resume | ${SITE_TITLE}`}
-			description="James Weng's resume — CS + Education at UIUC, software engineering and research experience."
-			image={OGImage}
-		/>
-		<style>
-			main {
-				max-width: 960px;
-				margin: 0 auto;
-				padding: var(--space-2xl) var(--space-md);
-			}
-			.page-header {
-				margin-bottom: var(--space-xl);
-			}
-			.page-header h1 {
-				font-size: clamp(2.5rem, 8vw, 4.5rem);
-				letter-spacing: -0.03em;
-				line-height: 1;
-				margin-bottom: 0.5rem;
-			}
-			.subtitle {
-				color: var(--ink-mute);
-				margin: 0 0 var(--space-md);
-				font-size: 1.15rem;
-			}
-			.download-btn {
-				display: inline-flex;
-				align-items: center;
-				gap: 0.5rem;
-				padding: 0.6rem 1.5rem;
-				background: var(--ink);
-				color: var(--bg);
-				border-radius: 4px;
-				text-decoration: none;
-				font-size: 0.9rem;
-				font-weight: 600;
-				transition:
-					opacity 0.2s,
-					transform 0.2s;
-				margin-bottom: var(--space-md);
-			}
-			.download-btn:hover {
-				opacity: 0.85;
-				transform: translateY(-1px);
-			}
-			.pdf-container {
-				width: 100%;
-				border: 1px solid var(--rule);
-				border-radius: 6px;
-				overflow: hidden;
-				box-shadow: var(--shadow-sm);
-			}
+<BaseLayout
+	title={`Resume | ${SITE_TITLE}`}
+	description="James Weng's resume — CS + Education at UIUC, software engineering and research experience."
+	image={OGImage}
+>
+	<main id="main-content" class="container" transition:animate={fade({ duration: '0.3s' })}>
+		<div class="page-header">
+			<h1>Resume</h1>
+			<p class="subtitle">Interested in working together? Here's a quick look at my background.</p>
+		</div>
+		<a href="/resume.pdf" download class="download-btn">Download PDF</a>
+		<div class="pdf-container">
+			<iframe src="/resume.pdf" title="James Weng Resume"></iframe>
+			<div class="mobile-fallback">
+				<p>PDF preview isn't available on mobile. Tap the button above to download and view.</p>
+			</div>
+		</div>
+	</main>
+	<style>
+		.subtitle {
+			color: var(--ink-mute);
+			margin: 0 0 var(--space-md);
+			font-size: 1.15rem;
+		}
+		.download-btn {
+			display: inline-flex;
+			align-items: center;
+			gap: 0.5rem;
+			padding: 0.6rem 1.5rem;
+			background: var(--ink);
+			color: var(--bg);
+			border-radius: 4px;
+			text-decoration: none;
+			font-size: 0.9rem;
+			font-weight: 600;
+			transition:
+				opacity 0.2s,
+				transform 0.2s;
+			margin-bottom: var(--space-md);
+		}
+		.download-btn:hover {
+			opacity: 0.85;
+			transform: translateY(-1px);
+		}
+		.pdf-container {
+			width: 100%;
+			border: 1px solid var(--rule);
+			border-radius: 6px;
+			overflow: hidden;
+			box-shadow: var(--shadow-sm);
+		}
+		.pdf-container iframe {
+			width: 100%;
+			height: 80vh;
+			display: block;
+			border: none;
+		}
+		.mobile-fallback {
+			display: none;
+			text-align: center;
+			padding: var(--space-xl) var(--space-sm);
+			color: var(--ink-mute);
+		}
+		.mobile-fallback p {
+			margin-bottom: var(--space-md);
+			font-size: 1rem;
+		}
+		@media (max-width: 768px) {
 			.pdf-container iframe {
-				width: 100%;
-				height: 80vh;
-				display: block;
-				border: none;
+				display: none;
 			}
 			.mobile-fallback {
-				display: none;
-				text-align: center;
-				padding: var(--space-xl) var(--space-sm);
-				color: var(--ink-mute);
+				display: block;
 			}
-			.mobile-fallback p {
-				margin-bottom: var(--space-md);
-				font-size: 1rem;
-			}
-			@media (max-width: 768px) {
-				.pdf-container iframe {
-					display: none;
-				}
-				.mobile-fallback {
-					display: block;
-				}
-			}
-		</style>
-	</head>
-	<body>
-		<Header />
-		<main id="main-content" transition:animate={fade({ duration: '0.3s' })}>
-			<div class="page-header">
-				<h1>Resume</h1>
-				<p class="subtitle">
-					Interested in working together? Here's a quick look at my background.
-				</p>
-			</div>
-			<a href="/resume.pdf" download class="download-btn">Download PDF</a>
-			<div class="pdf-container">
-				<iframe src="/resume.pdf" title="James Weng Resume"></iframe>
-				<div class="mobile-fallback">
-					<p>PDF preview isn't available on mobile. Tap the button above to download and view.</p>
-				</div>
-			</div>
-		</main>
-		<Footer />
-	</body>
-</html>
+		}
+	</style>
+</BaseLayout>

@@ -8,8 +8,6 @@
   - Tokens exposed via CSS vars so the Tweaks panel can update them at runtime
 */
 
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Fraunces:opsz,wght,SOFT@9..144,300..800,0..100&display=swap');
-
 :root {
 	/* Palette — "paper" (default) */
 	--bg: oklch(97.5% 0.006 80);
@@ -967,4 +965,22 @@ footer {
 }
 .d5 {
 	animation-delay: 0.5s;
+}
+
+/* Layout utilities — shared across pages */
+.container {
+	max-width: 960px;
+	margin: 0 auto;
+	padding: var(--space-2xl) var(--space-md);
+}
+
+.page-header {
+	margin-bottom: var(--space-2xl);
+}
+
+.page-header h1 {
+	font-size: clamp(2.5rem, 8vw, 4.5rem);
+	letter-spacing: -0.03em;
+	line-height: 1;
+	margin-bottom: 0.5rem;
 }

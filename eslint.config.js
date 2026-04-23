@@ -1,4 +1,5 @@
 import eslintPluginAstro from 'eslint-plugin-astro';
+import tsParser from '@typescript-eslint/parser';
 
 export default [
 	// Astro recommended configs - this handles .astro files
@@ -8,8 +9,11 @@ export default [
 	{
 		files: ['**/*.{js,ts}'],
 		languageOptions: {
-			ecmaVersion: 'latest',
-			sourceType: 'module',
+			parser: tsParser,
+			parserOptions: {
+				ecmaVersion: 'latest',
+				sourceType: 'module',
+			},
 		},
 		rules: {
 			'no-console': 'off',
