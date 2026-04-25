@@ -10,74 +10,465 @@ import { SITE_TITLE } from '../consts';
 	description="James Weng's resume — CS + Education at UIUC, software engineering and research experience."
 	image={OGImage}
 >
-	<main id="main-content" class="container" transition:animate={fade({ duration: '0.3s' })}>
-		<div class="page-header">
-			<h1>Resume</h1>
-			<p class="subtitle">Interested in working together? Here's a quick look at my background.</p>
+	<main id="main-content" class="resume-page" transition:animate={fade({ duration: '0.3s' })}>
+		<div class="resume-toolbar">
+			<a href="/resume.pdf" download class="download-btn">
+				<span>Download PDF</span>
+				<span aria-hidden="true">↓</span>
+			</a>
 		</div>
-		<a href="/resume.pdf" download class="download-btn">Download PDF</a>
-		<div class="pdf-container">
-			<iframe src="/resume.pdf" title="James Weng Resume"></iframe>
-			<div class="mobile-fallback">
-				<p>PDF preview isn't available on mobile. Tap the button above to download and view.</p>
-			</div>
-		</div>
+
+		<article class="latex">
+			<header class="cv-head">
+				<h1>ZHIHENG (JAMES) WENG</h1>
+				<p class="cv-contact">
+					312-536-6979 <span class="sep">|</span>
+					<a href="mailto:zweng7@illinois.edu">zweng7@illinois.edu</a>
+					<span class="sep">|</span>
+					<a href="https://www.linkedin.com/in/JamesWeng0428" target="_blank" rel="noopener"
+						>linkedin.com/in/JamesWeng0428</a
+					>
+					<span class="sep">|</span>
+					<a href="https://github.com/JamesWeng0428" target="_blank" rel="noopener"
+						>github.com/JamesWeng0428</a
+					>
+				</p>
+			</header>
+
+			<section class="cv-section">
+				<h2>Education</h2>
+
+				<div class="entry">
+					<div class="entry-row">
+						<span class="left"
+							><strong>University of Illinois at Urbana-Champaign (U Illinois)</strong></span
+						>
+						<span class="right">Dec 2026</span>
+					</div>
+					<div class="entry-row">
+						<span class="left italic"
+							>Bachelor of Science in Computer Science + Education (Learning Science)</span
+						>
+						<span class="right">GPA: 3.80 / 4.00</span>
+					</div>
+					<div class="entry-row">
+						<span class="left italic">Grainger College of James Scholar Honor</span>
+						<span class="right">Fall 2025 – Present</span>
+					</div>
+				</div>
+
+				<div class="entry">
+					<div class="entry-row">
+						<span class="left"><strong>Massachusetts Institute of Technology (MIT)</strong></span>
+						<span class="right">Summer 2023</span>
+					</div>
+					<div class="entry-row">
+						<span class="left italic">Game Lab Summer School</span>
+					</div>
+					<div class="entry-row">
+						<span class="left"
+							>Courses: Introduction to Time Series Modeling with Applications in Economics and
+							Public Health</span
+						>
+					</div>
+				</div>
+
+				<div class="entry">
+					<div class="entry-row">
+						<span class="left"><strong>Stanford University, Scholar AI4ALL</strong></span>
+						<span class="right">Summer 2020</span>
+					</div>
+					<ul>
+						<li>
+							Immersed in AI through lectures, hands-on research projects, and mentoring activities
+						</li>
+						<li>
+							Engaged in small-group research projects led by graduate students and post-docs in
+							Computer Science and AI
+						</li>
+					</ul>
+				</div>
+			</section>
+
+			<section class="cv-section">
+				<h2>Experience</h2>
+
+				<div class="entry">
+					<div class="entry-row">
+						<span class="left"
+							><strong>Siebel School of Computing and Data Science (SSCDS), U Illinois</strong
+							></span
+						>
+						<span class="right">Champaign, IL</span>
+					</div>
+					<div class="entry-row">
+						<span class="left italic">Course Assistant (CS124)</span>
+						<span class="right">Aug 2025 – Present</span>
+					</div>
+					<ul>
+						<li>
+							Guide 300 students through problem decomposition on assignments spanning data
+							structures, algorithms, and programming
+						</li>
+						<li>
+							Identify and address conceptual gaps through weekly office hours; translate complex
+							technical concepts for diverse learning backgrounds
+						</li>
+					</ul>
+				</div>
+			</section>
+
+			<section class="cv-section">
+				<h2>Research</h2>
+
+				<div class="entry">
+					<div class="entry-row">
+						<span class="left"><strong>Department of Educational Psychology</strong></span>
+						<span class="right">Champaign, IL</span>
+					</div>
+					<div class="entry-row">
+						<span class="left italic"
+							>Undergraduate Researcher — Effect of College Education on Social-Emotional
+							Development</span
+						>
+						<span class="right">Spring 2026 – Present</span>
+					</div>
+					<ul>
+						<li>
+							Contributing to a study examining the causal effect of college education on Social,
+							Emotional, and Behavioral (SEB) skill development across a 30,000-person longitudinal
+							dataset
+						</li>
+						<li>
+							Supporting research design, data organization, and pipeline setup for Causal Forest
+							modeling (AIPW framework) targeting peer-reviewed publication
+						</li>
+					</ul>
+				</div>
+
+				<div class="entry">
+					<div class="entry-row">
+						<span class="left"
+							><strong>Undergraduate Research Scientific Advancement (URSA)</strong></span
+						>
+						<span class="right">Champaign, IL</span>
+					</div>
+					<div class="entry-row">
+						<span class="left italic"
+							>Undergraduate Researcher — LLM-Based Mathematical Equation Relation Extraction</span
+						>
+						<span class="right">Spring 2026 – Present</span>
+					</div>
+					<ul>
+						<li>
+							Completed 100+ annotations for a mathematical derivation graph dataset; contributions
+							support model training for LLM-based equation relation extraction
+						</li>
+						<li>
+							Contributing to annotation methodology and dataset quality assurance; project targets
+							conference publication
+						</li>
+					</ul>
+				</div>
+			</section>
+
+			<section class="cv-section">
+				<h2>Projects</h2>
+
+				<div class="entry">
+					<div class="entry-row">
+						<span class="left"><strong>OhMyTSS</strong> <span class="muted">(Swift)</span></span>
+						<span class="right">Nov 2025 – Present</span>
+					</div>
+					<div class="entry-row">
+						<span class="left italic">Co-Founder &middot; Developer</span>
+					</div>
+					<ul>
+						<li>
+							Integrated Apple HealthKit API to ingest and process wearable workout data in real
+							time, transforming raw sensor streams into readiness and training-load insights with
+							on-device, privacy-first architecture
+						</li>
+						<li>
+							Diagnose user-reported issues, implement data parsing and validation fixes, and ship
+							stability improvements to active user base
+						</li>
+					</ul>
+				</div>
+
+				<div class="entry">
+					<div class="entry-row">
+						<span class="left"
+							><strong>Meeting Minion — AI Meeting Summarizer</strong>
+							<span class="muted">(Python)</span></span
+						>
+						<span class="right">Aug 2025 – Jan 2026</span>
+					</div>
+					<div class="entry-row">
+						<span class="left italic">Team Lead &amp; Developer, SSCDS, U Illinois</span>
+					</div>
+					<ul>
+						<li>
+							Led full lifecycle development of a production backend system with real users:
+							designed architecture, coordinated cross-functional team, and deployed end-to-end
+							transcription and summarization pipeline
+						</li>
+						<li>
+							Integrated third-party LLM (Ollama) and WhisperX transcription model with SQLite
+							persistence layer; enforced engineering standards via CI/CD, PR reviews, and pytest
+							suite (64+ tests, 100% pass rate)
+						</li>
+					</ul>
+				</div>
+
+				<div class="entry">
+					<div class="entry-row">
+						<span class="left"
+							><strong>Seizure Prediction Wristband — Patented Device</strong>
+							<span class="muted">(C/C++)</span></span
+						>
+						<span class="right">2022 – 2024</span>
+					</div>
+					<div class="entry-row">
+						<span class="left italic">Initiator &amp; Team Lead</span>
+					</div>
+					<ul>
+						<li>
+							Built end-to-end ML pipeline for real-world medical application: collected and
+							processed heart rate and humidity sensor data, engineered time-series features, and
+							trained a classification model validated via cross-validation to detect pre-seizure
+							patterns on-device
+						</li>
+						<li>
+							Managed full project lifecycle from hardware prototyping to algorithm deployment;
+							resulted in registered German utility patent (DE 20 2023 107 669) and peer-reviewed
+							publication in <em>Highlights in Science, Engineering &amp; Technology</em> (2023)
+						</li>
+					</ul>
+				</div>
+			</section>
+
+			<section class="cv-section">
+				<h2>Activities &amp; Awards</h2>
+
+				<div class="entry">
+					<div class="entry-row">
+						<span class="left"><strong>Contests and Competitions</strong></span>
+					</div>
+					<ul>
+						<li>
+							<span class="bullet-row">
+								<span>American Invitational Mathematics Examination (AIME) — 11/15</span>
+								<span class="right-inline">2023</span>
+							</span>
+						</li>
+						<li>
+							<span class="bullet-row">
+								<span>American Mathematics Competition 12 (AMC 12) — Top 1% (135/150)</span>
+								<span class="right-inline">2022</span>
+							</span>
+						</li>
+						<li>
+							<span class="bullet-row">
+								<span>USA Computing Olympiad (USACO) — Gold Division</span>
+								<span class="right-inline">2021 – 2022</span>
+							</span>
+						</li>
+					</ul>
+				</div>
+			</section>
+		</article>
 	</main>
+
 	<style>
-		.subtitle {
-			color: var(--ink-mute);
-			margin: 0 0 var(--space-md);
-			font-size: 1.15rem;
+		.resume-page {
+			max-width: var(--col);
+			margin: 0 auto;
+			padding: var(--space-2xl) 1.5rem;
 		}
+
+		.resume-toolbar {
+			display: flex;
+			justify-content: flex-end;
+			margin-bottom: var(--space-lg);
+		}
+
 		.download-btn {
 			display: inline-flex;
 			align-items: center;
 			gap: 0.5rem;
-			padding: 0.6rem 1.5rem;
-			background: var(--ink);
-			color: var(--bg);
-			border-radius: 4px;
+			padding: 0.55rem 1.1rem;
+			border: 1px solid var(--ink);
+			border-radius: 999px;
+			color: var(--ink);
+			background: transparent;
 			text-decoration: none;
-			font-size: 0.9rem;
-			font-weight: 600;
+			font-family: var(--font-body);
+			font-size: 0.85rem;
+			font-weight: 500;
+			letter-spacing: 0.02em;
 			transition:
-				opacity 0.2s,
+				background 0.2s,
+				color 0.2s,
 				transform 0.2s;
-			margin-bottom: var(--space-md);
 		}
 		.download-btn:hover {
-			opacity: 0.85;
+			background: var(--ink);
+			color: var(--bg);
 			transform: translateY(-1px);
 		}
-		.pdf-container {
-			width: 100%;
-			border: 1px solid var(--rule);
-			border-radius: 6px;
-			overflow: hidden;
-			box-shadow: var(--shadow-sm);
+
+		/* The resume reads as part of the site — inherits palette + body type */
+		.latex {
+			color: var(--ink);
+			background: transparent;
+			font-family: var(--font-body);
+			font-size: 1rem;
+			line-height: 1.65;
 		}
-		.pdf-container iframe {
-			width: 100%;
-			height: 80vh;
-			display: block;
-			border: none;
+
+		.cv-head {
+			text-align: left;
+			margin-bottom: 2.5rem;
+			padding-bottom: 1.25rem;
+			border-bottom: 1px solid var(--rule);
 		}
-		.mobile-fallback {
-			display: none;
-			text-align: center;
-			padding: var(--space-xl) var(--space-sm);
+		.cv-head h1 {
+			font-family: var(--font-display);
+			font-size: clamp(2.25rem, 5vw, 3.25rem);
+			font-weight: 400;
+			letter-spacing: -0.02em;
+			line-height: 1.05;
+			margin: 0 0 0.6rem;
+			color: var(--ink);
+		}
+		.cv-contact {
+			font-family: var(--font-mono);
+			font-size: 0.78rem;
+			letter-spacing: 0.04em;
+			margin: 0;
 			color: var(--ink-mute);
 		}
-		.mobile-fallback p {
-			margin-bottom: var(--space-md);
-			font-size: 1rem;
+		.cv-contact a {
+			color: var(--ink-soft);
+			text-decoration: underline;
+			text-decoration-color: var(--rule);
+			text-underline-offset: 3px;
+			transition:
+				color 0.2s,
+				text-decoration-color 0.2s;
 		}
-		@media (max-width: 768px) {
-			.pdf-container iframe {
-				display: none;
+		.cv-contact a:hover {
+			color: var(--accent);
+			text-decoration-color: var(--accent);
+		}
+		.cv-contact .sep {
+			margin: 0 0.4rem;
+			color: var(--rule);
+		}
+
+		.cv-section {
+			margin-top: 2.5rem;
+		}
+		.cv-section h2 {
+			font-family: var(--font-mono);
+			font-size: 0.72rem;
+			font-weight: 500;
+			text-transform: uppercase;
+			letter-spacing: 0.14em;
+			margin: 0 0 1.25rem;
+			padding-bottom: 0.5rem;
+			border-bottom: 1px solid var(--rule);
+			color: var(--ink-mute);
+		}
+
+		.entry {
+			margin: 0 0 1.75rem;
+		}
+		.entry:last-child {
+			margin-bottom: 0;
+		}
+		.entry-row {
+			display: flex;
+			justify-content: space-between;
+			align-items: baseline;
+			gap: 1.5rem;
+		}
+		.entry-row .left {
+			text-align: left;
+			color: var(--ink);
+		}
+		.entry-row .left strong {
+			font-family: var(--font-display);
+			font-weight: 400;
+			font-size: 1.2rem;
+			letter-spacing: -0.01em;
+			color: var(--ink);
+		}
+		.entry-row .right {
+			text-align: right;
+			white-space: nowrap;
+			font-family: var(--font-mono);
+			font-size: 0.72rem;
+			letter-spacing: 0.06em;
+			color: var(--ink-mute);
+			text-transform: uppercase;
+		}
+		.italic {
+			font-style: italic;
+			color: var(--ink-soft);
+		}
+		.muted {
+			color: var(--ink-mute);
+			font-style: normal;
+		}
+
+		.entry ul {
+			margin: 0.6rem 0 0;
+			padding-left: 1.1rem;
+			color: var(--ink-soft);
+		}
+		.entry li {
+			margin: 0.3rem 0;
+			line-height: 1.55;
+		}
+		.entry li::marker {
+			color: var(--ink-mute);
+		}
+
+		/* Bulleted rows that also carry a right-aligned date */
+		.bullet-row {
+			display: inline-flex;
+			justify-content: space-between;
+			width: 100%;
+			gap: 1rem;
+			align-items: baseline;
+		}
+		.bullet-row .right-inline {
+			white-space: nowrap;
+			font-family: var(--font-mono);
+			font-size: 0.72rem;
+			letter-spacing: 0.06em;
+			color: var(--ink-mute);
+		}
+
+		@media (max-width: 680px) {
+			.entry-row {
+				flex-direction: column;
+				gap: 0.25rem;
 			}
-			.mobile-fallback {
-				display: block;
+			.entry-row .right {
+				text-align: left;
+			}
+			.bullet-row {
+				flex-direction: column;
+				gap: 0.15rem;
+			}
+		}
+
+		@media print {
+			.resume-toolbar {
+				display: none;
 			}
 		}
 	</style>

@@ -94,7 +94,7 @@ body {
 	font-family: var(--font-body);
 	background: var(--bg);
 	color: var(--ink);
-	font-size: 16px;
+	font-size: 20px;
 	line-height: 1.6;
 	font-feature-settings: 'ss01', 'cv11';
 	-webkit-font-smoothing: antialiased;
@@ -752,6 +752,9 @@ h3 {
 	grid-template-columns: 1fr 1fr;
 	gap: 3rem;
 	align-items: end;
+}
+.contact-inner > .contact-links {
+	grid-column: 2;
 }
 .contact-headline {
 	font-family: var(--font-display);
