@@ -17,8 +17,8 @@
 	--ink-mute: oklch(56% 0.01 80);
 	--rule: oklch(88% 0.008 80);
 	--rule-soft: oklch(93% 0.006 80);
-	--accent: oklch(48% 0.08 235);
-	--accent-soft: oklch(48% 0.08 235 / 0.1);
+	--accent: oklch(38% 0.13 25);
+	--accent-soft: oklch(38% 0.13 25 / 0.1);
 
 	--font-display: 'Instrument Serif', 'EB Garamond', Georgia, serif;
 	--font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -26,7 +26,7 @@
 
 	--col: 720px;
 	--col-wide: 1080px;
-	--pad-y: 4rem;
+	--pad-y: 5rem;
 	--gap: 1.25rem;
 
 	/* Spacing + shadow shim for legacy subpage styles (portfolio, blog, resume, 404, BlogPost). */
@@ -50,8 +50,8 @@
 	--ink-mute: oklch(58% 0.012 265);
 	--rule: oklch(28% 0.014 265);
 	--rule-soft: oklch(22% 0.012 265);
-	--accent: oklch(78% 0.1 235);
-	--accent-soft: oklch(78% 0.1 235 / 0.12);
+	--accent: oklch(72% 0.13 35);
+	--accent-soft: oklch(72% 0.13 35 / 0.14);
 }
 
 [data-palette='sand'] {
@@ -148,10 +148,10 @@ a {
 
 section {
 	padding: var(--pad-y) 0;
-	border-bottom: 1px solid var(--rule-soft);
+	border-top: 1px solid var(--rule);
 }
-section:last-of-type {
-	border-bottom: none;
+section:first-of-type {
+	border-top: none;
 }
 
 .serif {
@@ -159,15 +159,15 @@ section:last-of-type {
 }
 .mono {
 	font-family: var(--font-mono);
-	font-size: 0.75rem;
+	font-size: 0.82rem;
 	letter-spacing: 0.08em;
 	text-transform: uppercase;
 	color: var(--ink-mute);
 }
 .eyebrow {
 	font-family: var(--font-mono);
-	font-size: 0.72rem;
-	letter-spacing: 0.14em;
+	font-size: 0.78rem;
+	letter-spacing: 0.16em;
 	text-transform: uppercase;
 	color: var(--ink-mute);
 	display: inline-flex;
@@ -228,7 +228,7 @@ h3 {
 .nav-links {
 	display: flex;
 	gap: 1.75rem;
-	font-size: 0.82rem;
+	font-size: 0.92rem;
 	color: var(--ink-soft);
 }
 .nav-links a {
@@ -256,8 +256,8 @@ h3 {
 }
 .nav-status {
 	font-family: var(--font-mono);
-	font-size: 0.7rem;
-	letter-spacing: 0.1em;
+	font-size: 0.78rem;
+	letter-spacing: 0.12em;
 	text-transform: uppercase;
 	color: var(--ink-mute);
 	display: flex;
@@ -301,7 +301,7 @@ h3 {
 }
 .hero-display em {
 	font-style: italic;
-	color: var(--ink-soft);
+	color: var(--accent);
 }
 .hero-lede {
 	font-size: 1.1rem;
@@ -383,8 +383,8 @@ h3 {
 }
 .section-head .num {
 	font-family: var(--font-mono);
-	font-size: 0.72rem;
-	letter-spacing: 0.14em;
+	font-size: 0.78rem;
+	letter-spacing: 0.16em;
 	text-transform: uppercase;
 	color: var(--ink-mute);
 	padding-top: 0.5rem;
@@ -397,7 +397,7 @@ h3 {
 }
 .section-head h2 em {
 	font-style: italic;
-	color: var(--ink-soft);
+	color: var(--accent);
 }
 @media (max-width: 680px) {
 	.section-head {
@@ -416,6 +416,7 @@ h3 {
 	font-size: 1.05rem;
 	line-height: 1.7;
 	color: var(--ink-soft);
+	max-width: 62ch;
 }
 .about-body p {
 	margin: 0 0 1.25rem 0;
@@ -426,6 +427,15 @@ h3 {
 .about-body strong {
 	color: var(--ink);
 	font-weight: 500;
+}
+.about-body p:first-of-type::first-letter {
+	font-family: var(--font-display);
+	float: left;
+	font-size: 4.4em;
+	line-height: 0.85;
+	padding: 0.05em 0.12em 0 0;
+	color: var(--accent);
+	font-weight: 400;
 }
 .about-side {
 	display: grid;
@@ -520,7 +530,7 @@ h3 {
 	font-size: 0.92rem;
 	color: var(--ink-soft);
 	line-height: 1.55;
-	max-width: 32rem;
+	max-width: 60ch;
 }
 .hobby-stats {
 	display: flex;
@@ -593,7 +603,7 @@ h3 {
 	font-size: 0.9rem;
 	color: var(--ink-soft);
 	line-height: 1.6;
-	max-width: 42rem;
+	max-width: 62ch;
 }
 .exp-stack {
 	display: flex;
@@ -659,6 +669,7 @@ h3 {
 	font-size: 0.92rem;
 	color: var(--ink-soft);
 	line-height: 1.55;
+	max-width: 56ch;
 }
 .project-tags {
 	display: flex;
@@ -764,7 +775,7 @@ h3 {
 }
 .contact-headline em {
 	font-style: italic;
-	color: var(--ink-soft);
+	color: var(--accent);
 }
 .contact-links {
 	display: grid;
