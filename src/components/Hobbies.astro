@@ -1,16 +1,6 @@
 ---
 import SectionHead from './SectionHead.astro';
-
-const boulderingMedia = [
-	{ type: 'video', src: '/bouldering-1.mp4', poster: '/bouldering-1-poster.jpg' },
-	{ type: 'video', src: '/bouldering-2.mp4', poster: '/bouldering-2-poster.jpg' },
-];
-
-const cyclingMedia = [
-	{ type: 'image', src: '/cycling-1.JPG', alt: 'Cycling — ride 1' },
-	{ type: 'image', src: '/cycling-2.JPG', alt: 'Cycling — ride 2' },
-	{ type: 'image', src: '/cycling-3.JPG', alt: 'Cycling — ride 3' },
-];
+import { boulderingMedia, cyclingMedia, boulderingStats, cyclingStats } from '../data/hobbies';
 ---
 
 <section id="hobbies">
@@ -20,19 +10,18 @@ const cyclingMedia = [
 		<div class="hobby-block">
 			<div class="hobby-head">
 				<h3 class="hobby-title">Bouldering</h3>
-				<span class="hobby-label">Up to V6</span>
 			</div>
 			<p class="hobby-desc">
-				I climb at <a
+				I'm not a nerd! I have hobbies away from my computer. Bouldering is one of them. I'm an
+				active climber at <a
 					href="https://www.urbanaboulders.com/"
 					target="_blank"
-					rel="noopener noreferrer">Urbana Boulders</a
+					rel="noopener noreferrer">Urbana Boulders and Boneyard Boulders</a
 				>
-				and Boneyard. I climb for the puzzle more than the grade — a good sequence feels the same as a
-				clean proof. Follow along on
+				. If you are interested in Climbing, find me on
 				<a href="https://www.instagram.com/jamesweng0428/" target="_blank" rel="noopener noreferrer"
 					>Instagram</a
-				>.
+				>!
 			</p>
 			<div class="gallery gallery-videos">
 				{
@@ -46,9 +35,13 @@ const cyclingMedia = [
 				}
 			</div>
 			<div class="hobby-stats">
-				<span>Gym · <b>Urbana Boulders</b></span>
-				<span>Also · <b>Boneyard</b></span>
-				<span>Style · <b>Problem solver</b></span>
+				{
+					boulderingStats.map((s) => (
+						<span>
+							{s.label} · <b>{s.value}</b>
+						</span>
+					))
+				}
 			</div>
 		</div>
 
@@ -58,11 +51,11 @@ const cyclingMedia = [
 				<span class="hobby-label">On the road</span>
 			</div>
 			<p class="hobby-desc">
-				Long rides around Urbana on a GIANT Propel ADV SL. If you ride too, find me on <a
+				I also love cycling and have a GIANT Propel ADV SL. If you love ride too, find me on <a
 					href="https://www.strava.com/athletes/124960807"
 					target="_blank"
 					rel="noopener noreferrer">Strava</a
-				>.
+				>!
 			</p>
 			<div class="gallery gallery-photos">
 				{
@@ -74,9 +67,13 @@ const cyclingMedia = [
 				}
 			</div>
 			<div class="hobby-stats">
-				<span>Rig · <b>GIANT Propel ADV SL</b></span>
-				<span>Terrain · <b>Road</b></span>
-				<span>Track · <b>Strava</b></span>
+				{
+					cyclingStats.map((s) => (
+						<span>
+							{s.label} · <b>{s.value}</b>
+						</span>
+					))
+				}
 			</div>
 		</div>
 	</div>

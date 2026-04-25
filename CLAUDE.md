@@ -33,3 +33,7 @@ Pre-redesign `.bak` files (`Header.astro.bak`, `index.astro.bak`, `global.css.ba
 **Static assets**: `public/` contains fonts, images (cycling photos, blog placeholders), and bouldering MP4 videos served as-is. Local images in `src/assets/` go through Astro's image optimization pipeline (via `sharp`).
 
 **Deployment**: GitHub Actions workflow at `.github/workflows/deploy.yml` — pushes to `main` trigger a build and deploy to GitHub Pages using Node.js 24.
+
+## Content rules
+
+**Never rewrite James's voice.** Prose copy (hero, About, Hobbies, Projects, blog posts, etc.) is hand-written in James's voice. Do not edit, polish, paraphrase, or "improve" it — even when it reads informally or has small grammatical quirks. Only change copy when James gives the new wording explicitly. Layout, markup, and styling are fair game; the words inside are not.
