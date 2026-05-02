@@ -22,9 +22,13 @@ Astro 6 static site deployed to GitHub Pages at `https://JamesWeng0428.github.io
 
 **Layouts & Components**: `src/layouts/BlogPost.astro` wraps blog posts. Shared UI is in `src/components/`:
 
-- Homepage sections: `Hero`, `About`, `Hobbies`, `Experience`, `Projects`, `Writing`, `Contact` — all rendered in order from `src/pages/index.astro`.
+- Homepage sections: `Hero`, `About`, `Hobbies`, `Experience`, `Projects`, `Writing`, `Contact` — all rendered in order from `src/pages/index.astro` (English) and `src/pages/zh/index.astro` (Chinese).
 - Chrome: `Header`, `BaseHead`, `SectionHead`, `FormattedDate`.
 - Section IDs used by the header nav: `#about`, `#work` (Experience), `#projects`, `#contact`. Keep these anchors in sync if you rename a section.
+
+**i18n**: English lives at `/`, Chinese at `/zh/`. All user-facing copy for homepage sections + chrome (Header, Footer, Contact) lives in `src/i18n.ts` as a `t.en` / `t.zh` dictionary. Each section component takes a `lang?: 'en' | 'zh'` prop (default `'en'`) and reads its strings from `t[lang]`. `BaseLayout` threads `lang` to Header/Footer and sets `<html lang>` (`en` or `zh-CN`). The header carries a 中文 ↔ EN toggle that links between the two roots. Blog posts and the resume page are English-only on purpose — only homepage + chrome are translated.
+
+When adding new copy: put strings in `src/i18n.ts` under both `en` and `zh`, never inline. When adding a new section: accept `lang` as a prop and pull text from `t[lang]`.
 
 Pre-redesign `.bak` files (`Header.astro.bak`, `index.astro.bak`, `global.css.bak`) are local rollback snapshots from the editorial template install — left untracked on purpose, don't stage them and don't treat them as active source.
 
