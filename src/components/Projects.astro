@@ -1,14 +1,20 @@
 ---
 import SectionHead from './SectionHead.astro';
-import { projects } from '../data/projects';
+import { t, type Lang } from '../i18n';
+
+interface Props {
+	lang?: Lang;
+}
+const { lang = 'en' } = Astro.props;
+const c = t[lang].projects;
 ---
 
 <section id="projects">
 	<div class="wrap">
-		<SectionHead num="§ 04 / Projects" title="Selected" titleEm="work." />
+		<SectionHead num={c.sectionNum} title={c.sectionTitle} titleEm={c.sectionTitleEm} />
 		<div class="projects">
 			{
-				projects.map((p) => {
+				c.items.map((p) => {
 					const inner = (
 						<>
 							<div class="project-head">

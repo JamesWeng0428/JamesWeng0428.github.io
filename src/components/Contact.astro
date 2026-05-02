@@ -1,31 +1,30 @@
 ---
 import SectionHead from './SectionHead.astro';
+import { t, type Lang } from '../i18n';
+
+interface Props {
+	lang?: Lang;
+}
+const { lang = 'en' } = Astro.props;
+const c = t[lang].contact;
 const year = new Date().getFullYear();
-const contacts = [
-	{ k: 'Email', v: 'Wengzhiheng1@outlook.com', href: 'mailto:Wengzhiheng1@outlook.com' },
-	{ k: 'GitHub', v: 'JamesWeng0428', href: 'https://github.com/JamesWeng0428' },
-	{ k: 'LinkedIn', v: 'in/JamesWeng0428', href: 'https://www.linkedin.com/in/JamesWeng0428' },
-	{ k: 'Instagram', v: '@jamesweng0428', href: 'https://www.instagram.com/jamesweng0428/' },
-	{ k: 'Strava', v: 'James Weng', href: 'https://www.strava.com/athletes/124960807' },
-	{ k: 'Resume', v: 'Download PDF', href: '/resume.pdf' },
-];
 ---
 
 <section id="contact" style="border-bottom: none;">
 	<div class="wrap contact">
-		<SectionHead num="§ 06 / Contact" title="Let's" titleEm="talk." />
+		<SectionHead num={c.sectionNum} title={c.sectionTitle} titleEm={c.sectionTitleEm} />
 		<div class="contact-inner">
 			<div class="contact-links">
 				{
-					contacts.map((c) => (
+					c.items.map((item) => (
 						<a
 							class="contact-link"
-							href={c.href}
-							target={c.href.startsWith('http') ? '_blank' : undefined}
-							rel={c.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+							href={item.href}
+							target={item.href.startsWith('http') ? '_blank' : undefined}
+							rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
 						>
-							<span class="k">{c.k}</span>
-							<span class="v">{c.v}</span>
+							<span class="k">{item.k}</span>
+							<span class="v">{item.v}</span>
 							<span class="arr">↗</span>
 						</a>
 					))
@@ -34,7 +33,7 @@ const contacts = [
 		</div>
 		<footer>
 			<span>© James Weng — {year}</span>
-			<span>Urbana, IL</span>
+			<span>{c.footerLoc}</span>
 		</footer>
 	</div>
 </section>

@@ -1,50 +1,47 @@
 ---
 import SectionHead from './SectionHead.astro';
+import { t, type Lang, sectionHref } from '../i18n';
+
+interface Props {
+	lang?: Lang;
+}
+const { lang = 'en' } = Astro.props;
+const c = t[lang].about;
 ---
 
 <section id="about">
 	<div class="wrap">
-		<SectionHead num="§ 01 / About" title="A few" titleEm="things about me." />
+		<SectionHead num={c.sectionNum} title={c.sectionTitle} titleEm={c.sectionTitleEm} />
 		<div class="about-grid">
 			<aside class="about-side">
 				<div class="about-side-block">
-					<span class="k">Now</span>
-					<span class="v">See <a href="/#work">Work</a> for current research & roles.</span>
+					<span class="k">{c.sideNowK}</span>
+					<span class="v"
+						>{c.sideNowV1}<a href={sectionHref(lang, 'work')}>{c.sideNowLink}</a>{c.sideNowV2}</span
+					>
 				</div>
 				<div class="about-side-block">
-					<span class="k">Hobbies</span>
+					<span class="k">{c.sideHobbiesK}</span>
 					<div class="v-list">
-						<span>Bouldering</span>
-						<span>Cycling</span>
-						<span>Writing</span>
+						{c.sideHobbies.map((h) => <span>{h}</span>)}
 					</div>
 				</div>
 				<div class="about-side-block">
-					<span class="k">Languages</span>
+					<span class="k">{c.sideLanguagesK}</span>
 					<div class="v-list">
-						<span>English</span>
-						<span>Mandarin</span>
+						{c.sideLanguages.map((l) => <span>{l}</span>)}
 					</div>
 				</div>
 			</aside>
 			<div class="about-body">
 				<p>
-					I'm a student at UIUC studying <strong>Computer Science + Education</strong>. Most of my
-					work lives at the intersection of software, learning, and health — I like building things
-					I couldn't find anywhere else.
+					{c.body1Pre}<strong>{c.body1Strong}</strong>{c.body1Post}
 				</p>
 				<p>
-					I grew up planning every detail of my life and slowly learned that <strong>
-						you will never feel like you're ready</strong
-					> — you can only start being ready. Most of the best things I've done came from starting before
-					I felt prepared: shipping an iOS app, leading a cross-functional AI team, building a wearable
-					for my brother.
+					{c.body2Pre}<strong>{c.body2Strong}</strong>{c.body2Post}
 				</p>
 				<p>
-					Away from the keyboard I climb at Urbana Boulders and Boneyard, cycle on a GIANT Propel,
-					and write short essays about <strong
-						>responsibility, readiness, and the gifts of the era we live in</strong
-					>. If any of that resonates, say hello.
+					{c.body3Pre}<strong>{c.body3Strong}</strong>{c.body3Post}
 				</p>
 			</div>
 		</div>

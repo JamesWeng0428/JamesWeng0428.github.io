@@ -1,19 +1,25 @@
 ---
 // src/components/Header.astro — replaces existing Header
 import ThemeToggle from './ThemeToggle.astro';
+import { t, type Lang, homeHref, sectionHref } from '../i18n';
+
+interface Props {
+	lang?: Lang;
+}
+const { lang = 'en' } = Astro.props;
 const nav = [
-	{ href: '/#about', label: 'About' },
-	{ href: '/#work', label: 'Work' },
-	{ href: '/#projects', label: 'Projects' },
-	{ href: '/#writing', label: 'Journals' },
-	{ href: '/#contact', label: 'Contact' },
-	{ href: '/resume', label: 'Resume' },
+	{ href: sectionHref(lang, 'about'), label: t[lang].nav.about },
+	{ href: sectionHref(lang, 'work'), label: t[lang].nav.work },
+	{ href: sectionHref(lang, 'projects'), label: t[lang].nav.projects },
+	{ href: sectionHref(lang, 'writing'), label: t[lang].nav.writing },
+	{ href: sectionHref(lang, 'contact'), label: t[lang].nav.contact },
+	{ href: '/resume', label: t[lang].nav.resume },
 ];
 ---
 
 <nav class="nav">
 	<div class="nav-inner">
-		<a href="/" class="nav-brand">
+		<a href={homeHref(lang)} class="nav-brand">
 			<span class="dot"></span>
 			<span>James Weng</span>
 		</a>
@@ -22,13 +28,35 @@ const nav = [
 		</div>
 		<div class="nav-status">
 			<span class="ping"></span>
-			<span>Open to roles</span>
+			<span>{t[lang].nav.openToRoles}</span>
+			<a class="lang-toggle" href={t[lang].nav.langToggleHref} aria-label="Switch language"
+				>{t[lang].nav.langToggleLabel}</a
+			>
 			<ThemeToggle />
 		</div>
 	</div>
 </nav>
 
 <style>
+	.lang-toggle {
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		letter-spacing: 0.04em;
+		padding: 0.35em 0.55em;
+		border: 1px solid var(--rule);
+		border-radius: 4px;
+		color: var(--ink-mute);
+		text-decoration: none;
+		transition:
+			background 0.2s,
+			color 0.2s,
+			border-color 0.2s;
+	}
+	.lang-toggle:hover {
+		background: var(--bg-raised);
+		border-color: var(--ink-mute);
+		color: var(--ink);
+	}
 	.nav-status :global(.theme-toggle) {
 		background: transparent;
 		border: 1px solid var(--rule);

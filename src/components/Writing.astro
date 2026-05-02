@@ -1,23 +1,26 @@
 ---
 import SectionHead from './SectionHead.astro';
 import FormattedDate from './FormattedDate.astro';
+import { t, type Lang } from '../i18n';
 
 interface Props {
 	posts: any[];
+	lang?: Lang;
 }
-const { posts } = Astro.props;
+const { posts, lang = 'en' } = Astro.props;
+const c = t[lang].writing;
 
 // Rough read-time estimate. Swap for a real reading-time lib if you prefer.
 function readTime(body: string | undefined) {
-	if (!body) return '3 min';
+	if (!body) return `3 ${c.minSuffix}`;
 	const words = body.split(/\s+/).length;
-	return `${Math.max(1, Math.round(words / 220))} min`;
+	return `${Math.max(1, Math.round(words / 220))} ${c.minSuffix}`;
 }
 ---
 
 <section id="writing">
 	<div class="wrap">
-		<SectionHead num="§ 05 / Writing" title="Essays &" titleEm="notebooks." />
+		<SectionHead num={c.sectionNum} title={c.sectionTitle} titleEm={c.sectionTitleEm} />
 		<div class="writing">
 			{
 				posts.map((p) => (

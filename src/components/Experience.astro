@@ -1,46 +1,20 @@
 ---
 import SectionHead from './SectionHead.astro';
+import { t, type Lang } from '../i18n';
 
-const experience = [
-	{
-		years: '2025 — Now',
-		role: 'URSA Research Mentee',
-		co: 'University of Illinois Urbana-Champaign',
-		coNote: 'Mentor: Vishesh Vidya Prasad',
-		loc: 'Urbana, IL',
-		detail:
-			'Annotating arXiv papers and helping build the Mathematical Derivation Graphs Dataset — a corpus for training models to reason about derivation structure in mathematics. Targeting a top-tier ML/NLP venue.',
-		stack: ['Python', 'arXiv', 'Graph Annotation', 'Research'],
-	},
-	{
-		years: '2025 — Now',
-		role: 'Research Assistant',
-		co: "Prof. Chris Napolitano's Lab",
-		coNote: 'UIUC · SEB',
-		loc: 'Urbana, IL',
-		detail:
-			"Working on Social-Emotional-Behavioral (SEB) skills research. Contributing software tooling and data infrastructure that supports the group's studies.",
-		stack: ['Python', 'Data', 'Education Research'],
-	},
-	{
-		years: '2024 — Now',
-		role: 'B.S. Computer Science + Education',
-		co: 'University of Illinois Urbana-Champaign',
-		coNote: 'Undergraduate',
-		loc: 'Urbana, IL',
-		detail:
-			'Coursework across systems (CS 225, CS 340, CS 374) and learning science. Interested in the seam between software engineering and how people actually learn.',
-		stack: ['C++', 'Python', 'Algorithms', 'Learning Science'],
-	},
-];
+interface Props {
+	lang?: Lang;
+}
+const { lang = 'en' } = Astro.props;
+const c = t[lang].experience;
 ---
 
 <section id="work">
 	<div class="wrap">
-		<SectionHead num="§ 03 / Work" title="Where I've" titleEm="built things." />
+		<SectionHead num={c.sectionNum} title={c.sectionTitle} titleEm={c.sectionTitleEm} />
 		<div class="exp">
 			{
-				experience.map((e) => (
+				c.items.map((e) => (
 					<div class="exp-row">
 						<span class="years">{e.years}</span>
 						<div class="body">

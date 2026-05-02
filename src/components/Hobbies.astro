@@ -1,27 +1,33 @@
 ---
 import SectionHead from './SectionHead.astro';
-import { boulderingMedia, cyclingMedia, boulderingStats, cyclingStats } from '../data/hobbies';
+import { boulderingMedia, cyclingMedia } from '../data/hobbies';
+import { t, type Lang } from '../i18n';
+
+interface Props {
+	lang?: Lang;
+}
+const { lang = 'en' } = Astro.props;
+const c = t[lang].hobbies;
 ---
 
 <section id="hobbies">
 	<div class="wrap">
-		<SectionHead num="§ 02 / Hobbies" title="Off the" titleEm="keyboard." />
+		<SectionHead num={c.sectionNum} title={c.sectionTitle} titleEm={c.sectionTitleEm} />
 
 		<div class="hobby-block">
 			<div class="hobby-head">
-				<h3 class="hobby-title">Bouldering</h3>
+				<h3 class="hobby-title">{c.boulderTitle}</h3>
 			</div>
 			<p class="hobby-desc">
-				I'm not a nerd! I have hobbies away from my computer. Bouldering is one of them. I'm an
-				active climber at <a
+				{c.boulderDescPre}<a
 					href="https://www.urbanaboulders.com/"
 					target="_blank"
-					rel="noopener noreferrer">Urbana Boulders and Boneyard Boulders</a
-				>
-				. If you are interested in Climbing, find me on
-				<a href="https://www.instagram.com/jamesweng0428/" target="_blank" rel="noopener noreferrer"
-					>Instagram</a
-				>!
+					rel="noopener noreferrer">{c.boulderGymsLink}</a
+				>{c.boulderDescMid}<a
+					href="https://www.instagram.com/jamesweng0428/"
+					target="_blank"
+					rel="noopener noreferrer">{c.boulderIgLink}</a
+				>{c.boulderDescEnd}
 			</p>
 			<div class="gallery gallery-videos">
 				{
@@ -36,7 +42,7 @@ import { boulderingMedia, cyclingMedia, boulderingStats, cyclingStats } from '..
 			</div>
 			<div class="hobby-stats">
 				{
-					boulderingStats.map((s) => (
+					c.boulderStats.map((s) => (
 						<span>
 							{s.label} · <b>{s.value}</b>
 						</span>
@@ -47,15 +53,15 @@ import { boulderingMedia, cyclingMedia, boulderingStats, cyclingStats } from '..
 
 		<div class="hobby-block">
 			<div class="hobby-head">
-				<h3 class="hobby-title">Cycling</h3>
-				<span class="hobby-label">On the road</span>
+				<h3 class="hobby-title">{c.cyclingTitle}</h3>
+				<span class="hobby-label">{c.cyclingLabel}</span>
 			</div>
 			<p class="hobby-desc">
-				I also love cycling and have a GIANT Propel ADV SL. If you love ride too, find me on <a
+				{c.cyclingDescPre}<a
 					href="https://www.strava.com/athletes/124960807"
 					target="_blank"
-					rel="noopener noreferrer">Strava</a
-				>!
+					rel="noopener noreferrer">{c.cyclingStravaLink}</a
+				>{c.cyclingDescEnd}
 			</p>
 			<div class="gallery gallery-photos">
 				{
@@ -68,7 +74,7 @@ import { boulderingMedia, cyclingMedia, boulderingStats, cyclingStats } from '..
 			</div>
 			<div class="hobby-stats">
 				{
-					cyclingStats.map((s) => (
+					c.cyclingStats.map((s) => (
 						<span>
 							{s.label} · <b>{s.value}</b>
 						</span>

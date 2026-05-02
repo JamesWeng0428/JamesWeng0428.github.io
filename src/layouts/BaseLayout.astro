@@ -3,25 +3,28 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import type { ImageMetadata } from 'astro';
+import type { Lang } from '../i18n';
 
 interface Props {
 	title: string;
 	description: string;
 	image?: ImageMetadata;
 	showFooter?: boolean;
+	lang?: Lang;
 }
 
-const { title, description, image, showFooter = true } = Astro.props;
+const { title, description, image, showFooter = true, lang = 'en' } = Astro.props;
+const htmlLang = lang === 'zh' ? 'zh-CN' : 'en';
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={htmlLang}>
 	<head>
 		<BaseHead title={title} description={description} image={image} />
 	</head>
 	<body>
-		<Header />
+		<Header lang={lang} />
 		<slot />
-		{showFooter && <Footer />}
+		{showFooter && <Footer lang={lang} />}
 	</body>
 </html>

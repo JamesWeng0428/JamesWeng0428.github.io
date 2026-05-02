@@ -1,4 +1,11 @@
 ---
+import { t, type Lang, homeHref, sectionHref } from '../i18n';
+
+interface Props {
+	lang?: Lang;
+}
+const { lang = 'en' } = Astro.props;
+const c = t[lang].footer;
 const today = new Date();
 ---
 
@@ -21,18 +28,18 @@ const today = new Date();
 		<div class="footer-col footer-brand">
 			<p class="footer-name">James Weng</p>
 			<p class="footer-tagline">
-				I build useful things, write what I learn, and stay human in the process.
+				{c.tagline}
 			</p>
 		</div>
 		<div class="footer-col footer-nav">
-			<p class="footer-heading">Pages</p>
-			<a href="/">Home</a>
-			<a href="/#projects">Projects</a>
-			<a href="/blog">Journals</a>
-			<a href="/resume">Resume</a>
+			<p class="footer-heading">{c.pagesHeading}</p>
+			<a href={homeHref(lang)}>{c.home}</a>
+			<a href={sectionHref(lang, 'projects')}>{c.projects}</a>
+			<a href="/blog">{c.journals}</a>
+			<a href="/resume">{c.resume}</a>
 		</div>
 		<div class="footer-col footer-connect">
-			<p class="footer-heading">Connect</p>
+			<p class="footer-heading">{c.connectHeading}</p>
 			<div class="social-links">
 				<a
 					href="https://github.com/JamesWeng0428"
@@ -72,7 +79,7 @@ const today = new Date();
 		</div>
 	</div>
 	<div class="footer-bottom">
-		&copy; {today.getFullYear()} James Weng. All rights reserved.
+		&copy; {today.getFullYear()} James Weng. {c.rights}
 	</div>
 </footer>
 <style>
