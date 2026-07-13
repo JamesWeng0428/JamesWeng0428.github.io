@@ -252,15 +252,15 @@ export const t = {
 			body1Pre: '我在伊利诺伊大学香槟分校(UIUC)读',
 			body1Strong: '计算机科学 + 教育',
 			body1Post:
-				'。我做的事大多卡在软件、学习和健康的交界处——我喜欢自己动手做那些一直想要、却没人做出来的东西。',
+				'。我做的事大多落在软件、学习和健康的交叉地带——我喜欢自己动手做那些一直想要、却没人做出来的东西。',
 			body2Pre: '我从小什么都要先规划好,后来才慢慢想明白一件事:',
 			body2Strong: '你永远不会真的觉得自己"准备好了"',
 			body2Post:
-				'——你只能在还没准备好的时候,先动手。回头看,我做过的最值得的事,基本都是这样开始的:发了个 iOS 应用、带了一支跨职能的 AI 小队、给我弟做了个可穿戴设备。',
+				'——你只能在还没准备好的时候,先动手。回头看,我做过的最值得的事,基本都是这样开始的:发了个 iOS 应用、带了一支跨职能的 AI 小队、给我哥做了个可穿戴设备。',
 			body3Pre:
 				'不在电脑前的时候,我会去 Urbana Boulders 和 Boneyard 抱石,骑一辆 GIANT Propel 上路,也写点短文,聊聊',
 			body3Strong: '责任、准备,以及我们这个时代所赠予之物',
-			body3Post: '。如果这些里有让你有共鸣的,欢迎来打个招呼。',
+			body3Post: '。',
 		},
 		hobbies: {
 			sectionNum: '§ 02 / 爱好',
@@ -274,7 +274,7 @@ export const t = {
 			boulderDescEnd: ' 上找到我!',
 			cyclingTitle: '骑行',
 			cyclingLabel: '上路',
-			cyclingDescPre: '同时我也骑车,我有一辆 GIANT Propel ADV SL。你要是也骑,欢迎来 ',
+			cyclingDescPre: '我也爱骑车,有一辆 GIANT Propel ADV SL。你要是也骑,欢迎来 ',
 			cyclingStravaLink: 'Strava',
 			cyclingDescEnd: ' 上找我!',
 			boulderStats: [
@@ -309,8 +309,7 @@ export const t = {
 					co: 'Chris Napolitano 教授课题组',
 					coNote: 'UIUC · SEB',
 					loc: '美国伊利诺伊州 厄巴纳',
-					detail:
-						'做社会—情感—行为(SEB)能力方向的研究,给课题组搭软件工具和数据基础设施,支持组里的研究。',
+					detail: '做社会—情感—行为(SEB)能力方向的研究,给课题组搭软件工具和数据基础设施。',
 					stack: ['Python', '数据', '教育研究'],
 				},
 				{
@@ -334,7 +333,7 @@ export const t = {
 					title: 'Spray',
 					year: '2026 — 至今',
 					url: 'https://spray.cruxbeta.dev/',
-					desc: '一个抱石社区网站的维护者,汇集攀岩 beta、线路信息和大家一起贡献的内容。',
+					desc: '我在维护一个抱石社区网站,汇集攀岩 beta、线路信息和大家共建的内容。',
 					tags: ['Web', '攀岩'],
 				},
 				{
@@ -362,7 +361,7 @@ export const t = {
 					title: '癫痫预测手环',
 					year: '2022 — 2024',
 					url: null as string | null,
-					desc: '给我弟做的一只可穿戴癫痫预测设备。综合多种传感器和机器学习,实时读生理信号,在发作之前提个醒。',
+					desc: '给我哥做的一个可穿戴癫痫预测设备。综合多种传感器和机器学习,实时读生理信号,在发作之前提个醒。',
 					tags: ['C++', '机器学习', '嵌入式系统'],
 				},
 				{
