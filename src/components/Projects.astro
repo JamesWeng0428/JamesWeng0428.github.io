@@ -52,4 +52,18 @@ const c = t[lang].projects;
 		text-decoration: none;
 		display: block;
 	}
+	/* Stretch the hit area over the whole card, including its padding. */
+	.project-link::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+	}
+	/* Ring the whole card rather than just the inner text box. */
+	.project-link:focus-visible {
+		outline: none;
+	}
+	.project:has(.project-link:focus-visible) {
+		outline: 2px solid var(--accent);
+		outline-offset: -2px;
+	}
 </style>

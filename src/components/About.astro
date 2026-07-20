@@ -35,7 +35,9 @@ const c = t[lang].about;
 			</aside>
 			<div class="about-body">
 				<p>
-					{c.body1Pre}<strong>{c.body1Strong}</strong>{c.body1Post}
+					<span class="dropcap">{c.body1Pre.charAt(0)}</span>{c.body1Pre.slice(1)}<strong
+						>{c.body1Strong}</strong
+					>{c.body1Post}
 				</p>
 				<p>
 					{c.body2Pre}<strong>{c.body2Strong}</strong>{c.body2Post}

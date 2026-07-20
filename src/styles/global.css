@@ -14,7 +14,7 @@
 	--bg-raised: oklch(99% 0.004 80);
 	--ink: oklch(20% 0.012 80);
 	--ink-soft: oklch(36% 0.012 80);
-	--ink-mute: oklch(56% 0.01 80);
+	--ink-mute: oklch(54% 0.01 80); /* 4.7:1 on --bg — WCAG AA for the small mono meta text */
 	--rule: oklch(88% 0.008 80);
 	--rule-soft: oklch(93% 0.006 80);
 	--accent: oklch(38% 0.13 25);
@@ -111,6 +111,17 @@ body {
 a {
 	color: inherit;
 	text-decoration: none;
+}
+
+/* Keyboard focus — links here are undecorated, so the ring is the only affordance. */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+video:focus-visible,
+[tabindex]:focus-visible {
+	outline: 2px solid var(--accent);
+	outline-offset: 3px;
+	border-radius: 2px;
 }
 
 /* Inline prose links — underlined so they're obviously clickable */
@@ -288,6 +299,9 @@ h3 {
 }
 
 /* Hero */
+/* Note: this element is `.wrap .hero`, and the shorthand below resets .wrap's
+   `padding: 0 1.5rem` to 0 on the inline axis — so the hero runs edge-to-edge
+   below 720px. Intentional; use padding-block here if that ever changes. */
 .hero {
 	padding: 5.5rem 0 4.5rem;
 }
@@ -428,7 +442,9 @@ h3 {
 	color: var(--ink);
 	font-weight: 500;
 }
-.about-body p:first-of-type::first-letter {
+/* Explicit span, not ::first-letter — that pseudo swallows adjacent punctuation,
+   so a paragraph opening on "I'm" would drop-cap "I'" instead of "I". */
+.about-body .dropcap {
 	font-family: var(--font-display);
 	float: left;
 	font-size: 4.4em;
@@ -645,9 +661,10 @@ h3 {
 	display: grid;
 	gap: 1rem;
 	transition: background 0.3s;
-	cursor: pointer;
+	position: relative;
 }
-.project:hover {
+/* Only cards that actually carry a link get the clickable affordance. */
+.project:has(.project-link):hover {
 	background: var(--bg-raised);
 }
 .project-head {
@@ -755,6 +772,8 @@ h3 {
 }
 
 /* Contact */
+/* Same as .hero — this is `.wrap .contact`, and the shorthand drops .wrap's
+   inline padding to 0. Intentional; use padding-block here if that ever changes. */
 .contact {
 	padding: var(--pad-y) 0 calc(var(--pad-y) * 0.5);
 }
