@@ -30,8 +30,6 @@ Astro 6 static site deployed to GitHub Pages at `https://wengzhiheng.com`.
 
 When adding new copy: put strings in `src/i18n.ts` under both `en` and `zh`, never inline. When adding a new section: accept `lang` as a prop and pull text from `t[lang]`.
 
-Pre-redesign `.bak` files (`Header.astro.bak`, `index.astro.bak`, `global.css.bak`) are local rollback snapshots from the editorial template install — left untracked on purpose, don't stage them and don't treat them as active source.
-
 **Styling**: Single `src/styles/global.css` with CSS custom properties for theming (palette, type, density tokens). Component-scoped styles live inside `<style>` blocks in `.astro` files — prefer scoped styles for section-specific tweaks, global.css for shared tokens and prose rules (e.g. the inline link underline rule).
 
 **Static assets**: `public/` contains fonts, images (cycling photos, blog placeholders), and bouldering MP4 videos served as-is. Local images in `src/assets/` go through Astro's image optimization pipeline (via `sharp`).
