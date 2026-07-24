@@ -14,7 +14,7 @@ No test suite is configured.
 
 ## Architecture
 
-Astro 6 static site deployed to GitHub Pages at `https://JamesWeng0428.github.io`.
+Astro 6 static site deployed to GitHub Pages at `https://wengzhiheng.com`.
 
 **Content model**: Blog posts live in `src/content/blog/` as Markdown/MDX files. The schema (title, description, pubDate, updatedDate?) is defined in `src/content.config.ts`. Site-wide constants (SITE_TITLE, SITE_DESCRIPTION) are in `src/consts.ts`.
 

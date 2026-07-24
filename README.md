@@ -1,6 +1,6 @@
 # James Weng — Personal Website
 
-Personal site built with [Astro](https://astro.build). Static, deployed to GitHub Pages at <https://JamesWeng0428.github.io>.
+Personal site built with [Astro](https://astro.build). Static, deployed to GitHub Pages at <https://wengzhiheng.com>.
 
 ## Development
 
