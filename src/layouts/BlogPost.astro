@@ -81,7 +81,7 @@ const { title, description, pubDate, updatedDate, prevPost, nextPost } = Astro.p
 			margin: auto;
 			padding: var(--space-xl) 1em;
 			color: var(--ink-soft);
-			font-size: 1.08rem;
+			font-size: var(--text-body);
 			line-height: 1.85;
 		}
 		.title {
@@ -99,7 +99,7 @@ const { title, description, pubDate, updatedDate, prevPost, nextPost } = Astro.p
 		.date {
 			margin-bottom: 0.5em;
 			color: var(--ink-mute);
-			font-size: 0.95rem;
+			font-size: var(--text-sm);
 		}
 		.last-updated-on {
 			font-style: italic;
@@ -129,14 +129,14 @@ const { title, description, pubDate, updatedDate, prevPost, nextPost } = Astro.p
 			color: var(--accent);
 		}
 		.post-nav-label {
-			font-size: 0.75rem;
+			font-size: var(--text-label-sm);
 			color: var(--ink-mute);
 			text-transform: uppercase;
 			letter-spacing: 0.06em;
 			font-weight: 600;
 		}
 		.post-nav-title {
-			font-size: 0.95rem;
+			font-size: var(--text-sm);
 			color: var(--ink);
 			font-weight: 600;
 			transition: color 0.2s;

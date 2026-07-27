@@ -409,3 +409,34 @@ export const t = {
 		},
 	},
 } as const;
+
+/* Every character that renders in --font-display on /zh/.
+   BaseHead feeds this to the Google Fonts `text=` parameter so the Chinese
+   routes fetch one small subset of Noto Serif SC instead of the ~390KB of
+   frequency-bucket subsets the API ships by default. Derived from the
+   dictionary rather than hand-copied, so editing existing copy keeps it in
+   sync — but putting a NEW zh string into a display-face slot (hero headline,
+   section heading, hobby/role/project title) means adding it to this list too,
+   or those glyphs quietly fall back to the system serif mid-heading. */
+export const ZH_DISPLAY_TEXT: string = (() => {
+	const z = t.zh;
+	const sections = [z.about, z.hobbies, z.experience, z.projects, z.writing, z.contact];
+	const parts: string[] = [
+		z.hero.titleLine1,
+		z.hero.titleLine2Em,
+		...sections.flatMap((s) => [s.sectionTitle, s.sectionTitleEm]),
+		z.hobbies.boulderTitle,
+		z.hobbies.cyclingTitle,
+		...z.experience.items.map((i) => i.role),
+		...z.projects.items.map((p) => p.title),
+		// About's drop cap is the first character of the first paragraph, and it
+		// renders in the display face too. It happens to also appear in a heading
+		// today; don't rely on that.
+		z.about.body1Pre.charAt(0),
+	];
+	// Han only — Instrument Serif sits ahead of Noto in --font-display, so the
+	// Latin in these same strings never reaches the CJK face.
+	// Sorted so the request URL is stable across builds and stays cacheable.
+	const han = [...parts.join('')].filter((ch) => /\p{Script=Han}/u.test(ch));
+	return [...new Set(han)].sort().join('');
+})();

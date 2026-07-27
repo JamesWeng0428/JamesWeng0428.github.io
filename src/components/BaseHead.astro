@@ -6,16 +6,39 @@ import '../styles/global.css';
 import type { ImageMetadata } from 'astro';
 import FallbackImage from '../assets/blog-placeholder-1.jpg';
 import { SITE_TITLE } from '../consts';
+import { ZH_DISPLAY_TEXT, type Lang } from '../i18n';
 
 interface Props {
 	title: string;
 	description: string;
 	image?: ImageMetadata;
+	lang?: Lang;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = FallbackImage } = Astro.props;
+const { title, description, image = FallbackImage, lang = 'en' } = Astro.props;
+
+const latinFamilies = [
+	'Instrument+Serif:ital@0;1',
+	'Inter:wght@400;500;600',
+	'JetBrains+Mono:wght@400;500',
+];
+const latinFontHref = `https://fonts.googleapis.com/css2?${latinFamilies
+	.map((family) => `family=${family}`)
+	.join('&')}&display=swap`;
+
+// Han display face, requested only on the Chinese routes. `text=` is a
+// request-level parameter that subsets every family in the request, so it needs
+// its own <link> — folding it into the one above would strip the Latin faces
+// down to these same glyphs. Han body text is never webfont-served; it falls
+// back to the OS face via the --font-cjk-* stacks in global.css.
+const cjkFontHref =
+	lang === 'zh'
+		? `https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400&text=${encodeURIComponent(
+				ZH_DISPLAY_TEXT,
+			)}&display=swap`
+		: null;
 ---
 
 <!-- Global Metadata -->
@@ -23,10 +46,8 @@ const { title, description, image = FallbackImage } = Astro.props;
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-	rel="stylesheet"
-	href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Fraunces:opsz,wght,SOFT@9..144,300..800,0..100&display=swap"
-/>
+<link rel="stylesheet" href={latinFontHref} />
+{cjkFontHref && <link rel="stylesheet" href={cjkFontHref} />}
 
 <!-- Theme initialization (prevent flash) -->
 <script is:inline>

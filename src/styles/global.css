@@ -20,9 +20,29 @@
 	--accent: oklch(38% 0.13 25);
 	--accent-soft: oklch(38% 0.13 25 / 0.1);
 
-	--font-display: 'Instrument Serif', 'EB Garamond', Georgia, serif;
-	--font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-	--font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+	/* CJK tails. The Latin faces above carry no Han glyphs, so these only ever
+	   resolve for CJK codepoints — a mixed run like "James Weng · 计算机科学"
+	   keeps Inter for the Latin half and picks these up for the Han half.
+	   Noto Serif SC is only fetched on /zh/ (see BaseHead); everywhere else the
+	   list falls through to whatever the OS ships. */
+	--font-cjk-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', SimSun, serif;
+	--font-cjk-sans:
+		'PingFang SC', 'HarmonyOS Sans SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC',
+		sans-serif;
+
+	--font-display: 'Instrument Serif', 'EB Garamond', Georgia, var(--font-cjk-serif);
+	--font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', var(--font-cjk-sans);
+	--font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, var(--font-cjk-sans);
+
+	/* Type scale. Two prose tiers only — running prose and card/list copy — so
+	   body text stops drifting to 14px while headings sit at 60–100px. Nothing
+	   below --text-label-sm; that is the floor for uppercase mono. */
+	--text-lede: 1.15rem; /* 18.4px — hero lede */
+	--text-body: 1.0625rem; /* 17px — running prose */
+	--text-sm: 0.95rem; /* 15.2px — card, row, and list copy */
+	--text-meta: 0.85rem; /* 13.6px — inline meta values */
+	--text-label: 0.78rem; /* 12.5px — mono labels */
+	--text-label-sm: 0.74rem; /* 11.8px — tags, stats, timestamps */
 
 	--col: 720px;
 	--col-wide: 1080px;
@@ -66,9 +86,6 @@
 	--accent-soft: oklch(48% 0.1 35 / 0.1);
 }
 
-[data-type='fraunces'] {
-	--font-display: 'Fraunces', Georgia, serif;
-}
 [data-type='mono-first'] {
 	--font-display: 'JetBrains Mono', monospace;
 }
@@ -94,7 +111,7 @@ body {
 	font-family: var(--font-body);
 	background: var(--bg);
 	color: var(--ink);
-	font-size: 20px;
+	font-size: var(--text-body);
 	line-height: 1.6;
 	font-feature-settings: 'ss01', 'cv11';
 	-webkit-font-smoothing: antialiased;
@@ -170,14 +187,14 @@ section:first-of-type {
 }
 .mono {
 	font-family: var(--font-mono);
-	font-size: 0.82rem;
+	font-size: var(--text-label);
 	letter-spacing: 0.08em;
 	text-transform: uppercase;
 	color: var(--ink-mute);
 }
 .eyebrow {
 	font-family: var(--font-mono);
-	font-size: 0.78rem;
+	font-size: var(--text-label);
 	letter-spacing: 0.16em;
 	text-transform: uppercase;
 	color: var(--ink-mute);
@@ -199,6 +216,49 @@ h3 {
 	font-weight: 400;
 	color: var(--ink);
 	letter-spacing: -0.015em;
+}
+
+/* Chinese typography.
+   The display metrics above were tuned for Instrument Serif and do not carry
+   over to Han glyphs, which are full-width squares with no side bearings:
+   - Negative tracking closes gaps that were never there, so characters touch.
+   - A sub-1 line-height collides the lines outright.
+   - Chinese has no italic tradition. `font-style: italic` finds no italic face
+     and the browser synthesises one by skewing the outlines, which distorts
+     every stroke. Accent colour carries the emphasis on its own.
+   - CJK also reads better with more leading than Latin at the same size. */
+:lang(zh) .hero-display,
+:lang(zh) .section-head h2,
+:lang(zh) .contact-headline,
+:lang(zh) .page-header h1 {
+	letter-spacing: 0;
+	line-height: 1.28;
+}
+/* A Han glyph fills its em box; Latin letters use maybe two thirds of theirs.
+   Matched on font-size the Chinese hero reads far heavier and blows past the
+   authored line break, so it takes its own step down the scale. */
+:lang(zh) .hero-display {
+	font-size: clamp(2.5rem, 5.5vw, 4.25rem);
+}
+:lang(zh) .hero-display em,
+:lang(zh) .section-head h2 em,
+:lang(zh) .contact-headline em {
+	font-style: normal;
+}
+:lang(zh) .hero-lede,
+:lang(zh) .about-body,
+:lang(zh) .hobby-desc,
+:lang(zh) .exp-detail,
+:lang(zh) .project-desc,
+:lang(zh) .post-row .desc {
+	line-height: 1.9;
+}
+/* The drop cap assumes a Latin letterform sitting on a baseline; a Han glyph
+   fills its full em box, so the same multiplier overshoots badly. */
+:lang(zh) .about-body .dropcap {
+	font-size: 3.2em;
+	line-height: 1;
+	padding: 0.02em 0.14em 0 0;
 }
 
 /* Nav */
@@ -239,7 +299,7 @@ h3 {
 .nav-links {
 	display: flex;
 	gap: 1.75rem;
-	font-size: 0.92rem;
+	font-size: var(--text-sm);
 	color: var(--ink-soft);
 }
 .nav-links a {
@@ -267,7 +327,7 @@ h3 {
 }
 .nav-status {
 	font-family: var(--font-mono);
-	font-size: 0.78rem;
+	font-size: var(--text-label);
 	letter-spacing: 0.12em;
 	text-transform: uppercase;
 	color: var(--ink-mute);
@@ -318,8 +378,8 @@ h3 {
 	color: var(--accent);
 }
 .hero-lede {
-	font-size: 1.1rem;
-	line-height: 1.55;
+	font-size: var(--text-lede);
+	line-height: 1.6;
 	color: var(--ink-soft);
 	max-width: 36rem;
 	margin-bottom: 2.5rem;
@@ -331,7 +391,7 @@ h3 {
 	align-items: center;
 	padding-top: 1.5rem;
 	border-top: 1px solid var(--rule);
-	font-size: 0.85rem;
+	font-size: var(--text-meta);
 }
 .hero-meta-item {
 	display: flex;
@@ -340,7 +400,7 @@ h3 {
 }
 .hero-meta-item .k {
 	font-family: var(--font-mono);
-	font-size: 0.68rem;
+	font-size: var(--text-label-sm);
 	letter-spacing: 0.12em;
 	text-transform: uppercase;
 	color: var(--ink-mute);
@@ -358,7 +418,7 @@ h3 {
 	border: 1px solid var(--ink);
 	border-radius: 999px;
 	color: var(--ink);
-	font-size: 0.85rem;
+	font-size: var(--text-meta);
 	font-weight: 500;
 	transition:
 		background 0.25s,
@@ -397,7 +457,7 @@ h3 {
 }
 .section-head .num {
 	font-family: var(--font-mono);
-	font-size: 0.78rem;
+	font-size: var(--text-label);
 	letter-spacing: 0.16em;
 	text-transform: uppercase;
 	color: var(--ink-mute);
@@ -427,8 +487,8 @@ h3 {
 	gap: 2rem;
 }
 .about-body {
-	font-size: 1.05rem;
-	line-height: 1.7;
+	font-size: var(--text-body);
+	line-height: 1.75;
 	color: var(--ink-soft);
 	max-width: 62ch;
 }
@@ -456,7 +516,7 @@ h3 {
 .about-side {
 	display: grid;
 	gap: 1.5rem;
-	font-size: 0.82rem;
+	font-size: var(--text-meta);
 }
 .about-side-block {
 	display: grid;
@@ -464,7 +524,7 @@ h3 {
 }
 .about-side-block .k {
 	font-family: var(--font-mono);
-	font-size: 0.68rem;
+	font-size: var(--text-label-sm);
 	letter-spacing: 0.12em;
 	text-transform: uppercase;
 	color: var(--ink-mute);
@@ -505,7 +565,7 @@ h3 {
 	align-items: center;
 	justify-content: center;
 	font-family: var(--font-mono);
-	font-size: 0.7rem;
+	font-size: var(--text-label-sm);
 	letter-spacing: 0.1em;
 	text-transform: uppercase;
 	color: var(--ink-mute);
@@ -537,15 +597,15 @@ h3 {
 }
 .hobby-label {
 	font-family: var(--font-mono);
-	font-size: 0.7rem;
+	font-size: var(--text-label-sm);
 	color: var(--ink-mute);
 	letter-spacing: 0.1em;
 	padding-top: 0.9rem;
 }
 .hobby-desc {
-	font-size: 0.92rem;
+	font-size: var(--text-sm);
 	color: var(--ink-soft);
-	line-height: 1.55;
+	line-height: 1.65;
 	max-width: 60ch;
 }
 .hobby-stats {
@@ -553,7 +613,7 @@ h3 {
 	gap: 1.5rem;
 	padding-top: 0.5rem;
 	font-family: var(--font-mono);
-	font-size: 0.72rem;
+	font-size: var(--text-label-sm);
 	color: var(--ink-mute);
 	letter-spacing: 0.06em;
 }
@@ -585,7 +645,7 @@ h3 {
 }
 .exp-row .years {
 	font-family: var(--font-mono);
-	font-size: 0.75rem;
+	font-size: var(--text-label-sm);
 	letter-spacing: 0.08em;
 	color: var(--ink-mute);
 	padding-top: 0.35rem;
@@ -600,7 +660,7 @@ h3 {
 	line-height: 1.2;
 }
 .exp-row .co {
-	font-size: 0.92rem;
+	font-size: var(--text-sm);
 	color: var(--ink-soft);
 }
 .exp-row .co em {
@@ -609,16 +669,16 @@ h3 {
 }
 .exp-row .loc {
 	font-family: var(--font-mono);
-	font-size: 0.72rem;
+	font-size: var(--text-label-sm);
 	color: var(--ink-mute);
 	letter-spacing: 0.06em;
 	padding-top: 0.5rem;
 }
 .exp-detail {
 	margin-top: 0.5rem;
-	font-size: 0.9rem;
+	font-size: var(--text-sm);
 	color: var(--ink-soft);
-	line-height: 1.6;
+	line-height: 1.65;
 	max-width: 62ch;
 }
 .exp-stack {
@@ -629,7 +689,7 @@ h3 {
 }
 .exp-stack span {
 	font-family: var(--font-mono);
-	font-size: 0.7rem;
+	font-size: var(--text-label-sm);
 	padding: 0.2rem 0.55rem;
 	border: 1px solid var(--rule);
 	border-radius: 4px;
@@ -679,13 +739,13 @@ h3 {
 }
 .project-year {
 	font-family: var(--font-mono);
-	font-size: 0.7rem;
+	font-size: var(--text-label-sm);
 	color: var(--ink-mute);
 }
 .project-desc {
-	font-size: 0.92rem;
+	font-size: var(--text-sm);
 	color: var(--ink-soft);
-	line-height: 1.55;
+	line-height: 1.65;
 	max-width: 56ch;
 }
 .project-tags {
@@ -696,7 +756,7 @@ h3 {
 }
 .project-tags span {
 	font-family: var(--font-mono);
-	font-size: 0.7rem;
+	font-size: var(--text-label-sm);
 	padding: 0.2rem 0.55rem;
 	border: 1px solid var(--rule);
 	border-radius: 4px;
@@ -745,7 +805,7 @@ h3 {
 }
 .post-row .date {
 	font-family: var(--font-mono);
-	font-size: 0.72rem;
+	font-size: var(--text-label-sm);
 	color: var(--ink-mute);
 	letter-spacing: 0.06em;
 }
@@ -756,12 +816,13 @@ h3 {
 }
 .post-row .desc {
 	margin-top: 0.3rem;
-	font-size: 0.88rem;
+	font-size: var(--text-sm);
+	line-height: 1.6;
 	color: var(--ink-soft);
 }
 .post-row .read {
 	font-family: var(--font-mono);
-	font-size: 0.7rem;
+	font-size: var(--text-label-sm);
 	color: var(--ink-mute);
 }
 @media (max-width: 680px) {
@@ -799,7 +860,7 @@ h3 {
 .contact-links {
 	display: grid;
 	gap: 0.4rem;
-	font-size: 0.95rem;
+	font-size: var(--text-sm);
 }
 .contact-link {
 	display: grid;
@@ -815,7 +876,7 @@ h3 {
 }
 .contact-link .k {
 	font-family: var(--font-mono);
-	font-size: 0.7rem;
+	font-size: var(--text-label-sm);
 	letter-spacing: 0.1em;
 	text-transform: uppercase;
 	color: var(--ink-mute);
@@ -846,7 +907,7 @@ footer {
 	justify-content: space-between;
 	align-items: center;
 	font-family: var(--font-mono);
-	font-size: 0.72rem;
+	font-size: var(--text-label-sm);
 	letter-spacing: 0.08em;
 	color: var(--ink-mute);
 	text-transform: uppercase;
