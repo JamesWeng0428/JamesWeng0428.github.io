@@ -10,8 +10,251 @@ export function sectionHref(lang: Lang, section: string): string {
 	return `${homeHref(lang)}#${section}`;
 }
 
+// The resume stays English-only in both language roots, matching the supplied document.
+const resume = {
+	name: 'ZHIHENG(JAmes) WENG',
+	phone: '312-536-6979',
+	email: 'zweng7@illinois.edu',
+	website: 'wengzhiheng.com',
+	download: 'Download PDF',
+	sections: [
+		{
+			title: 'EDUCATION',
+			items: [
+				{
+					title: 'University of Illinois at Urbana-Champaign (U Illinois)',
+					right: 'Aug 2024 - Dec 2026',
+					subtitle: 'Bachelor of Science in Computer Science + Education (Learning Science)',
+					subtitleRight: 'GPA: 3.76/4.00',
+					notes: [
+						{
+							text: 'Grainger College of James Scholar Honor · Dean List',
+							right: 'Fall 2025 - Present',
+						},
+					],
+					bullets: [],
+				},
+				{
+					title: 'Massachusetts Institute of Technology (MIT)',
+					right: 'Summer 2023',
+					subtitle: 'Game Lab Summer School',
+					subtitleRight: '',
+					notes: [
+						{
+							text: 'Courses: Introduction to Time Series Modeling with Applications in Economics and Public Health',
+							right: '',
+						},
+					],
+					bullets: [],
+				},
+				{
+					title: 'Stanford University, Scholar AI4ALL',
+					right: 'Summer 2020',
+					subtitle: '',
+					subtitleRight: '',
+					notes: [],
+					bullets: [
+						{
+							text: 'Immersed in AI through lectures, hands-on research projects, and mentoring activities',
+							right: '',
+						},
+						{
+							text: 'Engaged in small-group research projects led by graduate students and post-docs in Computer Science and AI',
+							right: '',
+						},
+					],
+				},
+			],
+		},
+		{
+			title: 'EXPERIENCE',
+			items: [
+				{
+					title: 'Siebel School of computing and Data Science (SSCDS), U Illinois',
+					right: 'Champaign, IL',
+					subtitle: 'Course Assistant (CS124)',
+					subtitleRight: 'Aug 2025 – Aug 2026',
+					notes: [],
+					bullets: [
+						{
+							text: 'Guide 300 students through problem decomposition on assignments spanning data structures, algorithms, and programming',
+							right: '',
+						},
+						{
+							text: 'Identify and address conceptual gaps through weekly office hours; translate complex technical concepts for diverse learning backgrounds',
+							right: '',
+						},
+					],
+				},
+				{
+					title: 'Shenzhen Smart City Technology Development Group',
+					right: 'Shenzhen, China',
+					subtitle: 'Software Engineering Intern',
+					subtitleRight: 'Summer 2026 – Present',
+					notes: [],
+					bullets: [
+						{
+							text: 'Built a patent-pending stress/fatigue crowd model and debug dashboard in C++ on Unreal Engine 5.',
+							right: '',
+						},
+						{
+							text: 'Extended the C++ crowd-navigation plugin with doorway flow limits, queue-aware exit costs, and an SFM/FIFO mode switch.',
+							right: '',
+						},
+						{
+							text: 'Built headless regression testing for the simulator: fixed-timestep runs, command-line test flags, and a SHA-256 check that proved runs byte-identical (57,754 trajectory rows); cut each round from ~40 to ~5.5 min.',
+							right: '',
+						},
+						{
+							text: 'Found latent defects by code audit, e.g. two subsystems writing one speed channel so the model could never change agent speed; shipped the fix behind a flag and verified it with bit-exact regression.',
+							right: '',
+						},
+					],
+				},
+				{
+					title: 'Undergraduate Research Scientific Advancement (URSA)',
+					right: 'Champaign, IL',
+					subtitle: 'Webmaster/Secretary',
+					subtitleRight: 'Fall 2026 - Present',
+					notes: [],
+					bullets: [
+						{
+							text: 'Maintain and update the website, and reply emails for questions',
+							right: '',
+						},
+					],
+				},
+			],
+		},
+		{
+			title: 'RESEARCH',
+			items: [
+				{
+					title: 'Department of Educational Psychology',
+					right: 'Champaign, IL',
+					subtitle:
+						'Undergraduate Researcher -- Effect of College education on Social-Emotional Development',
+					subtitleRight: 'Spring 2026',
+					notes: [],
+					bullets: [
+						{
+							text: 'Contributing to a study examining the causal effect of college education on Social, Emotional, and Behavioral (SEB) skill development across a 30,000-person longitudinal dataset',
+							right: '',
+						},
+						{
+							text: 'Supporting research design, data organization, and pipeline setup for Causal Forest modeling (AIPW framework) targeting peer-reviewed publication',
+							right: '',
+						},
+					],
+				},
+				{
+					title: 'Undergraduate Research Scientific Advancement (URSA)',
+					right: 'Champaign, IL',
+					subtitle:
+						'Undergraduate Researcher -- LLM-Based Mathematical Equation Relation Extraction',
+					subtitleRight: 'Spring 2026',
+					notes: [],
+					bullets: [
+						{
+							text: 'Completed 100+ annotations for a mathematical derivation graph dataset; contributions support model training for LLM-based equation relation extraction',
+							right: '',
+						},
+						{
+							text: 'Contributing to annotation methodology and dataset quality assurance; project targets conference publication',
+							right: '',
+						},
+					],
+				},
+			],
+		},
+		{
+			title: 'PROJECTS',
+			items: [
+				{
+					title: 'OhMyTSS (SWIFT)',
+					right: 'Nov 2025 - Present',
+					subtitle: 'Co-Founder | Developer',
+					subtitleRight: '',
+					notes: [],
+					bullets: [
+						{
+							text: 'Integrated Apple HealthKit API to ingest and process wearable workout data in real time, transforming raw sensor streams into readiness and training-load insights with on-device, privacy-first architecture',
+							right: '',
+						},
+						{
+							text: 'Diagnose user-reported issues, implement data parsing and validation fixes, and ship stability improvements to active user base',
+							right: '',
+						},
+					],
+				},
+				{
+					title: 'Meeting Minion — AI Meeting Summarizer (Python)',
+					right: 'Aug 2025 – Jan 2026',
+					subtitle: 'Team Lead & Developer, SSCDS, U Illinois',
+					subtitleRight: '',
+					notes: [],
+					bullets: [
+						{
+							text: 'Led full lifecycle development of a production backend system with real users: designed architecture, coordinated cross-functional team, and deployed end-to-end transcription and summarization pipeline',
+							right: '',
+						},
+						{
+							text: 'Integrated third-party LLM (Ollama) and WhisperX transcription model with SQLite persistence layer; enforced engineering standards via CI/CD, PR reviews, and pytest suite (64+ tests, 100% pass rate)',
+							right: '',
+						},
+					],
+				},
+				{
+					title: 'Seizure Prediction Wristband — Patented Device (C/C++)',
+					right: '2022 – 2024',
+					subtitle: 'Initiator & Team Lead',
+					subtitleRight: '',
+					notes: [],
+					bullets: [
+						{
+							text: 'Built end-to-end ML pipeline for real-world medical application: collected and processed heart rate and humidity sensor data, engineered time-series features, and trained a classification model validated via cross-validation to detect pre-seizure patterns on-device',
+							right: '',
+						},
+						{
+							text: 'Managed full project lifecycle from hardware prototyping to algorithm deployment; resulted in registered German utility patent (DE 20 2023 107 669) and peer-reviewed publication in Highlights in Science, Engineering & Technology (2023)',
+							right: '',
+						},
+					],
+				},
+			],
+		},
+		{
+			title: 'ACTIVITIES & AWARDS',
+			items: [
+				{
+					title: 'Contests and Competitions',
+					right: '',
+					subtitle: '',
+					subtitleRight: '',
+					notes: [],
+					bullets: [
+						{
+							text: 'American Invitational Mathematics Examination (AIME) — 11/15',
+							right: '2023',
+						},
+						{
+							text: 'American Mathematics Competition 12 (AMC 12) — Top 1% (135/150)',
+							right: '2022',
+						},
+						{
+							text: 'USA Computing Olympiad (USACO) — Gold Division',
+							right: '2021-2022',
+						},
+					],
+				},
+			],
+		},
+	],
+} as const;
+
 export const t = {
 	en: {
+		resume,
 		nav: {
 			about: 'About',
 			work: 'Work',
@@ -240,6 +483,7 @@ export const t = {
 		},
 	},
 	zh: {
+		resume,
 		nav: {
 			about: '关于',
 			work: '经历',
