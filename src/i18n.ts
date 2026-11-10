@@ -410,7 +410,7 @@ export const t = {
 				{
 					title: 'Question Everything',
 					year: '2026 — Now',
-					url: null as string | null,
+					url: 'https://huitiwen.cn/',
 					desc: 'A bilingual (English / 中文) curriculum that teaches children critical thinking — motivated by the rise of AI. When answers are cheap and instant, the valuable skill is no longer getting an answer but judging answers and reasoning independently. Two tracks, 24 lessons, plus an assessment, a facilitator hub, and a self-paced course site.',
 					tags: ['Education', 'Bilingual', 'Curriculum', 'Web'],
 				},
@@ -661,7 +661,7 @@ export const t = {
 				{
 					title: '会提问的人',
 					year: '2026 — 至今',
-					url: null as string | null,
+					url: 'https://huitiwen.cn/',
 					desc: '一套中英双语的儿童批判性思维课程,起因是 AI 的崛起。当答案变得又便宜又即时,值钱的能力就不再是拿到答案,而是判断答案、自己把道理想明白。两条线、24 节课,外加测评、教师端和一个自学课程站。',
 					tags: ['教育', '双语', '课程', 'Web'],
 				},
