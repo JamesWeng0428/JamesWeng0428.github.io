@@ -20,14 +20,16 @@ const c = t[lang].experience;
 						<div class="body">
 							<div class="role">{e.role}</div>
 							<div class="co">
-								{e.co} <em>· {e.coNote}</em>
+								{e.co} {e.coNote && <em>· {e.coNote}</em>}
 							</div>
 							<p class="exp-detail">{e.detail}</p>
-							<div class="exp-stack">
-								{e.stack.map((s) => (
-									<span>{s}</span>
-								))}
-							</div>
+							{e.stack.length > 0 && (
+								<div class="exp-stack">
+									{e.stack.map((s) => (
+										<span>{s}</span>
+									))}
+								</div>
+							)}
 						</div>
 						<span class="loc">{e.loc}</span>
 					</div>

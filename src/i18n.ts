@@ -2,6 +2,9 @@ export type Lang = 'en' | 'zh';
 
 export const DEFAULT_LANG: Lang = 'en';
 
+const seizurePaper = 'https://doi.org/10.54097/gp3axg67';
+const wristbandUtilityModel = 'https://patents.google.com/patent/DE202023107669U1/en';
+
 export function homeHref(lang: Lang): string {
 	return lang === 'zh' ? '/zh/' : '/';
 }
@@ -271,6 +274,9 @@ export const t = {
 			titleLine1: 'Engineer by craft,',
 			titleLine2Em: 'writer by habit.',
 			lede: 'I build backend systems and ship reliable software. I also write short essays about growth, responsibility, and the strange business of becoming an adult. Currently open to new roles.',
+			researchQuestion:
+				'I want to understand how older adults make sense of everyday technology and learn to use it on their own.',
+			researchCV: 'Research CV (PDF)',
 			ctaPrimary: 'Get in touch',
 			ctaSecondary: 'See my work',
 			metaBasedInK: 'Based in',
@@ -306,7 +312,7 @@ export const t = {
 			body3Post: '. If any of that resonates, say hello.',
 		},
 		hobbies: {
-			sectionNum: '§ 02 / Hobbies',
+			sectionNum: '§ 03 / Hobbies',
 			sectionTitle: 'Off the',
 			sectionTitleEm: 'keyboard.',
 			boulderTitle: 'Bouldering',
@@ -334,12 +340,31 @@ export const t = {
 			],
 		},
 		experience: {
-			sectionNum: '§ 03 / Work',
+			sectionNum: '§ 02 / Work',
 			sectionTitle: "Where I've",
 			sectionTitleEm: 'built things.',
 			items: [
 				{
-					years: '2025 — Now',
+					years: 'Summer 2026 – Present',
+					role: 'Software Engineering Intern',
+					co: 'Shenzhen Smart City Technology Development Group',
+					coNote: '',
+					loc: 'Shenzhen, China',
+					detail:
+						'Built regression tests for a crowd simulator and cut each round from about 40 minutes to 5.5. Used SHA-256 to verify that all 57,754 trajectory rows matched byte for byte across runs.',
+					stack: ['C++', 'Unreal Engine 5', 'Regression Testing'],
+				},
+				{
+					years: 'Fall 2026 – Present',
+					role: 'URSA Webmaster and Secretary',
+					co: 'Undergraduate Research Scientific Advancement',
+					coNote: 'UIUC',
+					loc: 'Champaign, IL',
+					detail: 'Maintain the website and respond to inquiries.',
+					stack: [],
+				},
+				{
+					years: 'Spring 2026',
 					role: 'URSA Research Mentee',
 					co: 'University of Illinois Urbana-Champaign',
 					coNote: 'Mentor: Vishesh Vidya Prasad',
@@ -349,7 +374,7 @@ export const t = {
 					stack: ['Python', 'arXiv', 'Graph Annotation', 'Research'],
 				},
 				{
-					years: '2025 — Now',
+					years: 'Spring 2026',
 					role: 'Research Assistant',
 					co: "Prof. Chris Napolitano's Lab",
 					coNote: 'UIUC · SEB',
@@ -437,10 +462,14 @@ export const t = {
 					url: null as string | null,
 					desc: 'Wearable seizure-prediction device built for my brother, combining advanced sensors and ML to analyze real-time biometric data and deliver timely alerts.',
 					tags: ['C++', 'Machine Learning', 'Embedded Systems'],
+					resources: [
+						{ label: 'Related paper', href: seizurePaper },
+						{ label: 'German utility model', href: wristbandUtilityModel },
+					],
 				},
 				{
 					title: 'Derivation Graph Builder',
-					year: '2025 — Now',
+					year: 'My contribution · Spring 2026',
 					url: 'https://github.com/MLPgroup/Derivation-Tree',
 					desc: 'Heuristic pipeline for extracting math equation derivation graphs from arXiv papers. Part of the URSA Mathematical Derivation Graphs Dataset project targeting a top-tier conference.',
 					tags: ['Python', 'NLP', 'Research'],
@@ -500,6 +529,8 @@ export const t = {
 			titleLine1: '工程是手艺,',
 			titleLine2Em: '写作是习惯。',
 			lede: '我写后端,做能跑得住的软件;也写点短文,聊聊成长、责任,还有"长大成人"这件有点奇怪的事。目前在找新机会。',
+			researchQuestion: '我想研究老年人怎么理解日常用到的科技产品，又是怎么学会自己使用它们的。',
+			researchCV: '研究简历（英文 PDF）',
 			ctaPrimary: '联系我',
 			ctaSecondary: '看看我做过什么',
 			metaBasedInK: '所在地',
@@ -535,7 +566,7 @@ export const t = {
 			body3Post: '。',
 		},
 		hobbies: {
-			sectionNum: '§ 02 / 爱好',
+			sectionNum: '§ 03 / 爱好',
 			sectionTitle: '下了键盘',
 			sectionTitleEm: '之后。',
 			boulderTitle: '抱石',
@@ -561,12 +592,31 @@ export const t = {
 			],
 		},
 		experience: {
-			sectionNum: '§ 03 / 经历',
+			sectionNum: '§ 02 / 经历',
 			sectionTitle: '我待过的',
 			sectionTitleEm: '地方。',
 			items: [
 				{
-					years: '2025 — 至今',
+					years: '2026 年夏 – 至今',
+					role: '软件工程实习生',
+					co: '深圳市智慧城市科技发展集团有限公司',
+					coNote: '',
+					loc: '中国深圳',
+					detail:
+						'给人群模拟器写了回归测试，每轮从约 40 分钟缩短到 5.5 分钟。用 SHA-256 核对重复运行的结果，确认 57,754 行轨迹数据逐字节一致。',
+					stack: ['C++', 'Unreal Engine 5', '回归测试'],
+				},
+				{
+					years: '2026 年秋 – 至今',
+					role: 'URSA 网站管理员兼秘书',
+					co: 'Undergraduate Research Scientific Advancement',
+					coNote: 'UIUC',
+					loc: '美国伊利诺伊州 香槟',
+					detail: '维护网站，回复大家发来的咨询邮件。',
+					stack: [],
+				},
+				{
+					years: '2026 年春',
 					role: 'URSA 科研学员',
 					co: '伊利诺伊大学香槟分校',
 					coNote: '导师:Vishesh Vidya Prasad',
@@ -576,7 +626,7 @@ export const t = {
 					stack: ['Python', 'arXiv', '图标注', '科研'],
 				},
 				{
-					years: '2025 — 至今',
+					years: '2026 年春',
 					role: '科研助理',
 					co: 'Chris Napolitano 教授课题组',
 					coNote: 'UIUC · SEB',
@@ -663,10 +713,14 @@ export const t = {
 					url: null as string | null,
 					desc: '给我哥做的一个可穿戴癫痫预测设备。综合多种传感器和机器学习,实时读生理信号,在发作之前提个醒。',
 					tags: ['C++', '机器学习', '嵌入式系统'],
+					resources: [
+						{ label: '相关论文', href: seizurePaper },
+						{ label: '德国实用新型', href: wristbandUtilityModel },
+					],
 				},
 				{
 					title: 'Derivation Graph Builder',
-					year: '2025 — 至今',
+					year: '我参与的时间 · 2026 年春',
 					url: 'https://github.com/MLPgroup/Derivation-Tree',
 					desc: '一套启发式流水线,从 arXiv 论文里抽取数学公式的推导图。属于 URSA Mathematical Derivation Graphs Dataset 项目,目标是投顶会。',
 					tags: ['Python', 'NLP', '科研'],
