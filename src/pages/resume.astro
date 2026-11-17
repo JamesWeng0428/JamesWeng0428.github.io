@@ -53,7 +53,9 @@ const c = t.en.resume;
 								)}
 								{item.notes.map((note) => (
 									<div class="entry-row">
-										<span class="left">{note.text}</span>
+										<span class="left">
+											{'href' in note ? <a href={note.href}>{note.text}</a> : note.text}
+										</span>
 										{note.right && <span class="right">{note.right}</span>}
 									</div>
 								))}

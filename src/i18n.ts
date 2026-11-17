@@ -2,6 +2,7 @@ export type Lang = 'en' | 'zh';
 
 export const DEFAULT_LANG: Lang = 'en';
 
+const derivationPaper = 'https://openreview.net/forum?id=Z1BIcq3OfW';
 const seizurePaper = 'https://doi.org/10.54097/gp3axg67';
 const wristbandUtilityModel = 'https://patents.google.com/patent/DE202023107669U1/en';
 
@@ -163,10 +164,31 @@ const resume = {
 							right: '',
 						},
 						{
-							text: 'Contributing to annotation methodology and dataset quality assurance; project targets conference publication',
+							text: 'Contributed to annotation methodology and dataset quality assurance',
+							right: '',
+						},
+						{
+							text: 'Developed the MIDGARD Voting Ensemble to combine repeated LLM runs and predictions from different extractors, with configurable voting thresholds and per-article vote counts for partial coverage',
 							right: '',
 						},
 					],
+				},
+			],
+		},
+		{
+			title: 'PUBLICATIONS',
+			items: [
+				{
+					title: 'Mathematical Derivation Graphs: A Relation Extraction Task in STEM Manuscripts',
+					right: '',
+					subtitle:
+						'Vishesh Prasad, Brian Kim, Petr Myagkov, Taarush Goswami, Daniel Thaisz, James Weng, Nickvash Kani',
+					subtitleRight: '',
+					notes: [
+						{ text: 'Submitted to ACL Rolling Review (ACL ARR), May 2026. Long paper.', right: '' },
+						{ text: derivationPaper, right: '', href: derivationPaper },
+					],
+					bullets: [],
 				},
 			],
 		},
@@ -370,7 +392,7 @@ export const t = {
 					coNote: 'Mentor: Vishesh Vidya Prasad',
 					loc: 'Urbana, IL',
 					detail:
-						'Annotating arXiv papers and helping build the Mathematical Derivation Graphs Dataset — a corpus for training models to reason about derivation structure in mathematics. Targeting a top-tier ML/NLP venue.',
+						'Contributed annotations to the Mathematical Derivation Graphs Dataset and developed the MIDGARD Voting Ensemble, combining repeated LLM runs and predictions from different extractors with configurable voting thresholds. Paper submitted to ACL ARR (May 2026).',
 					stack: ['Python', 'arXiv', 'Graph Annotation', 'Research'],
 				},
 				{
@@ -485,8 +507,9 @@ export const t = {
 					title: 'Derivation Graph Builder',
 					year: 'My contribution · Spring 2026',
 					url: 'https://github.com/MLPgroup/Derivation-Tree',
-					desc: 'Heuristic pipeline for extracting math equation derivation graphs from arXiv papers. Part of the URSA Mathematical Derivation Graphs Dataset project targeting a top-tier conference.',
+					desc: 'Contributed annotations to the Mathematical Derivation Graphs Dataset and developed the MIDGARD Voting Ensemble, combining repeated LLM runs and predictions from different extractors with configurable voting thresholds. Paper submitted to ACL ARR (May 2026).',
 					tags: ['Python', 'NLP', 'Research'],
+					resources: [{ label: 'Paper · Submitted to ACL ARR (May 2026)', href: derivationPaper }],
 				},
 			],
 		},
@@ -636,7 +659,7 @@ export const t = {
 					coNote: '导师:Vishesh Vidya Prasad',
 					loc: '美国伊利诺伊州 厄巴纳',
 					detail:
-						'标注 arXiv 论文,参与构建 Mathematical Derivation Graphs Dataset——一个用来训练模型理解数学推导结构的语料库。目标是投顶会(ML/NLP 方向)。',
+						'参与 Mathematical Derivation Graphs Dataset 的标注，负责 MIDGARD Voting Ensemble：用可调的投票阈值，整合同一模型多次运行和不同抽取算法的预测。论文已投稿 ACL ARR（2026 年 5 月）。',
 					stack: ['Python', 'arXiv', '图标注', '科研'],
 				},
 				{
@@ -750,8 +773,9 @@ export const t = {
 					title: 'Derivation Graph Builder',
 					year: '我参与的时间 · 2026 年春',
 					url: 'https://github.com/MLPgroup/Derivation-Tree',
-					desc: '一套启发式流水线,从 arXiv 论文里抽取数学公式的推导图。属于 URSA Mathematical Derivation Graphs Dataset 项目,目标是投顶会。',
+					desc: '参与 Mathematical Derivation Graphs Dataset 的标注，负责 MIDGARD Voting Ensemble：用可调的投票阈值，整合同一模型多次运行和不同抽取算法的预测。论文已投稿 ACL ARR（2026 年 5 月）。',
 					tags: ['Python', 'NLP', '科研'],
+					resources: [{ label: '论文 · 已投稿 ACL ARR（2026 年 5 月）', href: derivationPaper }],
 				},
 			],
 		},
