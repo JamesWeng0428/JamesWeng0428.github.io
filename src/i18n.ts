@@ -401,6 +401,20 @@ export const t = {
 			sectionTitleEm: 'work.',
 			items: [
 				{
+					title: 'Power Ruler',
+					year: '2026',
+					url: 'https://apps.garmin.com/apps/784bc8be-3076-4d78-8fe9-d5f7f9b8cafc',
+					desc: 'A power data field for Garmin Edge 1050. Current, average and maximum power sit alongside the power zone, with LOW / HIGH showing which half of the zone you’re in.',
+					tags: ['Garmin Connect IQ', 'Monkey C', 'Cycling'],
+				},
+				{
+					title: 'Heart Rate Ruler',
+					year: '2026',
+					url: 'https://apps.garmin.com/apps/89d38d53-09d5-4c4c-a5b1-54ca7344c5ff',
+					desc: 'A heart rate data field for Garmin Edge 1050. Current, average and maximum heart rate sit alongside the heart rate zone, with a marker showing your position within it.',
+					tags: ['Garmin Connect IQ', 'Monkey C', 'Cycling'],
+				},
+				{
 					title: 'Spray',
 					year: '2026 — Now',
 					url: 'https://spray.cruxbeta.dev/',
@@ -651,6 +665,20 @@ export const t = {
 			sectionTitle: '一些',
 			sectionTitleEm: '作品。',
 			items: [
+				{
+					title: 'Power Ruler',
+					year: '2026',
+					url: 'https://apps.garmin.com/apps/784bc8be-3076-4d78-8fe9-d5f7f9b8cafc',
+					desc: '给 Garmin Edge 1050 做的功率数据栏。当前功率、平均值、最大值和功率区间放在一起，用 LOW / HIGH 标出在区间里的位置。',
+					tags: ['Garmin Connect IQ', 'Monkey C', '骑行'],
+				},
+				{
+					title: 'Heart Rate Ruler',
+					year: '2026',
+					url: 'https://apps.garmin.com/apps/89d38d53-09d5-4c4c-a5b1-54ca7344c5ff',
+					desc: '给 Garmin Edge 1050 做的心率数据栏。当前心率、平均值、最大值和心率区间放在一起，用标记显示在区间里的位置。',
+					tags: ['Garmin Connect IQ', 'Monkey C', '骑行'],
+				},
 				{
 					title: 'Spray',
 					year: '2026 — 至今',
